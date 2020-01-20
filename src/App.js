@@ -1,39 +1,53 @@
 /**
  * @Date:   2020-01-03T02:49:14+00:00
- * @Last modified time: 2020-01-15T16:40:44+00:00
+ * @Last modified time: 2020-01-17T18:36:41+00:00
  */
 
 
 
 import React, { Component } from 'react';
+import {BrowserRouter, Route, Link, Redirect} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-import bruh from "./sounds/Bruh.mp3";
+import bruh from "./sounds/Bruh.mp3"
+import 'bootstrap/dist/css/bootstrap.css';
 
-const {app} = window.require('electron').remote;
+import BC from "./components/BaseCheck";
+import F from "./components/File";
+import SA from "./components/ApiCall";
+import M from "./components/Main/Main";
+
 
 class App extends Component {
 
-  playSound(){
-    new Audio(bruh).play();
-  }
+
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>React + Electron = <span role="img" aria-label="love">😍</span></h2>
-        </div>
-        <p className="App-intro">
-          <b> Release 0.2.7 </b>
-          Version: {app.getVersion()}
-        </p>
-        <img src={require("./images/Arbalest.jpg")}/>
-        <button onClick={() => {this.playSound()}}>Bruh</button>
-      </div>
+      <>
+        <BrowserRouter>
+          <Redirect exact from="/" to="/main" />
+
+          <Link to="/BaseCheck">Base Check | </Link>
+          <Link to="/SoundFiles">Sound Files | </Link>
+          <Link to="/SoundAPI">Sound API | </Link>
+          <Link to="/main">Main Tab | </Link>
+
+          <div className="container">
+            <div className="row">
+              <Route exact path="/BaseCheck" component={BC}/>
+              <Route exact path="/SoundFiles" component={F}/>
+              <Route exact path="/SoundAPI" component={SA}/>
+
+            </div>
+          </div>
+          <Route exact path="/main" component={M}/>
+
+        </BrowserRouter>
+      </>
     );
   }
 }
+
 
 export default App;

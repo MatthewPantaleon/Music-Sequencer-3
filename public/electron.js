@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-03T02:49:14+00:00
- * @Last modified time: 2020-01-15T16:23:24+00:00
+ * @Last modified time: 2020-01-16T15:18:00+00:00
  */
 const electron = require("electron");
 const app = electron.app;
@@ -17,7 +17,7 @@ require("update-electron-app")({
 });
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 900, height: 680, webPreferences: { nodeIntegration: true }});
+  mainWindow = new BrowserWindow({ width: 1366, height: 768, webPreferences: { nodeIntegration: true }});
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
