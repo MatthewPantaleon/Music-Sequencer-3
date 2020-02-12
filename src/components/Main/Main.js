@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-12T14:35:27+00:00
+ * @Last modified time: 2020-02-12T18:55:34+00:00
  */
 
 
@@ -8,6 +8,7 @@ import React, { Component, Fragment } from 'react';
 import $ from "jquery";
 import SoundBrowser from './SoundBrowser';
 import SoundContainer from './SoundContainer';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 
 const fs = window.require("fs");
@@ -41,10 +42,34 @@ const isObjectEmpty = (obj) => {
       }
    }.bind(this);
 
+   newProject(){
+     console.log("NEW PROJECT");
+   }
+
+   saveProject(){
+     console.log("Save Project");
+   }
+
+   loadProject(){
+     console.log("Load Project");
+   }
+
    render(){
      return(
        <>
-          <div className="no-gutters p-0 m-0 container-fluid" style={{overflowX: "hidden"}}>
+          <div className="no-gutters p-0 m-0 container-fluid" style={{overflowX: "hidden", overflowY: "hidden"}}>
+            <div className="card-header bg-dark text-white p-0">
+
+
+            <DropdownButton title="File" variant="dark" size="sm">
+              <Dropdown.Item href="#" onClick={() => this.newProject()}>New Project</Dropdown.Item>
+              <Dropdown.Item href="#" onClick={() => this.saveProject()}>Save Project</Dropdown.Item>
+              <Dropdown.Item href="#" onClick={() => this.loadProject()}>Load Project</Dropdown.Item>
+            </DropdownButton>
+
+
+
+            </div>
             <div className="row p-0">
             <div className="col-3 p-0" style={{height: "calc(100vh - 50px)"}}>
               <SoundBrowser />

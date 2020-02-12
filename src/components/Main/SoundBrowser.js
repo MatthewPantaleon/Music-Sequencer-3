@@ -1,11 +1,14 @@
 /**
  * @Date:   2020-02-05T15:09:26+00:00
- * @Last modified time: 2020-02-12T14:38:19+00:00
+ * @Last modified time: 2020-02-12T18:55:08+00:00
  */
 
 import React, { Component, Fragment } from 'react';
 import $ from "jquery";
 import 'bootstrap/dist/css/bootstrap.css';
+
+import SoundLibrary from './SoundLibrary';
+import SoundAPI from './SoundAPI';
 
 const fs = window.require("fs");
 
@@ -24,10 +27,25 @@ class SoundBrowser extends Component{
     super(props);
 
     this.state = {
-
+      isLibrary: true
     };
 
 
+  }
+
+  switchLibrary(location){
+    switch(location){
+      case "library":
+        this.setState({isLibrary: true});
+        break;
+      case "API":
+        this.setState({isLibrary: false});
+        break;
+      default:
+        let e = {message: "How did you even get Here?"}
+        throw e.message;
+        break;
+    }
   }
 
   render(){
@@ -35,12 +53,12 @@ class SoundBrowser extends Component{
       <>
         <div className="card">
           <div className="card-header bg-dark text-white">
-            <button className="btn btn-primary mr-3">Sound Library</button>
-            <button className="btn btn-secondary">Sound Browser</button>
+            <button className="btn btn-primary mr-3" onClick={() => this.switchLibrary("library")}>Sound Library</button>
+            <button className="btn btn-secondary" onClick={() => this.switchLibrary("API")}>Sound Browser</button>
           </div>
 
           <div className="card-body bg-secondary" style={{height: "calc(100vh - 120px)"}}>
-            rwthht
+            {this.state.isLibrary ? <SoundLibrary /> : <SoundAPI />}
           </div>
           <hr className="m-0"/>
         </div>
