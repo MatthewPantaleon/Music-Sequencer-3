@@ -1,11 +1,15 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-01-20T20:12:02+00:00
+ * @Last modified time: 2020-02-12T14:35:27+00:00
  */
 
 
 import React, { Component, Fragment } from 'react';
 import $ from "jquery";
+import SoundBrowser from './SoundBrowser';
+import SoundContainer from './SoundContainer';
+
+
 const fs = window.require("fs");
 
 let baseStyle = {
@@ -40,64 +44,43 @@ const isObjectEmpty = (obj) => {
    render(){
      return(
        <>
-        <p>Main</p>
-        <div className="container-fluid">
-          <div className="row">
-            <ReadySounds files={this.state.readyFiles}/>
-            <Timeline />
+          <div className="no-gutters p-0 m-0 container-fluid" style={{overflowX: "hidden"}}>
+            <div className="row p-0">
+            <div className="col-3 p-0" style={{height: "calc(100vh - 50px)"}}>
+              <SoundBrowser />
+            </div>
 
-            <hr className="col-12" style={{border: "1px solid black", margin: 0}}/>
-
-            <FileManager give={this.giveReadyFiles} dir={this.state.directory}/>
-            <SoundArea />
+            <div className="col-9">
+              <SoundContainer />
+            </div>
+            </div>
           </div>
-        </div>
-
        </>
      );
    }
-
  }
 
-//-------------------------------------------
-class ReadySounds extends Component{
+ let border = {
+   border: "1px solid red"
+ };
 
-  constructor(props){
-    super(props);
-    this.state = {
+ // fs.readdir(this.props.dir, (err, files) => {
+ //   console.log(files);
+ //   files.forEach((e, i) => {
+ //     try{
+ //       const data = fs.statSync(this.props.dir + "/" + e);
+ //       temp.push({
+ //         name: e,
+ //         stats: data
+ //       });
+ //     }catch(err){
+ //       console.log("ESKET");
+ //     }
+ //     this.setState({files: temp});
+ //   });
+ // });
 
-    };
-  }
 
-  render(){
-    return(
-      <>
-        <div className="col-3" style={baseStyle}>
-
-            <p>oehn</p>
-            <ul>
-              {this.props.files.map((e, i) => {
-                return(<li key={i}>{e.name}</li>);
-              })}
-            </ul>
-
-        </div>
-      </>
-    );
-  }
-}
-//-------------------------------------------
-class Timeline extends Component{
-  render(){
-    return(
-      <>
-        <div className="col-9" style={baseStyle}>
-            <p>oehn</p>
-        </div>
-      </>
-    );
-  }
-}
 //-------------------------------------------
 class FileManager extends Component{
 
@@ -112,22 +95,6 @@ class FileManager extends Component{
   ////////////////////////////////////////////////////////////
   getFiles(){
     let temp = [];
-    fs.readdir(this.props.dir, (err, files) => {
-      console.log(files);
-      files.forEach((e, i) => {
-        try{
-          const data = fs.statSync(this.props.dir + "/" + e);
-          temp.push({
-            name: e,
-            stats: data
-          });
-        }catch(err){
-          console.log("ESKET");
-        }
-        this.setState({files: temp});
-      });
-    });
-
   }
   ////////////////////////////////////////////////////////////
 
@@ -140,7 +107,6 @@ class FileManager extends Component{
     // console.log(e);
     this.setState({selectedFile: e});
   }
-
 
   render(){
     return(
@@ -155,18 +121,6 @@ class FileManager extends Component{
                   return (<li key={i} onClick={() => this.selectedFile(e)}>{e.name}</li>);
                 })}
             </ul>
-        </div>
-      </>
-    );
-  }
-}
-//-------------------------------------------
-class SoundArea extends Component{
-  render(){
-    return(
-      <>
-        <div className="col-7" style={baseStyle}>
-            <p>oehn</p>
         </div>
       </>
     );

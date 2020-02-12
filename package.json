@@ -9,10 +9,12 @@
     "cross-env": "6.0.2",
     "electron-is-dev": "1.1.0",
     "electron-log": "^3.0.8",
+    "electron-oauth2": "^3.0.0",
     "fs-extra": "^8.1.0",
     "jquery": "^3.4.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-oauth-flow": "^1.2.0",
     "react-router-dom": "^5.1.2",
     "update-electron-app": "^1.2.0"
   },

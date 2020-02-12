@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-03T02:49:14+00:00
- * @Last modified time: 2020-01-17T18:36:41+00:00
+ * @Last modified time: 2020-02-05T18:04:36+00:00
  */
 
 
@@ -17,11 +17,7 @@ import F from "./components/File";
 import SA from "./components/ApiCall";
 import M from "./components/Main/Main";
 
-
 class App extends Component {
-
-
-
   render() {
     return (
       <>

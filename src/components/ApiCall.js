@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-15T19:29:26+00:00
- * @Last modified time: 2020-01-16T10:20:36+00:00
+ * @Last modified time: 2020-01-21T17:57:03+00:00
  */
 
 
@@ -9,6 +9,10 @@
  import $ from "jquery";
 
  import 'bootstrap/dist/css/bootstrap.css';
+
+
+
+
 
  class SoundAPI extends Component{
    constructor(props){
@@ -20,7 +24,8 @@
        currentResult: {},
        nextURL: "",
        previousURL: "",
-       files: []
+       files: [],
+
      };
    }
 
@@ -32,9 +37,9 @@
      e.preventDefault();
      console.log(this.state.searchTerm);
    }
-
    componentDidMount(){
-     // window.location.href = "https://freesound.org/apiv2/oauth2/authorize/";
+     window.location.href = "https://freesound.org/apiv2/oauth2/authorize/?client_id=9pNXD48E3KzL8dcoUgcG&response_type=code";
+     // window.location.href = "https://freesound.org/apiv2/oauth2/logout_and_authorize/?...";
    }
 
    render(){

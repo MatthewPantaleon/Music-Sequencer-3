@@ -1,11 +1,12 @@
 /**
  * @Date:   2020-01-15T18:34:44+00:00
- * @Last modified time: 2020-01-16T13:16:51+00:00
+ * @Last modified time: 2020-01-22T15:26:51+00:00
  */
 
 
 import React, { Component, Fragment } from 'react';
 import $ from "jquery";
+import OAuth2 from "./OAuth2";
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -68,6 +69,8 @@ class FileCall extends Component{
     return(
       <Fragment>
         <div className="col-12" style={backgroundColor}>
+          <p>Login</p>
+          <OAuth2 />
           Sound Files:
           <button onClick={() => {this.getFiles()}}>Get Files</button>
           <ul>
