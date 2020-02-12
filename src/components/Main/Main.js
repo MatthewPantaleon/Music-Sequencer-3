@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-12T18:55:34+00:00
+ * @Last modified time: 2020-02-12T20:00:19+00:00
  */
 
 
@@ -28,7 +28,8 @@ const isObjectEmpty = (obj) => {
      this.state = {
        directory: "C:/Users/N00173936/Desktop/DummyFolder",
        selectedFile: {name: "", stats: []},
-       readyFiles: []
+       readyFiles: [],
+       test: {}
      };
      // console.log(this.state.directory);
    }
@@ -44,14 +45,23 @@ const isObjectEmpty = (obj) => {
 
    newProject(){
      console.log("NEW PROJECT");
+     alert("This is an Alert!");
+     window.confirm("Are you sure?");
    }
 
    saveProject(){
      console.log("Save Project");
+     let data = JSON.stringify(this.state.test);
+     console.log(data);
+     fs.writeFileSync("C:/Users/N00173936/Desktop/DummyFolder/projects/readme_2.json", data);
    }
 
    loadProject(){
      console.log("Load Project");
+     let rawData = fs.readFileSync("C:/Users/N00173936/Desktop/DummyFolder/projects/readme.json");
+     let jsonData = JSON.parse(rawData);
+     // console.log(jsonData);
+     this.setState({test: jsonData}, () => console.log(this.state.test));
    }
 
    render(){

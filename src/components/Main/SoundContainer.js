@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T17:37:27+00:00
- * @Last modified time: 2020-02-12T18:55:05+00:00
+ * @Last modified time: 2020-02-12T19:58:17+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -52,8 +52,8 @@ class SoundContainer extends Component{
             </div>
 
             <div className="card-header bg-dark" >
-              <button className="btn btn-primary mr-3" onClick={() => this.showHide("openChannelMixer", "openAudioMixer")}>Channel Mixer</button>
-              <button className="btn btn-primary" onClick={() => this.showHide("openAudioMixer", "openChannelMixer")}>Audio Mixer</button>
+              <button className={"mr-3 " + (this.state.openChannelMixer ? "btn btn-primary" : "btn btn-secondary")} onClick={() => this.showHide("openChannelMixer", "openAudioMixer")}>Channel Mixer</button>
+              <button className={(this.state.openAudioMixer ? "btn btn-primary" : "btn btn-secondary")} onClick={() => this.showHide("openAudioMixer", "openChannelMixer")}>Audio Mixer</button>
             </div>
           </div>
         </div>

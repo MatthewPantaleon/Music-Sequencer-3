@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T15:09:26+00:00
- * @Last modified time: 2020-02-12T18:55:08+00:00
+ * @Last modified time: 2020-02-12T19:56:31+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -27,7 +27,8 @@ class SoundBrowser extends Component{
     super(props);
 
     this.state = {
-      isLibrary: true
+      isLibrary: true,
+
     };
 
 
@@ -53,8 +54,8 @@ class SoundBrowser extends Component{
       <>
         <div className="card">
           <div className="card-header bg-dark text-white">
-            <button className="btn btn-primary mr-3" onClick={() => this.switchLibrary("library")}>Sound Library</button>
-            <button className="btn btn-secondary" onClick={() => this.switchLibrary("API")}>Sound Browser</button>
+            <button className={"mr-3 " + (this.state.isLibrary ? "btn btn-primary" : "btn btn-secondary")} onClick={() => this.switchLibrary("library")}>Sound Library</button>
+            <button className={(this.state.isLibrary ? "btn btn-secondary" : "btn btn-primary")} onClick={() => this.switchLibrary("API")}>Sound Browser</button>
           </div>
 
           <div className="card-body bg-secondary" style={{height: "calc(100vh - 120px)"}}>
