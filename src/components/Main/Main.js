@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-19T18:17:47+00:00
+ * @Last modified time: 2020-02-19T20:19:30+00:00
  */
 
 
@@ -29,7 +29,8 @@ const isObjectEmpty = (obj) => {
        directory: "C:/Users/N00173936/Desktop/DummyFolder",
        selectedFile: {name: "", stats: []},
        readyFiles: [],
-       test: {}
+       test: {soundUrls:[]},
+       soundUrls: []
      };
      // console.log(this.state.directory);
    }
@@ -64,7 +65,12 @@ const isObjectEmpty = (obj) => {
 
      let jsonData = JSON.parse(rawData);
      // console.log(jsonData);
-     this.setState({test: jsonData}, () => console.log(this.state.test.soundUrls));
+     this.setState({soundUrls: jsonData.soundUrls}, () => {
+       let results = fs.readdirSync(this.state.soundUrls[0]).filter((e, i) => {
+         return e.includes(".txt");
+       });
+       this.setState({readyFiles: results});
+     });
    }
 
    render(){
@@ -85,7 +91,7 @@ const isObjectEmpty = (obj) => {
             </div>
             <div className="row p-0">
             <div className="col-3 p-0" style={{height: "calc(100vh - 50px)"}}>
-              <SoundBrowser soundUrls={this.state.test.soundUrls || []}/>
+              <SoundBrowser sounds={this.state.readyFiles}/>
             </div>
 
             <div className="col-9">

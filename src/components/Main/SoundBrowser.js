@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T15:09:26+00:00
- * @Last modified time: 2020-02-12T19:56:31+00:00
+ * @Last modified time: 2020-02-19T20:22:33+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -59,7 +59,7 @@ class SoundBrowser extends Component{
           </div>
 
           <div className="card-body bg-secondary" style={{height: "calc(100vh - 120px)"}}>
-            {this.state.isLibrary ? <SoundLibrary /> : <SoundAPI />}
+            {this.state.isLibrary ? <SoundLibrary sounds={this.props.sounds}/> : <SoundAPI />}
           </div>
           <hr className="m-0"/>
         </div>

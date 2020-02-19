@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-02-19T18:18:41+00:00
+ * @Last modified time: 2020-02-19T20:25:56+00:00
  */
 
 
@@ -15,20 +15,34 @@
      super(props);
 
      this.state = {
-       sounds: []
+       sounds: [],
+       selectedFile: "" || "Name"
      };
    }
 
    componentDidMount(){
-     
+     // console.log(this.props);
+     // if(this.props.soundUrls[0] === undefined){
+     //   return;
+     // }else{
+     //   console.log("VAlid url");
+     //   let sounds = fs.readdirSync(this.props.soundUrls[0], (err, s) => {
+     //     console.log(s);
+     //   });
+     // }
    }
+
+   changeFile = (name) => {
+     this.setState({selectedFile: name});
+   };
+
 
    render(){
      return (
       <>
       <div className="row card-body bg-dark mb-2" style={{position: "relative", height: "calc(20vh)"}}>
         <div className="col-8 text-white">
-          <h5><b>Selected File: </b> Name </h5>
+          <h5><b>Selected File: </b> {this.state.selectedFile} </h5>
           <h5><b>File Type: </b> WAV </h5>
           <h5><b>File Size: </b> 100kb </h5>
 
@@ -44,7 +58,11 @@
         <div className="col-12 p-0">
           <ul className="list-group" style={{height: "calc(65vh)"}}>
             {/*<li className="list-group-item list-group-item-action">SoundFile1<button className="btn btn-danger float-right">X</button></li>*/}
-
+            {this.props.sounds.length === 0 ? <p className="text-white">You have no sounds in your library</p> : this.props.sounds.map((e, i) => {
+              return (
+                <li key={i} className="list-group-item list-group-item-action" onClick={() => this.changeFile(e)}>{e}<button className="btn btn-danger float-right">X</button></li>
+              );
+            })}
           </ul>
         </div>
 
