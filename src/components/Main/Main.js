@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-12T20:00:19+00:00
+ * @Last modified time: 2020-02-19T18:17:47+00:00
  */
 
 
@@ -58,10 +58,13 @@ const isObjectEmpty = (obj) => {
 
    loadProject(){
      console.log("Load Project");
-     let rawData = fs.readFileSync("C:/Users/N00173936/Desktop/DummyFolder/projects/readme.json");
+     let rawData = {};
+     rawData = fs.readFileSync("C:/Users/N00173936/Desktop/DummyFolder/projects/readme.json");
+
+
      let jsonData = JSON.parse(rawData);
      // console.log(jsonData);
-     this.setState({test: jsonData}, () => console.log(this.state.test));
+     this.setState({test: jsonData}, () => console.log(this.state.test.soundUrls));
    }
 
    render(){
@@ -82,7 +85,7 @@ const isObjectEmpty = (obj) => {
             </div>
             <div className="row p-0">
             <div className="col-3 p-0" style={{height: "calc(100vh - 50px)"}}>
-              <SoundBrowser />
+              <SoundBrowser soundUrls={this.state.test.soundUrls || []}/>
             </div>
 
             <div className="col-9">
