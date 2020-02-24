@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-19T20:19:30+00:00
+ * @Last modified time: 2020-02-24T11:44:54+00:00
  */
 
 
@@ -22,19 +22,21 @@ const isObjectEmpty = (obj) => {
   return obj.name === "" && obj.constructor === Object && obj.stats.length === 0;
 }
 
+
+const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
+
  class Main extends Component{
    constructor(props){
      super(props);
      this.state = {
-       directory: "C:/Users/N00173936/Desktop/DummyFolder",
+       directory: "C:/Users/N00173936/Desktop/DummyFolder/projects/",
        selectedFile: {name: "", stats: []},
        readyFiles: [],
-       test: {soundUrls:[]},
-       soundUrls: []
+       projectData: {}
      };
      // console.log(this.state.directory);
    }
-
+//-----------------------------------------------------------------------------------
    giveReadyFiles = function(e){
      console.log(this.state.directory);
      let temp = this.state.readyFiles;
@@ -44,6 +46,12 @@ const isObjectEmpty = (obj) => {
       }
    }.bind(this);
 
+   addNewChannel = () => {
+
+   };
+
+
+//-----------------------------------------------------------------------------------
    newProject(){
      console.log("NEW PROJECT");
      alert("This is an Alert!");
@@ -52,27 +60,27 @@ const isObjectEmpty = (obj) => {
 
    saveProject(){
      console.log("Save Project");
-     let data = JSON.stringify(this.state.test);
+     let data = JSON.stringify(this.state.projectData);
      console.log(data);
-     fs.writeFileSync("C:/Users/N00173936/Desktop/DummyFolder/projects/readme_2.json", data);
+     fs.writeFileSync(this.state.directory + "readme_2.json", data);
    }
 
    loadProject(){
      console.log("Load Project");
      let rawData = {};
-     rawData = fs.readFileSync("C:/Users/N00173936/Desktop/DummyFolder/projects/readme.json");
+     rawData = fs.readFileSync(this.state.directory + "readme.json");
 
 
      let jsonData = JSON.parse(rawData);
-     // console.log(jsonData);
-     this.setState({soundUrls: jsonData.soundUrls}, () => {
-       let results = fs.readdirSync(this.state.soundUrls[0]).filter((e, i) => {
-         return e.includes(".txt");
+     console.log(jsonData);
+     this.setState({soundDirectory: jsonData.projectDirectory + "/sounds", projectData: jsonData}, () => {
+       let results = fs.readdirSync(this.state.soundDirectory).filter((e, i) => {
+         return e.includes(".wav");
        });
        this.setState({readyFiles: results});
      });
    }
-
+//-----------------------------------------------------------------------------------
    render(){
      return(
        <>

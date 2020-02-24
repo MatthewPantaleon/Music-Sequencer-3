@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-24T10:35:30+00:00
+ * @Last modified time: 2020-02-24T11:26:38+00:00
  */
 
 
@@ -38,7 +38,9 @@ class SoundTimeline extends Component{
                  <button className="btn btn-secondary">PlaceHolder</button>
                </div>
 
-              {[<SoundChannel />, <SoundChannel />,<SoundChannel />]}
+               <div className="">
+               </div>
+              {[<SoundChannel id={1}/>, <SoundChannel id={2}/>,<SoundChannel id={3}/>]}
             </div>
           </div>
         </div>

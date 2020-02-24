@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-02-24T08:58:50+00:00
+ * @Last modified time: 2020-02-24T11:36:10+00:00
  */
 
 
@@ -53,7 +53,7 @@
         </div>
         <div className="col-4" style={{position: "relative"}}>
           <button className="btn-primary mb-2">Preview</button>
-          <button className="btn-secondary" disabled>Add Channel</button>
+          <button className="btn-secondary" disabled={this.props.sounds.length == 0} onClick={() => console.log("Adding Channel: ", this.props)}>Add Channel</button>
           <button className="btn-danger" style={{position: "absolute", bottom: 0, left: "15px"}}>Remove</button>
         </div>
       </div>

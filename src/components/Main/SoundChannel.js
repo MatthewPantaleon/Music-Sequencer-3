@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-24T11:12:04+00:00
+ * @Last modified time: 2020-02-24T11:23:25+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -25,14 +25,14 @@
        if((i+1) % this.state.barInterval === 0)backgroundColor = "#444";
        segments.push(
          <>
-          <div className="mr-1" onClick={() => this.doSomething()} style={segment(undefined,backgroundColor)}> </div>
+          <div className="mr-1" onClick={() => this.doSomething(this.props.id, i)} style={segment(undefined,backgroundColor)}> </div>
          </>);
      }
      this.setState({bar: segments});
    }
 
-   doSomething(){
-     console.log("This is something");
+   doSomething(id, i){
+     console.log("This is something from channel: "+ id + ". Position: " + (i+1));
    }
 
 
