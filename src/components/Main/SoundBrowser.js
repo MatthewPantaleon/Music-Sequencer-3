@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T15:09:26+00:00
- * @Last modified time: 2020-02-24T17:34:27+00:00
+ * @Last modified time: 2020-02-24T19:13:42+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -34,6 +34,10 @@ class SoundBrowser extends Component{
 
   }
 
+  componentDidMount(){
+    
+  }
+
   switchLibrary(location){
     switch(location){
       case "library":
@@ -59,7 +63,7 @@ class SoundBrowser extends Component{
           </div>
 
           <div className="card-body bg-secondary" style={{height: "calc(100vh - 120px)"}}>
-            {this.state.isLibrary ? <SoundLibrary sounds={this.props.sounds}/> : <SoundAPI />}
+            {this.state.isLibrary ? <SoundLibrary sounds={this.props.sounds} importSound={this.props.importSound}/> : <SoundAPI />}
           </div>
           <hr className="m-0"/>
         </div>

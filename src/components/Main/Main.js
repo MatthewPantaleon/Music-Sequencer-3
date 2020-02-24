@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-24T18:14:37+00:00
+ * @Last modified time: 2020-02-24T19:31:01+00:00
  */
 
 
@@ -12,6 +12,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 
 const fs = window.require("fs");
+const { dialog } = window.require('electron').remote;
 
 let baseStyle = {
   border: "1px solid red"
@@ -74,13 +75,36 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      let jsonData = JSON.parse(rawData);
      console.log(jsonData);
      this.setState({soundDirectory: jsonData.projectDirectory + "/sounds", projectData: jsonData}, () => {
+       console.log(this.state.soundDirectory);
        let results = fs.readdirSync(this.state.soundDirectory).filter((e, i) => {
-         return e.includes(".wav");
+         return e.includes(".mp3") || e.includes(".wav") ;
        });
        this.setState({readyFiles: results});
      });
    }
 //-----------------------------------------------------------------------------------
+
+  importSoundFromMain = async () => {
+    let file = await dialog.showOpenDialog().then((e) => e.filePaths[0]);
+    console.log(file);
+    let fileName = this.split(file);
+    console.log(fileName);
+
+    if(fileName.includes(".wav") || fileName.includes(".mp3")){
+      let newArray = this.state.readyFiles;
+      newArray.push(fileName);
+      this.setState({readyFiles: newArray});
+    }else{
+      alert("That is not a sound File!");
+    }
+
+  };
+
+  split = (str) => { //fastest
+      return str.split('\\').pop().split('/').pop();
+  };
+
+
    render(){
      return(
        <>
@@ -99,7 +123,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
             </div>
             <div className="row p-0">
             <div className="col-3 p-0" style={{height: "calc(100vh - 50px)"}}>
-              <SoundBrowser sounds={this.state.readyFiles}/>
+              <SoundBrowser sounds={this.state.readyFiles} importSound={this.importSoundFromMain}/>
             </div>
 
             <div className="col-9">

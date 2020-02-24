@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-02-24T18:19:26+00:00
+ * @Last modified time: 2020-02-24T19:34:18+00:00
  */
 
 
@@ -9,6 +9,7 @@
  import 'bootstrap/dist/css/bootstrap.css';
 
  const fs = window.require("fs");
+ const { dialog } = window.require('electron').remote;
 
  class SoundLibrary extends Component{
    constructor(props){
@@ -38,7 +39,13 @@
 
    removeFromLibrary(e){
      console.log("Remove: " + e);
+
    };
+
+   async importSound(){
+     let file = await dialog.showOpenDialog().then((e) => e.filePaths[0]);
+     console.log(file);
+   }
 
 
    render(){
@@ -53,7 +60,7 @@
         </div>
         <div className="col-4" style={{position: "relative"}}>
           <button className="btn-primary mb-2">Preview</button>
-          <button className="btn-secondary" disabled={this.props.sounds.length == 0} onClick={() => console.log("Adding Channel: ", this.props)}>Add Channel</button>
+          <button className="btn-secondary" disabled={this.props.sounds.length == 0} onClick={() => console.log("Adding Channel: ", this.props.sounds)}>Add Channel</button>
           <button className="btn-danger" style={{position: "absolute", bottom: 0, left: "15px"}}>Remove</button>
         </div>
       </div>
@@ -64,20 +71,38 @@
             {/*<li className="list-group-item list-group-item-action">SoundFile1<button className="btn btn-danger float-right">X</button></li>*/}
             {this.props.sounds.length === 0 ? <p className="text-white">You have no sounds in your library</p> : this.props.sounds.map((e, i) => {
               return (
-                <li key={i} className="list-group-item list-group-item-action" onClick={() => this.changeFile(e)}>{e}<button className="btn btn-danger float-right" onClick={() => this.removeFromLibrary(e)}>X</button></li>
+                <li key={i} className="list-group-item list-group-item-action pointer" onClick={() => this.changeFile(e)}>{e}<button className="btn btn-danger float-right" onClick={() => this.removeFromLibrary(e)}>X</button></li>
               );
             })}
           </ul>
         </div>
 
         <div className="col-12 bg-dark" style={{position: "absolute", bottom: 0, right: "0px"}}>
-          <button className="btn btn-primary float-right mb-3">Import</button>
+          <button className="btn btn-primary float-right mb-3" onClick={() => this.props.importSound()}>Import</button>
         </div>
       </div>
       </>
      );
    }
  }
+
+
+
+//  var substringTest = function (str) {
+//     return str.substring(str.lastIndexOf('/')+1);
+// }
+//
+// var replaceTest = function (str) {
+//     return str.replace(/^.*(\\|\/|\:)/, '');
+// }
+//
+// var execTest = function (str) {
+//     return /([^\\]+)$/.exec(str)[1];
+// }
+//
+// var splitTest = function (str) { //fastest
+//     return str.split('\\').pop().split('/').pop();
+// }
 
  let debugStyle = {
    border: "solid 1px red"
