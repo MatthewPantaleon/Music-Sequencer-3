@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-03T02:49:14+00:00
- * @Last modified time: 2020-02-05T18:04:36+00:00
+ * @Last modified time: 2020-02-24T18:13:12+00:00
  */
 
 
@@ -17,6 +17,12 @@ import F from "./components/File";
 import SA from "./components/ApiCall";
 import M from "./components/Main/Main";
 
+
+// <Link to="/BaseCheck">Base Check | </Link>
+// <Link to="/SoundFiles">Sound Files | </Link>
+// <Link to="/SoundAPI">Sound API | </Link>
+// <Link to="/main">Main Tab | </Link>
+
 class App extends Component {
   render() {
     return (
@@ -24,10 +30,7 @@ class App extends Component {
         <BrowserRouter>
           <Redirect exact from="/" to="/main" />
 
-          <Link to="/BaseCheck">Base Check | </Link>
-          <Link to="/SoundFiles">Sound Files | </Link>
-          <Link to="/SoundAPI">Sound API | </Link>
-          <Link to="/main">Main Tab | </Link>
+
 
           <div className="container">
             <div className="row">

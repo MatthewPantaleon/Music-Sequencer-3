@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-24T11:44:54+00:00
+ * @Last modified time: 2020-02-24T18:14:37+00:00
  */
 
 
@@ -84,7 +84,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
    render(){
      return(
        <>
-          <div className="no-gutters p-0 m-0 container-fluid" style={{overflowX: "hidden", overflowY: "hidden"}}>
+          <div className="no-gutters p-0 m-0 container-fluid" style={{overflowX: "hidden", overflowY: "hidden", width: "100%"}}>
             <div className="card-header bg-dark text-white p-0">
 
 

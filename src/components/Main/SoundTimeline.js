@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-24T17:55:27+00:00
+ * @Last modified time: 2020-02-24T18:17:32+00:00
  */
 
 
@@ -35,7 +35,7 @@ class SoundTimeline extends Component{
 
     //debug channels
     let debug = [];
-    for(let i = 0; i < 5; i++){
+    for(let i = 0; i < 20; i++){
       debug.push(<li className="list-group-item bg-dark"><SoundChannel key={i} id={i+1} time={globalOffset}/></li>);
     }
     this.setState({channelArray: debug});
@@ -66,11 +66,11 @@ class SoundTimeline extends Component{
             <div className="btn text-white"> Timeline</div>
           </div>
           <div className="card-body bg-secondary" style={{height: "calc(100vh - 120px)"}}>
-            <div className="row bg-dark">
+            <div className="row bg-dark mr-1">
               <div className="col-2 mb-2">
                 <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.playChannels()}>{this.state.isPlaying ? "Stop" : "Play Button"}</button>
               </div>
-              <ul className="list-group col-12" style={{height: "calc(78vh)", overflowY: "scroll"}}>
+              <ul className="list-group col-12" style={{height: ((this.props.isPanelOpen) ? "calc(48vh)" : "calc(78vh)"), overflowY: "scroll"}}>
               {this.state.channelArray}
               </ul>
             </div>

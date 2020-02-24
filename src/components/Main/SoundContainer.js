@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T17:37:27+00:00
- * @Last modified time: 2020-02-12T19:58:17+00:00
+ * @Last modified time: 2020-02-24T18:15:50+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -35,12 +35,9 @@ class SoundContainer extends Component{
      <>
      <div className="row p-0">
         <div className="col-12 p-0" style={{height: `calc(${this.state.openChannelMixer || this.state.openAudioMixer ? 70 : 100}vh - 120px)`}}>
-          <SoundTimeline />
+          <SoundTimeline isPanelOpen={this.state.openChannelMixer || this.state.openAudioMixer}/>
         </div>
 
-        <div className="col-12">
-
-        </div>
         <div className="col-12 p-0">
           <div className="card" style={{border: 0}}>
             <div className="card-body p-0" style={{height: `calc(30vh)`, display: `${this.state.openChannelMixer ? "block" : "none"}`}}>
