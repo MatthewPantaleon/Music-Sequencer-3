@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-24T11:26:38+00:00
+ * @Last modified time: 2020-02-24T14:59:39+00:00
  */
 
 
@@ -13,15 +13,40 @@ const electron = window.require('electron');
 const remote = electron.remote;
 let space = remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBounds();
 
+let globalOffset = 0;
+
+
 class SoundTimeline extends Component{
   constructor(props){
     super(props);
     this.state = {
-      channelArray: []
+      channelArray: [],
+      isPlaying: false,
+      playAction: ""
+
     };
   }
 
   componentDidMount(){
+
+  }
+
+  
+
+  playChannels(){
+    console.log("Playing");
+    let playing = () => {return setInterval((i) => {
+      console.log("thingy: " + i);
+    }, 500)};
+    console.log(playing.__proto__);
+    if(this.state.isPlaying){
+      this.setState({isPlaying: false});
+    }else{
+      this.setState({isPlaying: true}, () => {
+
+      });
+
+    }
 
   }
 
@@ -35,12 +60,10 @@ class SoundTimeline extends Component{
           <div className="card-body bg-secondary" style={{height: "calc(100vh - 120px)"}}>
             <div className="row bg-dark">
                <div className="col-2 mb-2">
-                 <button className="btn btn-secondary">PlaceHolder</button>
+                 <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.playChannels()}>{this.state.isPlaying ? "Stop" : "Play Button"}</button>
                </div>
 
-               <div className="">
-               </div>
-              {[<SoundChannel id={1}/>, <SoundChannel id={2}/>,<SoundChannel id={3}/>]}
+              {[<SoundChannel id={1} time={globalOffset}/>, <SoundChannel id={2} time={globalOffset}/>,<SoundChannel id={3} time={globalOffset}/>]}
             </div>
           </div>
         </div>

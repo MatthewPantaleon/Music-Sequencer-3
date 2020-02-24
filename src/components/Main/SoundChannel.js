@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-24T11:23:25+00:00
+ * @Last modified time: 2020-02-24T12:21:02+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -17,7 +17,7 @@
      };
    }
 
-   componentDidMount(){
+   componentWillMount(){
      let segments = [];
      for(let i = 0; i < this.state.segments; i++){
        let backgroundColor = "#777";
