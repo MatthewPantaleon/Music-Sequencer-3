@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T19:27:18+00:00
- * @Last modified time: 2020-02-12T15:44:08+00:00
+ * @Last modified time: 2020-02-24T20:14:40+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -27,7 +27,7 @@ class AudioMixer extends Component{
           <h4>Audio Mixer</h4>
         </div>
         <div className="card-body bg-secondary">
-          aerharhe
+        
         </div>
       </div>
       </>
