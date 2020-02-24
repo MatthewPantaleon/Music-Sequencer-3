@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-02-19T20:25:56+00:00
+ * @Last modified time: 2020-02-24T08:58:50+00:00
  */
 
 
@@ -36,6 +36,10 @@
      this.setState({selectedFile: name});
    };
 
+   removeFromLibrary(e){
+     console.log("Remove: " + e);
+   };
+
 
    render(){
      return (
@@ -56,11 +60,11 @@
       {/* Fix later either to set minnimum screen size or fix al together*/}
       <div className="row card-body bg-dark" style={{position: "relative"}}>
         <div className="col-12 p-0">
-          <ul className="list-group" style={{height: "calc(65vh)"}}>
+          <ul className="list-group" style={{height: "calc(60vh)"}}>
             {/*<li className="list-group-item list-group-item-action">SoundFile1<button className="btn btn-danger float-right">X</button></li>*/}
             {this.props.sounds.length === 0 ? <p className="text-white">You have no sounds in your library</p> : this.props.sounds.map((e, i) => {
               return (
-                <li key={i} className="list-group-item list-group-item-action" onClick={() => this.changeFile(e)}>{e}<button className="btn btn-danger float-right">X</button></li>
+                <li key={i} className="list-group-item list-group-item-action" onClick={() => this.changeFile(e)}>{e}<button className="btn btn-danger float-right" onClick={() => this.removeFromLibrary(e)}>X</button></li>
               );
             })}
           </ul>
