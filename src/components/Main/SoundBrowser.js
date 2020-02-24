@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T15:09:26+00:00
- * @Last modified time: 2020-02-24T09:24:19+00:00
+ * @Last modified time: 2020-02-24T17:34:27+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -68,13 +68,5 @@ class SoundBrowser extends Component{
   }
 }
 
-let h = {
-  tooltip: {
-    height: 200
-  },
-  browser: {
-    height: space.height - 210 + space.y
-  }
-};
 
 export default SoundBrowser;

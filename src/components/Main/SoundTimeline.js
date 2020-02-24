@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-24T14:59:39+00:00
+ * @Last modified time: 2020-02-24T17:55:27+00:00
  */
 
 
@@ -14,40 +14,48 @@ const remote = electron.remote;
 let space = remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBounds();
 
 let globalOffset = 0;
+let globalInterval;
 
+function bpm(){
+  console.log("rgji: " + globalOffset);
+  globalOffset++;
+}
 
 class SoundTimeline extends Component{
   constructor(props){
     super(props);
     this.state = {
       channelArray: [],
-      isPlaying: false,
-      playAction: ""
+      isPlaying: false
 
     };
   }
 
   componentDidMount(){
 
+    //debug channels
+    let debug = [];
+    for(let i = 0; i < 5; i++){
+      debug.push(<li className="list-group-item bg-dark"><SoundChannel key={i} id={i+1} time={globalOffset}/></li>);
+    }
+    this.setState({channelArray: debug});
   }
 
-  
+
 
   playChannels(){
-    console.log("Playing");
-    let playing = () => {return setInterval((i) => {
-      console.log("thingy: " + i);
-    }, 500)};
-    console.log(playing.__proto__);
-    if(this.state.isPlaying){
-      this.setState({isPlaying: false});
-    }else{
-      this.setState({isPlaying: true}, () => {
 
-      });
+    if(this.state.isPlaying){
+      console.log("Stopping");
+      this.setState({isPlaying: false});
+      clearInterval(globalInterval);
+      globalOffset = 0;
+
+    }else{
+      this.setState({isPlaying: true});
+      globalInterval = setInterval(bpm, 500);
 
     }
-
   }
 
   render(){
@@ -59,11 +67,12 @@ class SoundTimeline extends Component{
           </div>
           <div className="card-body bg-secondary" style={{height: "calc(100vh - 120px)"}}>
             <div className="row bg-dark">
-               <div className="col-2 mb-2">
-                 <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.playChannels()}>{this.state.isPlaying ? "Stop" : "Play Button"}</button>
-               </div>
-
-              {[<SoundChannel id={1} time={globalOffset}/>, <SoundChannel id={2} time={globalOffset}/>,<SoundChannel id={3} time={globalOffset}/>]}
+              <div className="col-2 mb-2">
+                <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.playChannels()}>{this.state.isPlaying ? "Stop" : "Play Button"}</button>
+              </div>
+              <ul className="list-group col-12" style={{height: "calc(78vh)", overflowY: "scroll"}}>
+              {this.state.channelArray}
+              </ul>
             </div>
           </div>
         </div>
@@ -73,13 +82,8 @@ class SoundTimeline extends Component{
   }
 }
 
-let h = {
-  tooltip: {
-    height: 350
-  },
-  browser: {
-    height: space.height - 360 + space.y
-  }
-};
+function debugBorder(color = "red", size = "1px", type = "solid"){
+  return {border: size +" "+ type +" " + color};
+}
 
 export default SoundTimeline;
