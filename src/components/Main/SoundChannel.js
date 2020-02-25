@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-25T17:41:03+00:00
+ * @Last modified time: 2020-02-25T18:26:18+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -14,26 +14,34 @@
        barInterval: 4,
        segments: 28,
        bar: [],
-       soundResource: ""
+       barBools: [],
+       pages: [],
+       soundResource: "",
+       activatedColor: ["#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff", "#000"],
+       normalColor: "#777"
      };
    }
 
    componentWillMount(){
      let segments = [];
      for(let i = 0; i < this.state.segments; i++){
-       let backgroundColor = "#777";
-
-       if((i+1) % this.state.barInterval === 0)backgroundColor = "#444";
-       segments.push(
-         <Fragment key={i}>
-          <div className="mr-1" onClick={() => this.doSomething(this.props.id, i)} style={segment(undefined,backgroundColor)}> </div>
-         </Fragment>);
+       // let backgroundColor = "#777";
+       let isEnd = false;
+       if((i+1) % this.state.barInterval === 0){
+         // backgroundColor = "#444"
+         isEnd = true;
+       }
+       segments.push({id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[this.props.id] || "#fff", isEnd, active: false});
      }
-     this.setState({bar: segments});
+     this.setState({bar: segments}, () => console.log(this.state.bar));
    }
 
    doSomething(id, i){
-     console.log("This is something from channel: "+ id + ". Position: " + (i+1));
+     // console.log("This is something from channel: "+ id + ". Position: " + (i+1));
+     // console.log(this.state.activatedColor[id]);
+     let allBar = this.state.bar;
+     allBar[i].active = !allBar[i].active;
+     this.setState({bar: allBar});
    }
 
    preview(){
@@ -50,7 +58,17 @@
             <button className="btn btn-secondary" onClick={() => this.preview()}>{this.props.name}</button>
           </div>
           <div className="col-11">
-            {this.state.bar}
+            {this.state.bar.map((e, i) => {
+              let color = this.state.normalColor;
+              if(e.active){
+                color = e.activeColor;
+              }else if(e.isEnd){
+                color = "#444"
+              }
+              return (<Fragment key={i}>
+                <div className="mr-1" onClick={() => this.doSomething(this.props.id, i)} style={segment(undefined, color)}> </div>
+              </Fragment>);
+            })}
           </div>
         </div>
        </div>
