@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-02-25T16:45:02+00:00
+ * @Last modified time: 2020-02-25T17:34:12+00:00
  */
 
 
@@ -26,7 +26,6 @@ let empty = true;
 
     split = (str) => { //fastest
       return str ? str.split('\\').pop().split('/').pop() : false;
-
     };
 
    componentDidMount(){
@@ -89,7 +88,7 @@ let empty = true;
         <div className="col-4" style={{position: "relative"}}>
           <button className={(this.state.selectedFile ? "btn-primary" : "btn-secondary") + " mb-2"} onClick={() => this.preview(this.state.selectedFile)}>Preview</button>
           <button className={(this.state.selectedFile ? "btn-primary" : "btn-secondary")} disabled={this.props.sounds.length == 0} onClick={() => this.props.addChannel(this.state.selectedFile)}>Add Channel</button>
-          <button className="btn-danger" style={{position: "absolute", bottom: 0, left: "15px"}} onClick={() => this.removeFromLibrary(this.state.selectedFile)}>Remove</button>
+          {this.state.selectedFile ? <button className="btn-danger" style={{position: "absolute", bottom: 0, left: "15px"}} onClick={() => this.removeFromLibrary(this.state.selectedFile)}>Remove</button> : <></>}
         </div>
       </div>
       {/* Fix later either to set minnimum screen size or fix al together*/}

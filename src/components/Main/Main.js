@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-25T15:58:56+00:00
+ * @Last modified time: 2020-02-25T17:28:39+00:00
  */
 
 
@@ -34,6 +34,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        directory: "C:/Users/N00173936/Desktop/DummyFolder/projects/",
        selectedFile: {name: "", stats: []},
        readyFiles: [],
+       soundChannels: [],
        projectData: {}
      };
      // console.log(this.state.directory);
@@ -50,8 +51,15 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
    addNewChannel = (fileName) => {
      console.log("Add New Channel: " + fileName);
+     let newArray = this.state.soundChannels;
+     newArray.push(fileName);
+     this.setState({soundChannels: newArray});
    };
 
+
+   saveProjectData = (attribute) => {
+     console.log("Save Part of a project!");
+   };
 
 //-----------------------------------------------------------------------------------
    newProject(){
@@ -137,7 +145,9 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
             </div>
 
             <div className="col-9">
-              <SoundContainer />
+              <SoundContainer
+                soundChannels={this.state.soundChannels}
+              />
             </div>
             </div>
           </div>

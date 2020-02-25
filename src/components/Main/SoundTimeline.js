@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-25T17:01:04+00:00
+ * @Last modified time: 2020-02-25T17:36:43+00:00
  */
 
 
@@ -33,12 +33,12 @@ class SoundTimeline extends Component{
 
   componentWillMount(){
 
-    //debug channels
-    let debug = [];
-    for(let i = 0; i < 1; i++){
-      debug.push(<li className="list-group-item bg-dark"><SoundChannel key={i} id={i+1} name={i} time={globalOffset}/></li>);
-    }
-    this.setState({channelArray: debug});
+      let debug = [];
+      for(let i = 0; i < 1; i++){
+        debug.push(<li className="list-group-item bg-dark"><SoundChannel key={i} id={i+1} name={i} time={globalOffset}/></li>);
+      }
+      this.setState({channelArray: debug});
+
   }
 
 
@@ -59,6 +59,10 @@ class SoundTimeline extends Component{
     }
   }
 
+  split = (str) => { //fastest
+    return str ? str.split('\\').pop().split('/').pop() : false;
+  };
+
   render(){
     return(
       <>
@@ -72,7 +76,9 @@ class SoundTimeline extends Component{
                 <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.playChannels()}>{this.state.isPlaying ? "Stop" : "Play Button"}</button>
               </div>
               <ul className="list-group col-12" style={{height: ((this.props.isPanelOpen) ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
-              {this.state.channelArray}
+              {this.props.soundChannels.length === 0 ? this.state.channelArray : this.props.soundChannels.map((e, i) => {
+                return <li className="list-group-item bg-dark"><SoundChannel key={i} id={i+1} name={this.split(e)} time={globalOffset} soundUrl={e}/></li>;
+              })}
               </ul>
             </div>
           </div>

@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T15:09:26+00:00
- * @Last modified time: 2020-02-25T15:50:48+00:00
+ * @Last modified time: 2020-02-25T17:26:30+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -17,7 +17,7 @@ const {screen, BrowserWindow} = window.require('electron');
 const remote = electron.remote;
 // console.log(screen.getPrimaryDisplay());
 
-console.log(remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBounds());
+// console.log(remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBounds());
 let space = remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBounds();
 
 
