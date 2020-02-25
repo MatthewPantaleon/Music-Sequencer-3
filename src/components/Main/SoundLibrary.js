@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-02-24T19:34:18+00:00
+ * @Last modified time: 2020-02-25T15:26:35+00:00
  */
 
 
@@ -11,17 +11,25 @@
  const fs = window.require("fs");
  const { dialog } = window.require('electron').remote;
 
+let empty = true;
+
+
  class SoundLibrary extends Component{
    constructor(props){
      super(props);
 
      this.state = {
        sounds: [],
-       selectedFile: "" || "Name"
+       selectedFile: ""
      };
    }
 
+   split = (str) => { //fastest
+       return str.split('\\').pop().split('/').pop();
+   };
+
    componentDidMount(){
+
      // console.log(this.props);
      // if(this.props.soundUrls[0] === undefined){
      //   return;
@@ -31,6 +39,12 @@
      //     console.log(s);
      //   });
      // }
+   }
+
+   componentDidUpdate(){
+     if(this.props.sounds.length !== 0 && empty){
+       this.setState({selectedFile: this.props.sounds[0]}, () => empty = false);
+     }
    }
 
    changeFile = (name) => {
@@ -48,19 +62,25 @@
    }
 
 
+   preview(file){
+     console.log(this.state.selectedFile);
+     if(file === "" || file === undefined)return;
+     new Audio(file).play();
+   }
+
    render(){
      return (
       <>
       <div className="row card-body bg-dark mb-2" style={{position: "relative", height: "calc(20vh)"}}>
         <div className="col-8 text-white">
-          <h5><b>Selected File: </b> {this.state.selectedFile} </h5>
+          <h5><b>Selected File: </b> {this.split(this.state.selectedFile)} </h5>
           <h5><b>File Type: </b> WAV </h5>
           <h5><b>File Size: </b> 100kb </h5>
 
         </div>
         <div className="col-4" style={{position: "relative"}}>
-          <button className="btn-primary mb-2">Preview</button>
-          <button className="btn-secondary" disabled={this.props.sounds.length == 0} onClick={() => console.log("Adding Channel: ", this.props.sounds)}>Add Channel</button>
+          {<button className="btn-primary mb-2" onClick={() => this.preview(this.state.selectedFile)}>Preview</button>}
+          <button className="btn-secondary" disabled={this.props.sounds.length == 0} onClick={() => this.props.addChannel(this.state.selectedFile)}>Add Channel</button>
           <button className="btn-danger" style={{position: "absolute", bottom: 0, left: "15px"}}>Remove</button>
         </div>
       </div>
@@ -71,7 +91,7 @@
             {/*<li className="list-group-item list-group-item-action">SoundFile1<button className="btn btn-danger float-right">X</button></li>*/}
             {this.props.sounds.length === 0 ? <p className="text-white">You have no sounds in your library</p> : this.props.sounds.map((e, i) => {
               return (
-                <li key={i} className="list-group-item list-group-item-action pointer" onClick={() => this.changeFile(e)}>{e}<button className="btn btn-danger float-right" onClick={() => this.removeFromLibrary(e)}>X</button></li>
+                <li key={i} className="list-group-item list-group-item-action pointer" onClick={() => this.changeFile(e)}>{this.split(e)}<button className="btn btn-danger float-right" onClick={() => this.removeFromLibrary(e)}>X</button></li>
               );
             })}
           </ul>

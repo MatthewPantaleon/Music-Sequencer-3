@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-24T20:03:04+00:00
+ * @Last modified time: 2020-02-25T13:06:34+00:00
  */
 
 
@@ -26,17 +26,17 @@ class SoundTimeline extends Component{
     super(props);
     this.state = {
       channelArray: [],
-      isPlaying: false
-
+      isPlaying: false,
+      bpm: 129
     };
   }
 
-  componentDidMount(){
+  componentWillMount(){
 
     //debug channels
     let debug = [];
     for(let i = 0; i < 20; i++){
-      debug.push(<li className="list-group-item bg-dark"><SoundChannel key={i} id={i+1} time={globalOffset}/></li>);
+      debug.push(<li className="list-group-item bg-dark"><SoundChannel key={i} id={i+1} name={i} time={globalOffset}/></li>);
     }
     this.setState({channelArray: debug});
   }
@@ -52,6 +52,7 @@ class SoundTimeline extends Component{
       globalOffset = 0;
 
     }else{
+      console.log("PLaying");
       this.setState({isPlaying: true});
       globalInterval = setInterval(bpm, 500);
 

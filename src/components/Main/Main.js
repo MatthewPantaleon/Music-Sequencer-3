@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-24T19:31:01+00:00
+ * @Last modified time: 2020-02-25T15:25:35+00:00
  */
 
 
@@ -13,6 +13,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 const fs = window.require("fs");
 const { dialog } = window.require('electron').remote;
+const { BrowserWindow } = window.require('electron');
 
 let baseStyle = {
   border: "1px solid red"
@@ -47,8 +48,8 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
       }
    }.bind(this);
 
-   addNewChannel = () => {
-
+   addNewChannel = (fileName) => {
+     console.log("Add New Channel: " + fileName);
    };
 
 
@@ -85,14 +86,13 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 //-----------------------------------------------------------------------------------
 
   importSoundFromMain = async () => {
-    let file = await dialog.showOpenDialog().then((e) => e.filePaths[0]);
+    let file = await dialog.showOpenDialog(BrowserWindow).then((e) => e.filePaths[0]);
+    if(!file)return;
     console.log(file);
-    let fileName = this.split(file);
-    console.log(fileName);
 
-    if(fileName.includes(".wav") || fileName.includes(".mp3")){
+    if(file.includes(".wav") || file.includes(".mp3")){
       let newArray = this.state.readyFiles;
-      newArray.push(fileName);
+      newArray.push(file);
       this.setState({readyFiles: newArray});
     }else{
       alert("That is not a sound File!");
@@ -100,9 +100,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
   };
 
-  split = (str) => { //fastest
-      return str.split('\\').pop().split('/').pop();
-  };
+
 
 
    render(){
@@ -123,7 +121,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
             </div>
             <div className="row p-0">
             <div className="col-3 p-0" style={{height: "calc(100vh - 50px)"}}>
-              <SoundBrowser sounds={this.state.readyFiles} importSound={this.importSoundFromMain}/>
+              <SoundBrowser sounds={this.state.readyFiles} importSound={this.importSoundFromMain} addChannel={this.addNewChannel}/>
             </div>
 
             <div className="col-9">

@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-03T02:49:14+00:00
- * @Last modified time: 2020-02-12T16:13:28+00:00
+ * @Last modified time: 2020-02-25T14:54:15+00:00
  */
 const electron = require("electron");
 const app = electron.app;
@@ -39,7 +39,7 @@ function currentURL(e){
 
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 1366, height: 768, webPreferences: { nodeIntegration: true }});
+  mainWindow = new BrowserWindow({ width: 1366, height: 768, webPreferences: { nodeIntegration: true, webSecurity: false}});
   // mainWindow.setMenu(null);
   mainWindow.webContents.openDevTools();
   // mainWindow.loadURL(

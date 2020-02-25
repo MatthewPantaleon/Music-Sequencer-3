@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-24T19:41:25+00:00
+ * @Last modified time: 2020-02-25T12:18:56+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -44,7 +44,7 @@
        <div className="col-12">
         <div className="row mb-1" >
           <div className="col-1">
-            <button className="btn btn-secondary">Name</button>
+            <button className="btn btn-secondary">C: {this.props.name + 1}</button>
           </div>
           <div className="col-11">
             {this.state.bar}
