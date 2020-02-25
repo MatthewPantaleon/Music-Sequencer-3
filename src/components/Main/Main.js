@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-25T18:43:53+00:00
+ * @Last modified time: 2020-02-25T18:46:57+00:00
  */
 
 
@@ -50,7 +50,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
    }.bind(this);
 
    addNewChannel = (fileName) => {
-     console.log("Add New Channel: " + fileName);
+     // console.log("Add New Channel: " + fileName);
      let newArray = this.state.soundChannels;
      newArray.push(fileName);
      this.setState({soundChannels: newArray});
