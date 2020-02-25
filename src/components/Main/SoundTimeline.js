@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-25T17:36:43+00:00
+ * @Last modified time: 2020-02-25T18:42:17+00:00
  */
 
 
@@ -44,7 +44,10 @@ class SoundTimeline extends Component{
 
 
   playChannels(){
-
+    if(this.props.soundChannels.length === 0){
+      alert("There are no Channels to play!");
+      return;
+    }
     if(this.state.isPlaying){
       console.log("Stopping");
       this.setState({isPlaying: false});
@@ -72,8 +75,9 @@ class SoundTimeline extends Component{
           </div>
           <div className="card-body bg-secondary" style={{height: "calc(100vh - 120px)"}}>
             <div className="row bg-dark mr-1">
-              <div className="col-2 mb-2">
-                <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.playChannels()}>{this.state.isPlaying ? "Stop" : "Play Button"}</button>
+              <div className="col-12 mb-2">
+                <button className="btn btn-secondary mt-2 mb-4 mr-3" onClick={() => this.playChannels()}>{this.state.isPlaying ? "Stop" : "Play Button"}</button>
+                <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.props.clearChannels()}>Clear Channels</button>
               </div>
               <ul className="list-group col-12" style={{height: ((this.props.isPanelOpen) ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
               {this.props.soundChannels.length === 0 ? this.state.channelArray : this.props.soundChannels.map((e, i) => {

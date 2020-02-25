@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T15:09:26+00:00
- * @Last modified time: 2020-02-25T17:26:30+00:00
+ * @Last modified time: 2020-02-25T18:46:05+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -49,7 +49,6 @@ class SoundBrowser extends Component{
       default:
         let e = {message: "How did you even get Here?"}
         throw e.message;
-        break;
     }
   }
 

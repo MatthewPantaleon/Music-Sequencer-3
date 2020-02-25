@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-25T18:28:01+00:00
+ * @Last modified time: 2020-02-25T18:45:58+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -33,7 +33,7 @@
        }
        segments.push({id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[this.props.id] || "#fff", isEnd, active: false});
      }
-     this.setState({bar: segments}, () => console.log(this.state.bar));
+     this.setState({bar: segments});
    }
 
    doSomething(id, i){

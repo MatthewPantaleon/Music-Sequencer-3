@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-25T17:28:39+00:00
+ * @Last modified time: 2020-02-25T18:43:53+00:00
  */
 
 
@@ -56,6 +56,11 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      this.setState({soundChannels: newArray});
    };
 
+   clearAllChannels = () => {
+     if(window.confirm("Clear All Channels? This action cannot be Undone!")){
+       this.setState({soundChannels: []}, () => alert("Cleared All Channels"));
+     }
+   };
 
    saveProjectData = (attribute) => {
      console.log("Save Part of a project!");
@@ -147,6 +152,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
             <div className="col-9">
               <SoundContainer
                 soundChannels={this.state.soundChannels}
+                clearChannels={this.clearAllChannels}
               />
             </div>
             </div>
