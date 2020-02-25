@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T15:09:26+00:00
- * @Last modified time: 2020-02-25T13:18:39+00:00
+ * @Last modified time: 2020-02-25T15:50:48+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -67,6 +67,7 @@ class SoundBrowser extends Component{
               sounds={this.props.sounds}
               importSound={this.props.importSound}
               addChannel={this.props.addChannel}
+              removeSound={this.props.removeSound}
               /> : <SoundAPI />}
           </div>
           <hr className="m-0"/>

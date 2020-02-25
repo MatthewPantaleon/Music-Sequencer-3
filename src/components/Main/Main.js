@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-25T15:25:35+00:00
+ * @Last modified time: 2020-02-25T15:58:56+00:00
  */
 
 
@@ -93,11 +93,18 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
     if(file.includes(".wav") || file.includes(".mp3")){
       let newArray = this.state.readyFiles;
       newArray.push(file);
-      this.setState({readyFiles: newArray});
+      this.setState({readyFiles: newArray}, () => console.log(this.state.readyFiles));
     }else{
       alert("That is not a sound File!");
     }
+  };
 
+  removeFromProject = (name) => {
+    // console.log(name);
+    let newArray = this.state.readyFiles;
+    newArray = newArray.filter(e => e !== name);
+    console.log(newArray);
+    this.setState({readyFiles: newArray});
   };
 
 
@@ -121,7 +128,12 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
             </div>
             <div className="row p-0">
             <div className="col-3 p-0" style={{height: "calc(100vh - 50px)"}}>
-              <SoundBrowser sounds={this.state.readyFiles} importSound={this.importSoundFromMain} addChannel={this.addNewChannel}/>
+              <SoundBrowser
+                sounds={this.state.readyFiles}
+                importSound={this.importSoundFromMain}
+                removeSound={this.removeFromProject}
+                addChannel={this.addNewChannel}
+              />
             </div>
 
             <div className="col-9">

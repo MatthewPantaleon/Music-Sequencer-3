@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-25T13:06:34+00:00
+ * @Last modified time: 2020-02-25T17:01:04+00:00
  */
 
 
@@ -35,7 +35,7 @@ class SoundTimeline extends Component{
 
     //debug channels
     let debug = [];
-    for(let i = 0; i < 20; i++){
+    for(let i = 0; i < 1; i++){
       debug.push(<li className="list-group-item bg-dark"><SoundChannel key={i} id={i+1} name={i} time={globalOffset}/></li>);
     }
     this.setState({channelArray: debug});
