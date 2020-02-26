@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-25T18:45:58+00:00
+ * @Last modified time: 2020-02-26T14:00:20+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -14,7 +14,6 @@
        barInterval: 4,
        segments: 28,
        bar: [],
-       barBools: [],
        pages: [],
        soundResource: "",
        activatedColor: ["#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff", "#000"],
@@ -34,6 +33,14 @@
        segments.push({id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[this.props.id] || "#fff", isEnd, active: false});
      }
      this.setState({bar: segments});
+   }
+
+   blankChannel(){
+
+   }
+
+   componentDidUpdate(){
+
    }
 
    doSomething(id, i){
@@ -58,9 +65,9 @@
             <button className="btn btn-secondary" onClick={() => this.preview()}>{this.props.name}</button>
           </div>
           <div className="col-11">
-            {this.state.bar.map((e, i) => {
+            {this.props.soundUrl !== "" || this.props.soundUrl !== undefined ? this.state.bar.map((e, i) => {
               let color = this.state.normalColor;
-              if(e.active){
+              if(e.active && (this.props.soundUrl !== "" || this.props.soundUrl !== undefined)){
                 color = e.activeColor;
               }else if(e.isEnd){
                 color = "#444"
@@ -68,7 +75,7 @@
               return (<Fragment key={i}>
                 <div className="mr-1" onClick={() => {if(this.props.soundUrl)this.doSomething(this.props.id, i)}} style={segment(undefined, color)}> </div>
               </Fragment>);
-            })}
+            }) : this.componentWillMount()}
           </div>
         </div>
        </div>

@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-25T18:46:57+00:00
+ * @Last modified time: 2020-02-26T14:12:44+00:00
  */
 
 
@@ -39,6 +39,10 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      };
      // console.log(this.state.directory);
    }
+
+   split = (str) => { //fastest
+     return str ? str.split('\\').pop().split('/').pop() : false;
+   };
 //-----------------------------------------------------------------------------------
    giveReadyFiles = function(e){
      console.log(this.state.directory);
@@ -114,10 +118,14 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
   removeFromProject = (name) => {
     // console.log(name);
+    
     let newArray = this.state.readyFiles;
+    let newChannels = this.state.soundChannels;
     newArray = newArray.filter(e => e !== name);
+    newChannels = newChannels.filter(e => e !== name);
     console.log(newArray);
-    this.setState({readyFiles: newArray});
+    this.setState({readyFiles: newArray, soundChannels: newChannels});
+
   };
 
 

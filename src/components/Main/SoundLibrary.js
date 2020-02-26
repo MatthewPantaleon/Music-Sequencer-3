@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-02-25T17:34:12+00:00
+ * @Last modified time: 2020-02-26T14:16:08+00:00
  */
 
 
@@ -56,11 +56,17 @@ let empty = true;
    };
 
    removeFromLibrary(e){
-     this.setState({selectedFile: null}, () => {
-       this.props.removeSound(e);
-       console.log(this.state.selectedFile);
-     });
-
+      if(window.confirm(`Are you Sure you want to remove: ${this.split(e)}? \nThis will Remove all Channels too.\nThisCannot be undone!`)){
+        if(this.state.selectedFile === e){
+          this.setState({selectedFile: null}, () => {
+            this.props.removeSound(e);
+            console.log(this.state.selectedFile);
+          });
+        }else{
+          this.props.removeSound(e);
+          console.log(this.state.selectedFile);
+        }
+      }
    };
 
    importSound(){
@@ -87,7 +93,7 @@ let empty = true;
         </div>
         <div className="col-4" style={{position: "relative"}}>
           <button className={(this.state.selectedFile ? "btn-primary" : "btn-secondary") + " mb-2"} onClick={() => this.preview(this.state.selectedFile)}>Preview</button>
-          <button className={(this.state.selectedFile ? "btn-primary" : "btn-secondary")} disabled={this.props.sounds.length == 0} onClick={() => this.props.addChannel(this.state.selectedFile)}>Add Channel</button>
+          <button className={(this.state.selectedFile ? "btn-primary" : "btn-secondary")} disabled={this.state.selectedFile === "" || this.state.selectedFile === undefined} onClick={() => this.props.addChannel(this.state.selectedFile)}>Add Channel</button>
           {this.state.selectedFile ? <button className="btn-danger" style={{position: "absolute", bottom: 0, left: "15px"}} onClick={() => this.removeFromLibrary(this.state.selectedFile)}>Remove</button> : <></>}
         </div>
       </div>

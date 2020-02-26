@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-25T18:42:17+00:00
+ * @Last modified time: 2020-02-26T14:04:38+00:00
  */
 
 
@@ -15,6 +15,7 @@ let space = remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBou
 
 let globalOffset = 0;
 let globalInterval;
+let init = true;
 
 function bpm(){
   console.log("rgji: " + globalOffset);
@@ -33,11 +34,9 @@ class SoundTimeline extends Component{
 
   componentWillMount(){
 
-      let debug = [];
-      for(let i = 0; i < 1; i++){
-        debug.push(<li className="list-group-item bg-dark"><SoundChannel key={i} id={i+1} name={i} time={globalOffset}/></li>);
-      }
-      this.setState({channelArray: debug});
+  }
+
+  componentDidUpdate(){
 
   }
 
@@ -80,7 +79,7 @@ class SoundTimeline extends Component{
                 <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.props.clearChannels()}>Clear Channels</button>
               </div>
               <ul className="list-group col-12" style={{height: ((this.props.isPanelOpen) ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
-              {this.props.soundChannels.length === 0 ? this.state.channelArray : this.props.soundChannels.map((e, i) => {
+              {this.props.soundChannels.length === 0 ? <li className="list-group-item bg-dark text-white">There are no Channels</li> : this.props.soundChannels.map((e, i) => {
                 return <li className="list-group-item bg-dark"><SoundChannel key={i} id={i+1} name={this.split(e)} time={globalOffset} soundUrl={e}/></li>;
               })}
               </ul>
