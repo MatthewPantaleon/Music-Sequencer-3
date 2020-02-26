@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-26T14:04:38+00:00
+ * @Last modified time: 2020-02-26T14:19:58+00:00
  */
 
 
@@ -78,9 +78,9 @@ class SoundTimeline extends Component{
                 <button className="btn btn-secondary mt-2 mb-4 mr-3" onClick={() => this.playChannels()}>{this.state.isPlaying ? "Stop" : "Play Button"}</button>
                 <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.props.clearChannels()}>Clear Channels</button>
               </div>
-              <ul className="list-group col-12" style={{height: ((this.props.isPanelOpen) ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
+              <ul className="list-group col-12" style={{height: (this.props.isPanelOpen ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
               {this.props.soundChannels.length === 0 ? <li className="list-group-item bg-dark text-white">There are no Channels</li> : this.props.soundChannels.map((e, i) => {
-                return <li className="list-group-item bg-dark"><SoundChannel key={i} id={i+1} name={this.split(e)} time={globalOffset} soundUrl={e}/></li>;
+                return <li key={i} className="list-group-item bg-dark"><SoundChannel id={i+1} name={this.split(e)} time={globalOffset} soundUrl={e}/></li>;
               })}
               </ul>
             </div>
