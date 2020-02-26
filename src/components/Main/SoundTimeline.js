@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-26T14:19:58+00:00
+ * @Last modified time: 2020-02-26T16:14:04+00:00
  */
 
 
@@ -13,14 +13,13 @@ const electron = window.require('electron');
 const remote = electron.remote;
 let space = remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBounds();
 
-let globalOffset = 0;
+
+
+
 let globalInterval;
 let init = true;
 
-function bpm(){
-  console.log("rgji: " + globalOffset);
-  globalOffset++;
-}
+
 
 class SoundTimeline extends Component{
   constructor(props){
@@ -28,7 +27,8 @@ class SoundTimeline extends Component{
     this.state = {
       channelArray: [],
       isPlaying: false,
-      bpm: 129
+      bpm: 120,
+      timeIndex: 0
     };
   }
 
@@ -40,7 +40,16 @@ class SoundTimeline extends Component{
 
   }
 
-
+  bpm(that){
+    // console.log("rgji: " + globalOffset);
+    let t = that.state.timeIndex;
+    t++;
+    if(that.state.timeIndex < 28){
+      that.setState({timeIndex: t}, () => console.log(that.state.timeIndex));
+    }else{
+      that.setState({timeIndex: 0});
+    }
+  }
 
   playChannels(){
     if(this.props.soundChannels.length === 0){
@@ -49,16 +58,19 @@ class SoundTimeline extends Component{
     }
     if(this.state.isPlaying){
       console.log("Stopping");
-      this.setState({isPlaying: false});
+      this.setState({isPlaying: false, timeIndex: 0});
       clearInterval(globalInterval);
-      globalOffset = 0;
 
     }else{
       console.log("PLaying");
       this.setState({isPlaying: true});
-      globalInterval = setInterval(bpm, 500);
+      globalInterval = setInterval(this.bpm, this.calcBpm(this.state.bpm), this);
 
     }
+  }
+
+  calcBpm(bpm){
+    return 1000 * (60 / bpm);
   }
 
   split = (str) => { //fastest
@@ -80,7 +92,7 @@ class SoundTimeline extends Component{
               </div>
               <ul className="list-group col-12" style={{height: (this.props.isPanelOpen ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
               {this.props.soundChannels.length === 0 ? <li className="list-group-item bg-dark text-white">There are no Channels</li> : this.props.soundChannels.map((e, i) => {
-                return <li key={i} className="list-group-item bg-dark"><SoundChannel id={i+1} name={this.split(e)} time={globalOffset} soundUrl={e}/></li>;
+                return <li key={i} className="list-group-item bg-dark"><SoundChannel id={i+1} name={this.split(e)} time={this.state.timeIndex} isPlaying={this.state.isPlaying} soundUrl={e}/></li>;
               })}
               </ul>
             </div>

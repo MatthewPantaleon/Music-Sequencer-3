@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-26T14:12:44+00:00
+ * @Last modified time: 2020-02-26T14:27:48+00:00
  */
 
 
@@ -105,12 +105,12 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
   importSoundFromMain = async () => {
     let file = await dialog.showOpenDialog(BrowserWindow).then((e) => e.filePaths[0]);
     if(!file)return;
-    console.log(file);
+    // console.log(file);
 
     if(file.includes(".wav") || file.includes(".mp3")){
       let newArray = this.state.readyFiles;
       newArray.push(file);
-      this.setState({readyFiles: newArray}, () => console.log(this.state.readyFiles));
+      this.setState({readyFiles: newArray});
     }else{
       alert("That is not a sound File!");
     }
@@ -118,7 +118,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
   removeFromProject = (name) => {
     // console.log(name);
-    
+
     let newArray = this.state.readyFiles;
     let newChannels = this.state.soundChannels;
     newArray = newArray.filter(e => e !== name);

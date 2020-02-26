@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-02-26T14:16:08+00:00
+ * @Last modified time: 2020-02-26T15:10:39+00:00
  */
 
 
@@ -60,7 +60,7 @@ let empty = true;
         if(this.state.selectedFile === e){
           this.setState({selectedFile: null}, () => {
             this.props.removeSound(e);
-            console.log(this.state.selectedFile);
+            // console.log(this.state.selectedFile);
           });
         }else{
           this.props.removeSound(e);

@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-26T14:00:20+00:00
+ * @Last modified time: 2020-02-26T16:09:08+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -19,7 +19,10 @@
        activatedColor: ["#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff", "#000"],
        normalColor: "#777"
      };
+     this.timeIndex = 0;
    }
+
+
 
    componentWillMount(){
      let segments = [];
@@ -33,14 +36,6 @@
        segments.push({id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[this.props.id] || "#fff", isEnd, active: false});
      }
      this.setState({bar: segments});
-   }
-
-   blankChannel(){
-
-   }
-
-   componentDidUpdate(){
-
    }
 
    doSomething(id, i){
@@ -58,7 +53,6 @@
    render(){
      return(
        <>
-
        <div className="col-12">
         <div className="row mb-1" >
           <div className="col-1">
@@ -67,15 +61,16 @@
           <div className="col-11">
             {this.props.soundUrl !== "" || this.props.soundUrl !== undefined ? this.state.bar.map((e, i) => {
               let color = this.state.normalColor;
-              if(e.active && (this.props.soundUrl !== "" || this.props.soundUrl !== undefined)){
+              if(e.active){
                 color = e.activeColor;
               }else if(e.isEnd){
                 color = "#444"
               }
-              return (<Fragment key={i}>
-                <div className="mr-1" onClick={() => {if(this.props.soundUrl)this.doSomething(this.props.id, i)}} style={segment(undefined, color)}> </div>
+              return (
+              <Fragment key={i}>
+                <div className="mr-1" onClick={() => {if(this.props.soundUrl)this.doSomething(this.props.id, i)}} style={segment(undefined, color, {index: i, time: this.props.time})}> </div>
               </Fragment>);
-            }) : this.componentWillMount()}
+            }) : <></>}
           </div>
         </div>
        </div>
@@ -84,8 +79,13 @@
    }
  }
 
- function segment(size = "2vw", backgroundColor = "#777"){
-   return{width: size, height: size, backgroundColor, display: "inline-block"};
+ function segment(size = "2vw", backgroundColor = "#777", play){
+   if(play.index == play.time){
+     return{width: size, height: size, backgroundColor, display: "inline-block", border: "2px solid #fff"};
+   }else{
+     return{width: size, height: size, backgroundColor, display: "inline-block"};
+   }
+
  }
 
  function debugBorder(color = "red", size = "1px", type = "solid"){
