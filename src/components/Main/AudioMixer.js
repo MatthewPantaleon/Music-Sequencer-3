@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T19:27:18+00:00
- * @Last modified time: 2020-02-24T20:14:40+00:00
+ * @Last modified time: 2020-02-26T20:04:19+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -16,7 +16,21 @@ let space = remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBou
 class AudioMixer extends Component{
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {
+      min: 0,
+      max: 100, //max value will change by sound data
+      currentMin: 0,
+      currentMax: 100
+    };
+  }
+
+  changeTime(who, e){
+    // console.log(e.target.value);
+    this.setState({["current" + who]: e.target.value}, () => {
+      if(this.state.currentMin > this.state.currentMax){
+        this.setState({currentMax: this.state.currentMin});
+      }
+    });
   }
 
   render(){
@@ -27,7 +41,14 @@ class AudioMixer extends Component{
           <h4>Audio Mixer</h4>
         </div>
         <div className="card-body bg-secondary">
-        
+          <div className="row">
+            <div className="col-12">
+              <input className="form-control-range" type="range" min={this.state.min} max={this.state.max} value={this.state.currentMin} onChange={(e) => this.changeTime("Min", e)}/>
+            </div>
+            <div className="col-12">
+              <input className="form-control-range" type="range" min={this.state.min} max={this.state.max} value={this.state.currentMax} onChange={(e) => this.changeTime("Max", e)}/>
+            </div>
+          </div>
         </div>
       </div>
       </>

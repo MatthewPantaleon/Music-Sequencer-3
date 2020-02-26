@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-26T18:28:15+00:00
+ * @Last modified time: 2020-02-26T20:25:28+00:00
  */
 
 
@@ -45,7 +45,7 @@ class SoundTimeline extends Component{
     let t = that.state.timeIndex;
     t++;
     if(that.state.timeIndex < 28){
-      that.setState({timeIndex: t}, () => console.log(that.state.timeIndex));
+      that.setState({timeIndex: t});
     }else{
       that.setState({timeIndex: 0});
     }
