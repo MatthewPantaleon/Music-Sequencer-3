@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-26T16:09:08+00:00
+ * @Last modified time: 2020-02-26T17:03:30+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -50,6 +50,17 @@
      new Audio(this.props.soundUrl).play();
    }
 
+   segment(size = "2vw", backgroundColor = "#777", play, segment){
+     if(play.index == play.time){
+       if(segment.active){
+         new Audio(this.props.soundUrl).play();
+       }
+       return{width: size, height: size, backgroundColor, display: "inline-block", border: "2px solid #fff"};
+     }else{
+       return{width: size, height: size, backgroundColor, display: "inline-block"};
+     }
+   }
+
    render(){
      return(
        <>
@@ -68,7 +79,7 @@
               }
               return (
               <Fragment key={i}>
-                <div className="mr-1" onClick={() => {if(this.props.soundUrl)this.doSomething(this.props.id, i)}} style={segment(undefined, color, {index: i, time: this.props.time})}> </div>
+                <div className="mr-1" onClick={() => {if(this.props.soundUrl)this.doSomething(this.props.id, i)}} style={this.segment(undefined, color, {index: i, time: this.props.time}, e)}> </div>
               </Fragment>);
             }) : <></>}
           </div>
@@ -79,14 +90,7 @@
    }
  }
 
- function segment(size = "2vw", backgroundColor = "#777", play){
-   if(play.index == play.time){
-     return{width: size, height: size, backgroundColor, display: "inline-block", border: "2px solid #fff"};
-   }else{
-     return{width: size, height: size, backgroundColor, display: "inline-block"};
-   }
 
- }
 
  function debugBorder(color = "red", size = "1px", type = "solid"){
    return {border: size +" "+ type +" " + color};

@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-26T16:14:04+00:00
+ * @Last modified time: 2020-02-26T17:06:47+00:00
  */
 
 
@@ -27,7 +27,7 @@ class SoundTimeline extends Component{
     this.state = {
       channelArray: [],
       isPlaying: false,
-      bpm: 120,
+      bpm: 600,
       timeIndex: 0
     };
   }
@@ -70,7 +70,7 @@ class SoundTimeline extends Component{
   }
 
   calcBpm(bpm){
-    return 1000 * (60 / bpm);
+    return Math.floor(1000 * (60 / bpm));
   }
 
   split = (str) => { //fastest
