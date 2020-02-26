@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-02-26T15:10:39+00:00
+ * @Last modified time: 2020-02-26T19:19:46+00:00
  */
 
 
@@ -92,7 +92,7 @@ let empty = true;
 
         </div>
         <div className="col-4" style={{position: "relative"}}>
-          <button className={(this.state.selectedFile ? "btn-primary" : "btn-secondary") + " mb-2"} onClick={() => this.preview(this.state.selectedFile)}>Preview</button>
+          <button className={(this.state.selectedFile ? "btn-primary" : "btn-secondary") + " mb-2"} disabled={this.state.selectedFile === "" || this.state.selectedFile === undefined} onClick={() => this.preview(this.state.selectedFile)}>Preview</button>
           <button className={(this.state.selectedFile ? "btn-primary" : "btn-secondary")} disabled={this.state.selectedFile === "" || this.state.selectedFile === undefined} onClick={() => this.props.addChannel(this.state.selectedFile)}>Add Channel</button>
           {this.state.selectedFile ? <button className="btn-danger" style={{position: "absolute", bottom: 0, left: "15px"}} onClick={() => this.removeFromLibrary(this.state.selectedFile)}>Remove</button> : <></>}
         </div>

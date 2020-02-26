@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-26T14:27:48+00:00
+ * @Last modified time: 2020-02-26T19:18:48+00:00
  */
 
 
@@ -14,6 +14,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 const fs = window.require("fs");
 const { dialog } = window.require('electron').remote;
 const { BrowserWindow } = window.require('electron');
+const audioContext = new AudioContext();
 
 let baseStyle = {
   border: "1px solid red"
@@ -108,6 +109,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
     // console.log(file);
 
     if(file.includes(".wav") || file.includes(".mp3")){
+      // console.log(fs.createReadStream(file));
       let newArray = this.state.readyFiles;
       newArray.push(file);
       this.setState({readyFiles: newArray});

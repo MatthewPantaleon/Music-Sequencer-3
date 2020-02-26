@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-26T17:32:05+00:00
+ * @Last modified time: 2020-02-26T18:28:15+00:00
  */
 
 
@@ -78,7 +78,8 @@ class SoundTimeline extends Component{
   };
 
   changeBpm(e){
-    console.log(e.target.value);
+    // console.log(e.target.value);
+    this.setState({bpm: e.target.value});
   }
 
   render(){
@@ -86,7 +87,7 @@ class SoundTimeline extends Component{
       <>
         <div className="card">
           <div className="card-header bg-dark text-white">
-            <div className="btn text-white"> Timeline</div>
+            <div className="btn text-white">Timeline</div>
           </div>
           <div className="card-body bg-secondary" style={{height: "calc(100vh - 120px)"}}>
             <div className="row bg-dark mr-1">
@@ -94,6 +95,7 @@ class SoundTimeline extends Component{
                 <button className="btn btn-secondary mt-2 mb-4 mr-3" onClick={() => this.playChannels()}>{this.state.isPlaying ? "Stop" : "Play Button"}</button>
                 <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.props.clearChannels()}>Clear Channels</button>
                 <input type="range" min="60" max="240" onChange={(e) => this.changeBpm(e)}/>
+                <input className="btn btn-warning" onChange={(e) => this.changeBpm(e)} value={this.state.bpm}/>
               </div>
               <ul className="list-group col-12" style={{height: (this.props.isPanelOpen ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
               {this.props.soundChannels.length === 0 ? <li className="list-group-item bg-dark text-white">There are no Channels</li> : this.props.soundChannels.map((e, i) => {
