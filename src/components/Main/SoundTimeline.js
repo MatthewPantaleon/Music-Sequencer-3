@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-27T14:03:56+00:00
+ * @Last modified time: 2020-02-27T15:03:20+00:00
  */
 
 
@@ -33,7 +33,7 @@ class SoundTimeline extends Component{
   }
 
   componentWillMount(){
-
+    
   }
 
   componentDidUpdate(){
@@ -102,7 +102,16 @@ class SoundTimeline extends Component{
                 if(e === undefined)return;
                 return (
                 <li key={i} className="list-group-item bg-dark">
-                  <SoundChannel id={i+1} name={this.split(e)} time={this.state.timeIndex} isPlaying={this.state.isPlaying} soundUrl={e} removeChannel={this.props.removeChannel}/>
+                  <SoundChannel
+                    id={i+1}
+                    name={this.split(e)}
+                    time={this.state.timeIndex}
+                    isPlaying={this.state.isPlaying}
+                    soundUrl={e}
+                    removeChannel={this.props.removeChannel}
+                    getBarData={this.props.getBarData}
+                    existingBar={this.props.existingBars[i]}
+                    />
                 </li>);
               })}
               </ul>

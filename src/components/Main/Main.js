@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-27T14:22:40+00:00
+ * @Last modified time: 2020-02-27T15:38:35+00:00
  */
 
 
@@ -37,7 +37,8 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        readyFiles: [],
        soundChannels: [],
        channelBars: [],
-       projectData: {name: "untitled"}
+       bpm: 0,
+       projectName: "untitled"
      };
 
      this.state = this.newBlank;
@@ -47,12 +48,13 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
 
    split = (str) => { //fastest
+     if(!str)return;
      return str ? str.split('\\').pop().split('/').pop() : false;
    };
 //-----------------------------------------------------------------------------------
    giveReadyFiles = function(e){
-     console.log(this.state.directory);
-     let temp = this.state.readyFiles;
+      console.log(this.state.directory);
+      let temp = this.state.readyFiles;
       if(!isObjectEmpty(e)){
         temp.push(e);
         this.setState({readyFiles: temp});
@@ -76,6 +78,12 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      console.log("Save Part of a project!");
    };
 
+   getChannelBarData = (e) => {
+     let newArray = this.state.channelBars;
+     newArray.push(e);
+     this.setState({channelBars: newArray}, () => console.log(this.state.channelBars));
+   };
+
 //-----------------------------------------------------------------------------------
    newProject(){
      if(!window.confirm("Are you sure? All unsaved Progress will be lost!"))return;
@@ -85,15 +93,19 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        readyFiles: [],
        soundChannels: [],
        channelBars: [],
-       projectData: {name: "untitled"}
+       projectName: "untitled"
      }, () => console.log(this.state));
    }
 
-   saveProject(){
+   async saveProject(){
      console.log("Save Project");
-     let data = JSON.stringify(this.state.projectData);
-     console.log(data);
-     fs.writeFileSync(this.state.directory + "readme_2.json", data);
+     console.log(this.state);
+     let data = JSON.stringify(this.state);
+     let saveUrl = await dialog.showSaveDialog(BrowserWindow, {defaultPath: this.state.projectName + ".json"}).then(e => e.filePath);
+
+     if(saveUrl)fs.writeFileSync(saveUrl, data);
+     // console.log(saveUrl);
+
    }
 
    loadProject(){
@@ -107,7 +119,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      this.setState({soundDirectory: jsonData.projectDirectory + "/sounds", projectData: jsonData}, () => {
        console.log(this.state.soundDirectory);
        let results = fs.readdirSync(this.state.soundDirectory).filter((e, i) => {
-         return e.includes(".mp3") || e.includes(".wav") ;
+         return e.includes(".mp3") || e.includes(".wav");
        });
        this.setState({readyFiles: results});
      });
@@ -144,12 +156,14 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
   removeChannel = (index) => {
     // console.log(index - 1);
     let newArray = this.state.soundChannels;
+    let newChannels = this.state.channelBars;
     // console.log(newArray);
     newArray[index - 1] = undefined;
+    newChannels[index - 1] = undefined;
     if(newArray.every((e) => e === undefined)){
-      this.setState({soundChannels: []});
+      this.setState({soundChannels: [], channelBars: []});
     }else{
-      this.setState({soundChannels: newArray});
+      this.setState({soundChannels: newArray, channelBars: newChannels});
     }
 
   };
@@ -188,6 +202,8 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
                 soundChannels={this.state.soundChannels}
                 clearChannels={this.clearAllChannels}
                 removeChannel={this.removeChannel}
+                getBarData={this.getChannelBarData}
+                existingBars={this.state.channelBars}
               />
             </div>
             </div>

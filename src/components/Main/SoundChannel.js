@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-27T13:56:58+00:00
+ * @Last modified time: 2020-02-27T15:17:23+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -26,6 +26,7 @@
 
    componentWillMount(){
      let segments = [];
+
      for(let i = 0; i < this.state.segments; i++){
        // let backgroundColor = "#777";
        let isEnd = false;
@@ -33,12 +34,17 @@
          // backgroundColor = "#444"
          isEnd = true;
        }
-       segments.push({id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[(this.props.id % this.state.activatedColor.length) -1] || "#fff", isEnd, active: false});
+       if(!this.props.existingBar){
+         segments.push({id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[(this.props.id % this.state.activatedColor.length) -1] || "#fff", isEnd, active: false});
+       }else{
+         segments.push(this.props.existingBar[i]);
+       }
      }
+     this.props.getBarData(segments);
      this.setState({bar: segments});
    }
 
-   doSomething(id, i){
+   activate(id, i){
      // console.log("This is something from channel: "+ id + ". Position: " + (i+1));
      // console.log(this.state.activatedColor[id]);
      let allBar = this.state.bar;
@@ -85,7 +91,7 @@
               }
               return (
               <Fragment key={i}>
-                <div className="mr-1" onClick={() => {if(this.props.soundUrl)this.doSomething(this.props.id, i)}} style={this.segment(undefined, color, {index: i, time: this.props.time}, e)}> </div>
+                <div className="mr-1" onClick={() => {if(this.props.soundUrl)this.activate(this.props.id, i)}} style={this.segment(undefined, color, {index: i, time: this.props.time}, e)}> </div>
               </Fragment>);
             }) : <></>}
             <button className="btn btn-danger m-0 float-right" onClick={() => this.removeChannel(this.props.id)}>X</button>
