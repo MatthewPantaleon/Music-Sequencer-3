@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-27T18:03:52+00:00
+ * @Last modified time: 2020-02-27T18:51:13+00:00
  */
 
 
@@ -110,7 +110,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
    }
 
    async loadProject(){
-     console.log("Load Project");
+     // console.log("Load Project");
      if(this.state.soundChannels.length > 0){
        if(!window.confirm("All progress will be lost! Are you Sure to Load?")){
          return;
@@ -121,7 +121,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      rawData = fs.readFileSync(loadDIr);
      let jsonData = JSON.parse(rawData);
 
-     console.log(jsonData);
+     // console.log(jsonData);
      // this.setState({soundDirectory: jsonData.projectDirectory + "/sounds", projectData: jsonData}, () => {
      //   console.log(this.state.soundDirectory);
      //   let results = fs.readdirSync(this.state.soundDirectory).filter((e, i) => {
@@ -177,11 +177,16 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
     if(newArray.every((e) => e === undefined)){
       this.setState({soundChannels: [], channelBars: []});
     }else{
+      // newArray = newArray.filter(e => e !== undefined);
+      // newChannels = newChannels.filter(e => e !== undefined);
       this.setState({soundChannels: newArray, channelBars: newChannels});
     }
 
   };
-
+//-----------------------------------------------------------------------------------
+  saveToReal(){
+    console.log("SAVE TO REAL SOUND");
+  }
 
 
 
@@ -196,6 +201,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
               <Dropdown.Item href="#" onClick={() => this.newProject()}>New Project</Dropdown.Item>
               <Dropdown.Item href="#" onClick={() => this.saveProject()}>Save Project</Dropdown.Item>
               <Dropdown.Item href="#" onClick={() => this.loadProject()}>Load Project</Dropdown.Item>
+              <Dropdown.Item href="#" onClick={() => this.saveToReal()}>Export As File...</Dropdown.Item>
             </DropdownButton>
 
 
