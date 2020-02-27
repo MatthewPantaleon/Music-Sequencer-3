@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-27T14:18:35+00:00
+ * @Last modified time: 2020-02-27T14:22:40+00:00
  */
 
 
@@ -36,6 +36,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        selectedFile: "",
        readyFiles: [],
        soundChannels: [],
+       channelBars: [],
        projectData: {name: "untitled"}
      };
 
@@ -83,6 +84,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        selectedFile: "",
        readyFiles: [],
        soundChannels: [],
+       channelBars: [],
        projectData: {name: "untitled"}
      }, () => console.log(this.state));
    }
