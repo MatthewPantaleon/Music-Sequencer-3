@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-27T13:46:27+00:00
+ * @Last modified time: 2020-02-27T14:06:48+00:00
  */
 
 
@@ -135,7 +135,12 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
     let newArray = this.state.soundChannels;
     // console.log(newArray);
     newArray[index - 1] = undefined;
-    this.setState({soundChannels: newArray});
+    if(newArray.every((e) => e === undefined)){
+      this.setState({soundChannels: []});
+    }else{
+      this.setState({soundChannels: newArray});
+    }
+
   };
 
 

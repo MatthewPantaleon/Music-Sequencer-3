@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-27T13:25:58+00:00
+ * @Last modified time: 2020-02-27T13:56:58+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -33,7 +33,7 @@
          // backgroundColor = "#444"
          isEnd = true;
        }
-       segments.push({id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[this.props.id-1] || "#fff", isEnd, active: false});
+       segments.push({id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[(this.props.id % this.state.activatedColor.length) -1] || "#fff", isEnd, active: false});
      }
      this.setState({bar: segments});
    }

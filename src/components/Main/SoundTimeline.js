@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-27T13:48:09+00:00
+ * @Last modified time: 2020-02-27T14:03:56+00:00
  */
 
 
@@ -44,7 +44,7 @@ class SoundTimeline extends Component{
     // console.log("rgji: " + globalOffset);
     let t = that.state.timeIndex;
     t++;
-    if(that.state.timeIndex < 28){
+    if(that.state.timeIndex < 27){
       that.setState({timeIndex: t});
     }else{
       that.setState({timeIndex: 0});
@@ -98,7 +98,7 @@ class SoundTimeline extends Component{
                 <input className="btn btn-warning" onChange={(e) => this.changeBpm(e)} value={this.state.bpm}/>
               </div>
               <ul className="list-group col-12" style={{height: (this.props.isPanelOpen ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
-              {this.props.soundChannels.length === 0 ? <li className="list-group-item bg-dark text-white">There are no Channels</li> : this.props.soundChannels.map((e, i) => {
+              {this.props.soundChannels.length === 0 || this.props.soundChannels.every(e => e === undefined) ? <li className="list-group-item bg-dark text-white">There are no Channels</li> : this.props.soundChannels.map((e, i) => {
                 if(e === undefined)return;
                 return (
                 <li key={i} className="list-group-item bg-dark">
