@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-27T14:06:48+00:00
+ * @Last modified time: 2020-02-27T14:18:35+00:00
  */
 
 
@@ -31,15 +31,19 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
  class Main extends Component{
    constructor(props){
      super(props);
-     this.state = {
+     this.newBlank = {
        directory: "C:/Users/N00173936/Desktop/DummyFolder/projects/",
-       selectedFile: {name: "", stats: []},
+       selectedFile: "",
        readyFiles: [],
        soundChannels: [],
-       projectData: {}
+       projectData: {name: "untitled"}
      };
+
+     this.state = this.newBlank;
      // console.log(this.state.directory);
    }
+
+
 
    split = (str) => { //fastest
      return str ? str.split('\\').pop().split('/').pop() : false;
@@ -73,9 +77,14 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
 //-----------------------------------------------------------------------------------
    newProject(){
-     console.log("NEW PROJECT");
-     alert("This is an Alert!");
-     window.confirm("Are you sure?");
+     if(!window.confirm("Are you sure? All unsaved Progress will be lost!"))return;
+     this.setState({
+       directory: "C:/Users/N00173936/Desktop/DummyFolder/projects/",
+       selectedFile: "",
+       readyFiles: [],
+       soundChannels: [],
+       projectData: {name: "untitled"}
+     }, () => console.log(this.state));
    }
 
    saveProject(){
