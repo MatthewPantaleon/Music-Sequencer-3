@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-27T17:54:31+00:00
+ * @Last modified time: 2020-02-27T18:03:52+00:00
  */
 
 
@@ -98,18 +98,15 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        soundChannels: [],
        channelBars: [],
        projectName: "untitled"
-     }, () => console.log(this.state));
+     });
    }
 
    async saveProject(){
-     console.log("Save Project");
-     console.log(this.state);
      let data = JSON.stringify(this.state);
      let saveUrl = await dialog.showSaveDialog(BrowserWindow, {defaultPath: this.state.projectName + ".json"}).then(e => e.filePath);
 
      if(saveUrl)fs.writeFileSync(saveUrl, data);
      // console.log(saveUrl);
-
    }
 
    async loadProject(){
@@ -254,49 +251,49 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
 
 //-------------------------------------------
-class FileManager extends Component{
-
-  constructor(props){
-    super(props);
-    this.state = {
-      files: [],
-      selectedFile: {name: "", stats: []}
-    };
-  }
-
-  ////////////////////////////////////////////////////////////
-  getFiles(){
-    let temp = [];
-  }
-  ////////////////////////////////////////////////////////////
-
-  componentDidMount(){
-    this.getFiles();
-  }
-
-
-  selectedFile(e){
-    // console.log(e);
-    this.setState({selectedFile: e});
-  }
-
-  render(){
-    return(
-      <>
-        <div className="col-5" style={baseStyle}>
-            <p>List of Files</p>
-            <p>Slected File: {this.state.selectedFile.name}</p>
-            <button onClick={() => this.props.give(this.state.selectedFile)}>Import</button>
-            <button>Edit</button>
-            <ul>
-                {this.state.files.map((e, i) => {
-                  return (<li key={i} onClick={() => this.selectedFile(e)}>{e.name}</li>);
-                })}
-            </ul>
-        </div>
-      </>
-    );
-  }
-}
+// class FileManager extends Component{
+//
+//   constructor(props){
+//     super(props);
+//     this.state = {
+//       files: [],
+//       selectedFile: {name: "", stats: []}
+//     };
+//   }
+//
+//   ////////////////////////////////////////////////////////////
+//   getFiles(){
+//     let temp = [];
+//   }
+//   ////////////////////////////////////////////////////////////
+//
+//   componentDidMount(){
+//     this.getFiles();
+//   }
+//
+//
+//   selectedFile(e){
+//     // console.log(e);
+//     this.setState({selectedFile: e});
+//   }
+//
+//   render(){
+//     return(
+//       <>
+//         <div className="col-5" style={baseStyle}>
+//             <p>List of Files</p>
+//             <p>Slected File: {this.state.selectedFile.name}</p>
+//             <button onClick={() => this.props.give(this.state.selectedFile)}>Import</button>
+//             <button>Edit</button>
+//             <ul>
+//                 {this.state.files.map((e, i) => {
+//                   return (<li key={i} onClick={() => this.selectedFile(e)}>{e.name}</li>);
+//                 })}
+//             </ul>
+//         </div>
+//       </>
+//     );
+//   }
+// }
 
 export default Main;
