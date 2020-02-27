@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T17:37:27+00:00
- * @Last modified time: 2020-02-27T14:54:23+00:00
+ * @Last modified time: 2020-02-27T17:53:56+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -42,6 +42,8 @@ class SoundContainer extends Component{
             removeChannel={this.props.removeChannel}
             getBarData={this.props.getBarData}
             existingBars={this.props.existingBars}
+            bpm={this.state.bpm}
+            changeBpm={this.changeBpm}
           />
         </div>
 

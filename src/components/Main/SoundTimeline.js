@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-27T15:03:20+00:00
+ * @Last modified time: 2020-02-27T17:54:15+00:00
  */
 
 
@@ -27,13 +27,12 @@ class SoundTimeline extends Component{
     this.state = {
       channelArray: [],
       isPlaying: false,
-      bpm: 240,
       timeIndex: 0
     };
   }
 
   componentWillMount(){
-    
+
   }
 
   componentDidUpdate(){
@@ -64,7 +63,7 @@ class SoundTimeline extends Component{
     }else{
       console.log("PLaying");
       this.setState({isPlaying: true});
-      globalInterval = setInterval(this.bpm, this.calcBpm(this.state.bpm), this);
+      globalInterval = setInterval(this.bpm, this.calcBpm(this.props.bpm), this);
 
     }
   }
@@ -79,7 +78,8 @@ class SoundTimeline extends Component{
 
   changeBpm(e){
     // console.log(e.target.value);
-    this.setState({bpm: e.target.value});
+    // this.setState({bpm: e.target.value});
+    this.props.changeBpm(e);
   }
 
   render(){

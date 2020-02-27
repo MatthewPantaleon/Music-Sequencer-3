@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-27T16:06:19+00:00
+ * @Last modified time: 2020-02-27T17:54:31+00:00
  */
 
 
@@ -37,7 +37,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        readyFiles: [],
        soundChannels: [],
        channelBars: [],
-       bpm: 0,
+       bpm: 120,
        projectName: "untitled"
      };
 
@@ -78,10 +78,14 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      console.log("Save Part of a project!");
    };
 
+   changeBpm = (bpm) => {
+     this.setState({bpm});
+   };
+
    getChannelBarData = (e) => {
      let newArray = this.state.channelBars;
      newArray.push(e);
-     this.setState({channelBars: newArray}, () => console.log(this.state.channelBars));
+     this.setState({channelBars: newArray});
    };
 
 //-----------------------------------------------------------------------------------
@@ -110,6 +114,11 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
    async loadProject(){
      console.log("Load Project");
+     if(this.state.soundChannels.length > 0){
+       if(!window.confirm("All progress will be lost! Are you Sure to Load?")){
+         return;
+       }
+     }
      let rawData = {};
      let loadDIr = await dialog.showOpenDialog(BrowserWindow).then((e) => e.filePaths[0]);
      rawData = fs.readFileSync(loadDIr);
@@ -123,7 +132,14 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      //   });
      //   this.setState({readyFiles: results});
      // });
-     this.setState(jsonData);
+     this.setState({
+       directory: "C:/Users/N00173936/Desktop/DummyFolder/projects/",
+       selectedFile: "",
+       readyFiles: [],
+       soundChannels: [],
+       channelBars: [],
+       projectName: "untitled"
+     }, () => this.setState(jsonData));
    }
 //-----------------------------------------------------------------------------------
 
@@ -205,6 +221,8 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
                 removeChannel={this.removeChannel}
                 getBarData={this.getChannelBarData}
                 existingBars={this.state.channelBars}
+                bpm={this.state.bpm}
+                changeBpm={this.changeBpm}
               />
             </div>
             </div>

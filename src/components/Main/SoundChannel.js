@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-27T15:17:23+00:00
+ * @Last modified time: 2020-02-27T16:30:47+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -27,6 +27,11 @@
    componentWillMount(){
      let segments = [];
 
+     let exist = this.props.existingBar;
+     if(!exist){
+       exist = [{id: -1}];
+     }
+
      for(let i = 0; i < this.state.segments; i++){
        // let backgroundColor = "#777";
        let isEnd = false;
@@ -34,7 +39,8 @@
          // backgroundColor = "#444"
          isEnd = true;
        }
-       if(!this.props.existingBar){
+
+       if(exist[0].id !== this.props.id){
          segments.push({id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[(this.props.id % this.state.activatedColor.length) -1] || "#fff", isEnd, active: false});
        }else{
          segments.push(this.props.existingBar[i]);
