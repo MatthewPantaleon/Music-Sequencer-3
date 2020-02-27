@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-27T15:38:35+00:00
+ * @Last modified time: 2020-02-27T16:06:19+00:00
  */
 
 
@@ -108,21 +108,22 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
    }
 
-   loadProject(){
+   async loadProject(){
      console.log("Load Project");
      let rawData = {};
-     rawData = fs.readFileSync(this.state.directory + "readme.json");
-
-
+     let loadDIr = await dialog.showOpenDialog(BrowserWindow).then((e) => e.filePaths[0]);
+     rawData = fs.readFileSync(loadDIr);
      let jsonData = JSON.parse(rawData);
+
      console.log(jsonData);
-     this.setState({soundDirectory: jsonData.projectDirectory + "/sounds", projectData: jsonData}, () => {
-       console.log(this.state.soundDirectory);
-       let results = fs.readdirSync(this.state.soundDirectory).filter((e, i) => {
-         return e.includes(".mp3") || e.includes(".wav");
-       });
-       this.setState({readyFiles: results});
-     });
+     // this.setState({soundDirectory: jsonData.projectDirectory + "/sounds", projectData: jsonData}, () => {
+     //   console.log(this.state.soundDirectory);
+     //   let results = fs.readdirSync(this.state.soundDirectory).filter((e, i) => {
+     //     return e.includes(".mp3") || e.includes(".wav");
+     //   });
+     //   this.setState({readyFiles: results});
+     // });
+     this.setState(jsonData);
    }
 //-----------------------------------------------------------------------------------
 
