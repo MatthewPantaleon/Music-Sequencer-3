@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-26T19:18:48+00:00
+ * @Last modified time: 2020-02-27T13:46:27+00:00
  */
 
 
@@ -130,6 +130,14 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
   };
 
+  removeChannel = (index) => {
+    // console.log(index - 1);
+    let newArray = this.state.soundChannels;
+    // console.log(newArray);
+    newArray[index - 1] = undefined;
+    this.setState({soundChannels: newArray});
+  };
+
 
 
 
@@ -163,6 +171,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
               <SoundContainer
                 soundChannels={this.state.soundChannels}
                 clearChannels={this.clearAllChannels}
+                removeChannel={this.removeChannel}
               />
             </div>
             </div>

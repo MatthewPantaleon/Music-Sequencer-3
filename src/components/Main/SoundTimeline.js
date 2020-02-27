@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-26T20:25:28+00:00
+ * @Last modified time: 2020-02-27T13:48:09+00:00
  */
 
 
@@ -99,7 +99,11 @@ class SoundTimeline extends Component{
               </div>
               <ul className="list-group col-12" style={{height: (this.props.isPanelOpen ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
               {this.props.soundChannels.length === 0 ? <li className="list-group-item bg-dark text-white">There are no Channels</li> : this.props.soundChannels.map((e, i) => {
-                return <li key={i} className="list-group-item bg-dark"><SoundChannel id={i+1} name={this.split(e)} time={this.state.timeIndex} isPlaying={this.state.isPlaying} soundUrl={e}/></li>;
+                if(e === undefined)return;
+                return (
+                <li key={i} className="list-group-item bg-dark">
+                  <SoundChannel id={i+1} name={this.split(e)} time={this.state.timeIndex} isPlaying={this.state.isPlaying} soundUrl={e} removeChannel={this.props.removeChannel}/>
+                </li>);
               })}
               </ul>
             </div>

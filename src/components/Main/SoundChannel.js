@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-26T18:58:39+00:00
+ * @Last modified time: 2020-02-27T13:25:58+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -63,6 +63,10 @@
      }
    }
 
+   removeChannel(e){
+     this.props.removeChannel(e);
+   }
+
    render(){
      return(
        <>
@@ -84,6 +88,7 @@
                 <div className="mr-1" onClick={() => {if(this.props.soundUrl)this.doSomething(this.props.id, i)}} style={this.segment(undefined, color, {index: i, time: this.props.time}, e)}> </div>
               </Fragment>);
             }) : <></>}
+            <button className="btn btn-danger m-0 float-right" onClick={() => this.removeChannel(this.props.id)}>X</button>
           </div>
         </div>
        </div>
