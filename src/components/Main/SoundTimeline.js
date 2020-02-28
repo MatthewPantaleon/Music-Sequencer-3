@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-28T19:12:38+00:00
+ * @Last modified time: 2020-02-28T19:49:41+00:00
  */
 
 
@@ -27,7 +27,8 @@ class SoundTimeline extends Component{
     this.state = {
       channelArray: [],
       isPlaying: false,
-      timeIndex: 0
+      timeIndex: 0,
+      pages: [1, 2],
     };
   }
 
@@ -103,24 +104,32 @@ class SoundTimeline extends Component{
                 <input className="btn btn-warning" onChange={(e) => this.changeBpm(e)} value={this.props.bpm}/>
               </div>
               <ul className="list-group col-12" style={{height: (this.props.isPanelOpen ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
-              {this.props.soundChannels.length === 0 || this.props.soundChannels.every(e => e === undefined) ? <li className="list-group-item bg-dark text-white">There are no Channels</li> : this.props.soundChannels.map((e, i) => {
-                if(e === undefined || e === null)return;
-                return (
-                <li key={i} className="list-group-item bg-dark">
-                  <SoundChannel
-                    id={i+1}
-                    name={this.split(e)}
-                    time={this.state.timeIndex}
-                    isPlaying={this.state.isPlaying}
-                    soundUrl={e}
-                    removeChannel={this.props.removeChannel}
-                    getBarData={this.props.getBarData}
-                    existingBar={this.props.existingBars[i]}
 
-                    effects={this.props.effects[i]}
-                    />
-                </li>);
-              })}
+                {this.props.soundChannels.length === 0 || this.props.soundChannels.every(e => e === undefined) ?
+                <li className="list-group-item bg-dark text-white">There are no Channels</li> :
+                  this.props.soundChannels.map((e, i) => {
+                  if(e === undefined || e === null)return;
+                  return (
+                  <li key={i} className="list-group-item bg-dark">
+                    <SoundChannel
+                      id={i+1}
+                      name={this.split(e)}
+                      time={this.state.timeIndex}
+                      isPlaying={this.state.isPlaying}
+                      soundUrl={e}
+                      removeChannel={this.props.removeChannel}
+                      getBarData={this.props.getBarData}
+                      existingBar={this.props.existingBars[i]}
+
+                      effects={this.props.effects[i]}
+                      />
+                  </li>);
+                  })
+
+
+
+                }
+
               </ul>
             </div>
           </div>

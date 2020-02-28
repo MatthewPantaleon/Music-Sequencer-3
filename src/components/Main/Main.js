@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-28T19:30:22+00:00
+ * @Last modified time: 2020-02-28T20:13:44+00:00
  */
 
 
@@ -100,8 +100,12 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
    getChannelBarData = (e) => {
      let newArray = this.state.channelBars;
      let effectArray = this.state.effectBars;
+     console.log(e);
+     console.log(effectArray);
      newArray.push(e);
-     effectArray.push({id: e[0].id, volume: 1});
+     if(!effectArray.indexOf(e[0].id, 0)){
+       effectArray.push({id: e[0].id, volume: 1});
+     }
      this.setState({channelBars: newArray, effectBars: effectArray}, () => console.log(this.state));
    };
 
@@ -153,6 +157,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        selectedFile: "",
        readyFiles: [],
        soundChannels: [],
+       effectBars: [],
        channelBars: [],
        projectName: "untitled"
      }, () => this.setState(jsonData));

@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-28T18:54:51+00:00
+ * @Last modified time: 2020-02-28T19:42:18+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -14,7 +14,6 @@
        barInterval: 4,
        segments: 28,
        bar: [],
-       pages: [],
        soundResource: "",
        activatedColor: ["#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff", "#800", "#080", "#008", "#880", "#808", "#088"],
        normalColor: "#777",
