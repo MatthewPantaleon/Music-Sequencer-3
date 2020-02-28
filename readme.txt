@@ -18,7 +18,7 @@ load project - validation minimal
 save project - validation minimal
 
 import sounds - validation minimal
-create channel - does not check if sound url exists
+create channel - does not check if sound element actually exists
 mute channel
 destroy all channels
 remove one channel
