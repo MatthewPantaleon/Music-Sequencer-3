@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-27T16:30:47+00:00
+ * @Last modified time: 2020-02-28T13:00:56+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -17,9 +17,9 @@
        pages: [],
        soundResource: "",
        activatedColor: ["#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff", "#800", "#080", "#008", "#880", "#808", "#088"],
-       normalColor: "#777"
+       normalColor: "#777",
+       sound: new Audio(this.props.soundUrl) || ""
      };
-     this.timeIndex = 0;
    }
 
 
@@ -61,7 +61,7 @@
    }
 
    preview(){
-     new Audio(this.props.soundUrl).play();
+     this.state.sound.play();
    }
 
    segment(size = "2vw", backgroundColor = "#777", play, segment){

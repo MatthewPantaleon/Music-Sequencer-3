@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-27T18:51:13+00:00
+ * @Last modified time: 2020-02-28T14:28:08+00:00
  */
 
 
@@ -14,7 +14,6 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 const fs = window.require("fs");
 const { dialog } = window.require('electron').remote;
 const { BrowserWindow } = window.require('electron');
-const audioContext = new AudioContext();
 
 let baseStyle = {
   border: "1px solid red"
@@ -38,7 +37,8 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        soundChannels: [],
        channelBars: [],
        bpm: 120,
-       projectName: "untitled"
+       projectName: "untitled",
+       context: new AudioContext()
      };
 
      this.state = this.newBlank;
