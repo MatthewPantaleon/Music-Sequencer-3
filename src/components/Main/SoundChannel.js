@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-28T16:06:56+00:00
+ * @Last modified time: 2020-02-28T16:46:21+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -18,7 +18,8 @@
        soundResource: "",
        activatedColor: ["#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff", "#800", "#080", "#008", "#880", "#808", "#088"],
        normalColor: "#777",
-       sound: new Audio(this.props.soundUrl) || ""
+       sound: new Audio(this.props.soundUrl) || "",
+       mute: false
      };
    }
 
@@ -61,22 +62,23 @@
    }
 
    preview(){
+     // this.state.sound.volume = 0.5;
      this.state.sound.play();
      // console.log(this.state.sound.duration);
-     // console.log(this.state.sound.volume);
+     console.log(this.state.sound.volume);
      // console.log(this.state.sound.currentTime);
      // console.log(this.state.sound.controls);
      // console.log(this.state.sound.srcObject);
-     let test = this.state.sound;
-     console.log(test.srcObject = new MediaStream());
-     console.log(test.playBackRate);
+     // let test = this.state.sound;
+     // console.log(test.srcObject = new MediaStream());
+     // console.log(test.playBackRate);
 
    }
 
-   segment(size = "2vw", backgroundColor = "#777", play, segment){
+   segment(size = "1.9vw", backgroundColor = "#777", play, segment){
      if(play.index == play.time){
-       if(segment.active && this.props.isPlaying){
-         let a = new Audio(this.props.soundUrl);
+       let a = new Audio(this.props.soundUrl);
+       if(segment.active && this.props.isPlaying && !this.state.mute){
          a.play();
        }
        return{width: size, height: size, backgroundColor, display: "inline-block", border: "2px solid #fff"};
@@ -84,6 +86,12 @@
        return{width: size, height: size, backgroundColor, display: "inline-block"};
      }
    }
+
+   muteChannel(){
+     let m = this.state.mute;
+     this.setState({mute: !m});
+   }
+
 
    removeChannel(e){
      this.props.removeChannel(e);
@@ -111,6 +119,7 @@
               </Fragment>);
             }) : <></>}
             <button className="btn btn-danger m-0 float-right" onClick={() => this.removeChannel(this.props.id)}>X</button>
+            <button className={"btn m-0 float-right " + (this.state.mute ? "btn-danger" : "btn-secondary")} onClick={() => this.muteChannel()}>{this.state.mute ? "Muted" : "Mute"}</button>
           </div>
         </div>
        </div>
