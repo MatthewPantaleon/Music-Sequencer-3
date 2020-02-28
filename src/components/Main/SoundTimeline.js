@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-27T18:48:41+00:00
+ * @Last modified time: 2020-02-28T19:12:38+00:00
  */
 
 
@@ -116,6 +116,8 @@ class SoundTimeline extends Component{
                     removeChannel={this.props.removeChannel}
                     getBarData={this.props.getBarData}
                     existingBar={this.props.existingBars[i]}
+
+                    effects={this.props.effects[i]}
                     />
                 </li>);
               })}

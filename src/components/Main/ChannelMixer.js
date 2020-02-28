@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T19:27:18+00:00
- * @Last modified time: 2020-02-28T18:12:37+00:00
+ * @Last modified time: 2020-02-28T19:27:25+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -19,18 +19,27 @@ class ChannelMixer extends Component{
     this.state = {
       selectedEffect: "",
       volume: 1,
+      selectedChannel: -1
     };
   }
 
+  componentDidMount(){
+    // console.log(this.props);
+  }
 
-  changeSelected(e){
-    this.setState({selectedFile: e.target.value});
+
+  changeSelectedEffect(e){
+    this.setState({selectedEffect: e.target.value});
+  }
+
+  changeSelectedChannel(e){
+    this.setState({selectedChannel: e.target.value});
   }
 
   volumeControls(){
     return(
       <>
-        <input className="form-control-range" type="range" min="0" max="100" />
+        <input className="form-control-range" type="range" min="0" max="100" onChange={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, e.target.value)} />
         <p></p>
       </>
     );
@@ -42,8 +51,17 @@ class ChannelMixer extends Component{
       <>
       <div className="card p-0 m-0" style={{height: "100%"}}>
         <div className="card-header bg-dark text-white">
-          <h4>Channel Mixer</h4>
-
+          <h4 style={{display: "inline-block"}}>Channel Mixer</h4>
+          <select className="form-control col-2 float-right" onChange={(e) => this.changeSelectedChannel(e)}>
+            <option value="none">Select Channel</option>
+            {this.props.effects.map((e, i) => {
+              if(e === undefined)return;
+              return (
+                <Fragment key={i}>
+                  <option value={e.id}>{e.id}</option>
+                </Fragment>);
+            })}
+          </select>
         </div>
         <div className="card-body bg-secondary">
           <div className="row mr-1">
@@ -51,7 +69,7 @@ class ChannelMixer extends Component{
               <h5 className="float-left text-white">Effects</h5>
               <button className="btn btn-dark float-right">Apply/Remove</button>
 
-              <select className="custom-select" size="10" style={{height: "100%"}} onChange={(e) => this.changeSelected(e)}>
+              <select className="custom-select" size="10" style={{height: "100%"}} onChange={(e) => this.changeSelectedEffect(e)}>
                 <option value="volume">Volume</option>
                 <option value="playBackRate">playBackRate</option>
                 <option value="3">3</option>
@@ -60,8 +78,8 @@ class ChannelMixer extends Component{
               </select>
             </div>
             <div className="col-9 text-white" style={debugBorder()}>
-              {this.state.selectedFile === "volume" ? this.volumeControls() : <></>}
-              {this.state.selectedFile === "playBackRate" ? <p>playBackRate Controls</p> : <></>}
+              {this.state.selectedEffect === "volume" ? this.volumeControls() : <></>}
+              {this.state.selectedEffect === "playBackRate" ? <p>playBackRate Controls</p> : <></>}
             </div>
           </div>
         </div>

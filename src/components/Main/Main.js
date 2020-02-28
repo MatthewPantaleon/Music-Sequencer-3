@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-28T18:27:56+00:00
+ * @Last modified time: 2020-02-28T19:30:22+00:00
  */
 
 
@@ -84,8 +84,17 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      this.setState({bpm});
    };
 
-   changeChannelVolume = (id) => {
+   changeChannelVolume = (select, data) => {
+     // console.log(this.state.effectBars);
+     // console.log(select);
+     // console.log(data);
 
+     // let changed = this.state.effectBars[this.state.effectBars.findIndex(e => e.id == select)];
+     let all = this.state.effectBars;
+     // console.log(parseFloat(data/100));
+     // console.log(all);
+     all[this.state.effectBars.findIndex(e => e.id == select)].volume = parseFloat(data/100);
+     this.setState({effectBars: all});
    };
 
    getChannelBarData = (e) => {
@@ -239,6 +248,8 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
                 existingBars={this.state.channelBars}
                 bpm={this.state.bpm}
                 changeBpm={this.changeBpm}
+                changeVolume={this.changeChannelVolume}
+                effects={this.state.effectBars}
 
                 AudioContext={this.state.context}
               />

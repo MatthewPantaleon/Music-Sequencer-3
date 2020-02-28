@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T17:37:27+00:00
- * @Last modified time: 2020-02-27T17:58:24+00:00
+ * @Last modified time: 2020-02-28T19:09:43+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -30,6 +30,10 @@ class SoundContainer extends Component{
    });
  }
 
+ componentDidMount(){
+   // console.log(this.props);
+ }
+
  render(){
    return(
      <>
@@ -44,13 +48,17 @@ class SoundContainer extends Component{
             existingBars={this.props.existingBars}
             bpm={this.props.bpm}
             changeBpm={this.props.changeBpm}
+            effects={this.props.effects}
           />
         </div>
 
         <div className="col-12 p-0">
           <div className="card" style={{border: 0}}>
             <div className="card-body p-0" style={{height: `calc(30vh)`, display: `${this.state.openChannelMixer ? "block" : "none"}`}}>
-              <ChannelMixer />
+              <ChannelMixer
+                changeVolume={this.props.changeVolume}
+                effects={this.props.effects}
+              />
             </div>
 
             <div className="card-body p-0" style={{height: `calc(30vh)`, display: `${this.state.openAudioMixer ? "block" : "none"}`}}>

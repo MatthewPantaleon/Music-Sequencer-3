@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-28T17:43:55+00:00
+ * @Last modified time: 2020-02-28T18:54:51+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -64,8 +64,10 @@
    preview(){
      // this.state.sound.volume = 0.5;
      let t = this.state.sound;
-     console.log(new Audio(this.props.soundUrl));
-
+     // console.log(new Audio(this.props.soundUrl));
+     // console.log(parseFloat(this.props.effects.volume));
+     t.volume = parseFloat(this.props.effects.volume);
+     t.play();
      // console.log(this.state.sound.duration);
 
      // console.log(this.state.sound.currentTime);
@@ -81,6 +83,7 @@
      if(play.index == play.time){
        let a = new Audio(this.props.soundUrl);
        if(segment.active && this.props.isPlaying && !this.state.mute){
+         a.volume = parseFloat(this.props.effects.volume);
          a.play();
        }
        return{width: size, height: size, backgroundColor, display: "inline-block", border: "2px solid #fff"};
