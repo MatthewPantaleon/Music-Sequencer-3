@@ -22,6 +22,7 @@ create channel - does not check if sound element actually exists
 mute channel
 destroy all channels
 remove one channel
+bpm changer - validation minimal/minimum feedback
 
 change volume of individual channel - minimal feedback
 
