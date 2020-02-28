@@ -12,4 +12,21 @@ yarn start - for development electron:
 
 yarn build - for distribution, will create a build folder and dist folder. To run natively go to the dist/win-unpacked and run exe.
 
+working:
+create new project.
+load project - validation minimal
+save project - validation minimal
 
+import sounds - validation minimal
+create channel - does not check if sound url exists
+mute channel
+destroy all channels
+remove one channel
+
+change volume of individual channel - minimal feedback
+
+not working:
+export complete project with sounds
+save channels into one audio file
+ability to select a sub section of audio for channels to use
+multiple pages for channels
