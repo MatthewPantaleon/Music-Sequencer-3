@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T19:27:18+00:00
- * @Last modified time: 2020-02-28T19:27:25+00:00
+ * @Last modified time: 2020-02-28T20:24:13+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -80,6 +80,7 @@ class ChannelMixer extends Component{
             <div className="col-9 text-white" style={debugBorder()}>
               {this.state.selectedEffect === "volume" ? this.volumeControls() : <></>}
               {this.state.selectedEffect === "playBackRate" ? <p>playBackRate Controls</p> : <></>}
+              {/**/}
             </div>
           </div>
         </div>

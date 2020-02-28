@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-28T19:42:18+00:00
+ * @Last modified time: 2020-02-28T20:23:55+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -40,9 +40,9 @@
          isEnd = true;
        }
 
-       if(exist[0].id !== this.props.id){
+       if(exist[0].id !== this.props.id){//for adding new channels
          segments.push({id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[(this.props.id % this.state.activatedColor.length) -1] || "#fff", isEnd, active: false});
-       }else{
+       }else{//for creating channels that were loaded in
          segments.push(this.props.existingBar[i]);
        }
      }
@@ -60,7 +60,7 @@
      });
    }
 
-   preview(){
+   preview(){//preview sound, testing how audio effects here
      // this.state.sound.volume = 0.5;
      let t = this.state.sound;
      // console.log(new Audio(this.props.soundUrl));
@@ -78,6 +78,7 @@
 
    }
 
+   //how each segment is to be presented based on if it active or not
    segment(size = "1.9vw", backgroundColor = "#777", play, segment){
      if(play.index == play.time){
        let a = new Audio(this.props.soundUrl);
@@ -91,12 +92,13 @@
      }
    }
 
+   //mute
    muteChannel(){
      let m = this.state.mute;
      this.setState({mute: !m});
    }
 
-
+   //intermediary function to delete a channel
    removeChannel(e){
      this.props.removeChannel(e);
    }

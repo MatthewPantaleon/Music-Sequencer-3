@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-28T19:49:41+00:00
+ * @Last modified time: 2020-02-28T20:21:56+00:00
  */
 
 
@@ -69,7 +69,7 @@ class SoundTimeline extends Component{
   }
 
   affectBpm(){
-    globalInterval = setInterval(this.bpm, this.calcBpm(this.props.bpm), this);
+    globalInterval = setInterval(this.bpm, this.calcBpm(this.props.bpm), this);//handles the bpm so that channels can play their respective souns
   }
 
   calcBpm(bpm){

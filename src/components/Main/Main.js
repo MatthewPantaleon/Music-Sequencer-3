@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-28T20:13:44+00:00
+ * @Last modified time: 2020-02-28T20:21:03+00:00
  */
 
 
@@ -54,7 +54,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      return str ? str.split('\\').pop().split('/').pop() : false;
    };
 //-----------------------------------------------------------------------------------
-   giveReadyFiles = function(e){
+   giveReadyFiles = function(e){//is not used was for debug reasons
       console.log(this.state.directory);
       let temp = this.state.readyFiles;
       if(!isObjectEmpty(e)){
@@ -63,28 +63,28 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
       }
    }.bind(this);
 
-   addNewChannel = (fileName) => {
+   addNewChannel = (fileName) => {//adding a new channel
      // console.log("Add New Channel: " + fileName);
      let newArray = this.state.soundChannels;
      newArray.push(fileName);
      this.setState({soundChannels: newArray});
    };
 
-   clearAllChannels = () => {
+   clearAllChannels = () => {//clear all channels
      if(window.confirm("Clear All Channels? This action cannot be Undone!")){
        this.setState({soundChannels: []}, () => alert("Cleared All Channels"));
      }
    };
 
-   saveProjectData = (attribute) => {
+   saveProjectData = (attribute) => {//not used would have been for autosaves in the future
      console.log("Save Part of a project!");
    };
 
-   changeBpm = (bpm) => {
+   changeBpm = (bpm) => {//cjhange bpm of all channels, takes effect only when the tracks are not playing
      this.setState({bpm});
    };
 
-   changeChannelVolume = (select, data) => {
+   changeChannelVolume = (select, data) => {//change the volume of an individual channel
      // console.log(this.state.effectBars);
      // console.log(select);
      // console.log(data);
@@ -97,7 +97,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      this.setState({effectBars: all});
    };
 
-   getChannelBarData = (e) => {
+   getChannelBarData = (e) => {//gets the bar data of each channel for saving and loading projects
      let newArray = this.state.channelBars;
      let effectArray = this.state.effectBars;
      console.log(e);
@@ -110,7 +110,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
    };
 
 //-----------------------------------------------------------------------------------
-   newProject(){
+   newProject(){//clears the sound library and channels by clearing the main state
      if(!window.confirm("Are you sure? All unsaved Progress will be lost!"))return;
      this.setState({
        directory: "C:/Users/N00173936/Desktop/DummyFolder/projects/",
@@ -124,7 +124,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      });
    }
 
-   async saveProject(){
+   async saveProject(){//save the project state in its entirety, can be optimised
      let data = JSON.stringify(this.state);
      let saveUrl = await dialog.showSaveDialog(BrowserWindow, {defaultPath: this.state.projectName + ".json"}).then(e => e.filePath);
 
@@ -132,7 +132,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      // console.log(saveUrl);
    }
 
-   async loadProject(){
+   async loadProject(){//loads a prject from a directory, if the sound urls are not present exceptions are yeeted. Loads the data, clears the state and updates the state
      // console.log("Load Project");
      if(this.state.soundChannels.length > 0){
        if(!window.confirm("All progress will be lost! Are you Sure to Load?")){
@@ -164,7 +164,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
    }
 //-----------------------------------------------------------------------------------
 
-  importSoundFromMain = async () => {
+  importSoundFromMain = async () => {//abiity to import sound urls from the soumd library
     let file = await dialog.showOpenDialog(BrowserWindow).then((e) => e.filePaths[0]);
     if(!file)return;
     // console.log(file);
@@ -179,7 +179,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
     }
   };
 
-  removeFromProject = (name) => {
+  removeFromProject = (name) => {//remove sound from the sound library and any channels associated with it
     // console.log(name);
 
     let newArray = this.state.readyFiles;
@@ -191,7 +191,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
   };
 
-  removeChannel = (index) => {
+  removeChannel = (index) => {//remove an individual channel
     // console.log(index - 1);
     let newArray = this.state.soundChannels;
     let newChannels = this.state.channelBars;
@@ -211,11 +211,9 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
   };
 //-----------------------------------------------------------------------------------
-  saveToReal(){
+  saveToReal(){//functionality to export the audio from the channels to an actual audio file
     console.log("SAVE TO REAL SOUND");
   }
-
-
 
    render(){
      return(
@@ -223,7 +221,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
           <div className="no-gutters p-0 m-0 container-fluid" style={{overflowX: "hidden", overflowY: "hidden", width: "100%"}}>
             <div className="card-header bg-dark text-white p-0">
 
-
+            
             <DropdownButton title="File" variant="dark" size="sm">
               <Dropdown.Item href="#" onClick={() => this.newProject()}>New Project</Dropdown.Item>
               <Dropdown.Item href="#" onClick={() => this.saveProject()}>Save Project</Dropdown.Item>

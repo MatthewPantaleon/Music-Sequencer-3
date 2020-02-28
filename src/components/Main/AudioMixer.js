@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T19:27:18+00:00
- * @Last modified time: 2020-02-26T20:04:19+00:00
+ * @Last modified time: 2020-02-28T20:24:52+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -33,6 +33,7 @@ class AudioMixer extends Component{
     });
   }
 
+  // this component handles what time slice of audio is played for the channel
   render(){
     return(
       <>

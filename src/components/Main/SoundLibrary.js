@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-02-26T19:19:46+00:00
+ * @Last modified time: 2020-02-28T20:30:19+00:00
  */
 
 
@@ -54,6 +54,7 @@ let empty = true;
    changeFile = (name) => {
      this.setState({selectedFile: name});
    };
+
 
    removeFromLibrary(e){
       if(window.confirm(`Are you Sure you want to remove: ${this.split(e)}? \nThis will Remove all Channels too.\nThisCannot be undone!`)){
