@@ -30,3 +30,4 @@ export complete project with sounds
 save channels into one audio file
 ability to select a sub section of audio for channels to use
 multiple pages for channels
+API Browser
