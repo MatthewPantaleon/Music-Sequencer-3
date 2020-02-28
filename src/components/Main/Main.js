@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-28T14:29:58+00:00
+ * @Last modified time: 2020-02-28T18:27:56+00:00
  */
 
 
@@ -36,12 +36,14 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        readyFiles: [],
        soundChannels: [],
        channelBars: [],
+       effectBars: [],
        bpm: 120,
        projectName: "untitled",
        context: new AudioContext()
      };
 
      this.state = this.newBlank;
+     this.selectedChannel = -1;
      // console.log(this.state.directory);
    }
 
@@ -82,10 +84,16 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      this.setState({bpm});
    };
 
+   changeChannelVolume = (id) => {
+
+   };
+
    getChannelBarData = (e) => {
      let newArray = this.state.channelBars;
+     let effectArray = this.state.effectBars;
      newArray.push(e);
-     this.setState({channelBars: newArray});
+     effectArray.push({id: e[0].id, volume: 1});
+     this.setState({channelBars: newArray, effectBars: effectArray}, () => console.log(this.state));
    };
 
 //-----------------------------------------------------------------------------------
@@ -97,6 +105,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        readyFiles: [],
        soundChannels: [],
        channelBars: [],
+       effectbars: [],
        projectName: "untitled",
        context: new AudioContext()
      });
@@ -172,15 +181,18 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
     // console.log(index - 1);
     let newArray = this.state.soundChannels;
     let newChannels = this.state.channelBars;
+    let effectArray = this.state.effectBars;
     // console.log(newArray);
     newArray[index - 1] = undefined;
     newChannels[index - 1] = undefined;
+    effectArray[index - 1] = undefined;
+
     if(newArray.every((e) => e === undefined)){
-      this.setState({soundChannels: [], channelBars: []});
+      this.setState({soundChannels: [], channelBars: [], effectBars: []});
     }else{
       // newArray = newArray.filter(e => e !== undefined);
       // newChannels = newChannels.filter(e => e !== undefined);
-      this.setState({soundChannels: newArray, channelBars: newChannels});
+      this.setState({soundChannels: newArray, channelBars: newChannels, effectBars: effectArray});
     }
 
   };

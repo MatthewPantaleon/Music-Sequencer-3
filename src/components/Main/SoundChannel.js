@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-28T16:46:21+00:00
+ * @Last modified time: 2020-02-28T17:43:55+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -63,9 +63,11 @@
 
    preview(){
      // this.state.sound.volume = 0.5;
-     this.state.sound.play();
+     let t = this.state.sound;
+     console.log(new Audio(this.props.soundUrl));
+
      // console.log(this.state.sound.duration);
-     console.log(this.state.sound.volume);
+
      // console.log(this.state.sound.currentTime);
      // console.log(this.state.sound.controls);
      // console.log(this.state.sound.srcObject);
