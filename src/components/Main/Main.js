@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-28T14:28:08+00:00
+ * @Last modified time: 2020-02-28T14:29:58+00:00
  */
 
 
@@ -97,7 +97,8 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        readyFiles: [],
        soundChannels: [],
        channelBars: [],
-       projectName: "untitled"
+       projectName: "untitled",
+       context: new AudioContext()
      });
    }
 
@@ -226,6 +227,8 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
                 existingBars={this.state.channelBars}
                 bpm={this.state.bpm}
                 changeBpm={this.changeBpm}
+
+                AudioContext={this.state.context}
               />
             </div>
             </div>

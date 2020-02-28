@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T19:27:18+00:00
- * @Last modified time: 2020-02-12T15:44:02+00:00
+ * @Last modified time: 2020-02-28T16:17:23+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -27,7 +27,17 @@ class ChannelMixer extends Component{
           <h4>Channel Mixer</h4>
         </div>
         <div className="card-body bg-secondary">
-          aerharheathathhat
+          <div className="row">
+            <div className="col-3">
+              <select multiple className="custom-select" size="15" style={{height: "100%"}}>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
       </>

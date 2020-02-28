@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-28T13:00:56+00:00
+ * @Last modified time: 2020-02-28T16:06:56+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -62,12 +62,22 @@
 
    preview(){
      this.state.sound.play();
+     // console.log(this.state.sound.duration);
+     // console.log(this.state.sound.volume);
+     // console.log(this.state.sound.currentTime);
+     // console.log(this.state.sound.controls);
+     // console.log(this.state.sound.srcObject);
+     let test = this.state.sound;
+     console.log(test.srcObject = new MediaStream());
+     console.log(test.playBackRate);
+
    }
 
    segment(size = "2vw", backgroundColor = "#777", play, segment){
      if(play.index == play.time){
        if(segment.active && this.props.isPlaying){
-         new Audio(this.props.soundUrl).play();
+         let a = new Audio(this.props.soundUrl);
+         a.play();
        }
        return{width: size, height: size, backgroundColor, display: "inline-block", border: "2px solid #fff"};
      }else{
