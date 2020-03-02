@@ -5,6 +5,7 @@ YOU MUST USE YARN!!!
 copy, paste and unpack to directory.
 
 cd to directory.
+npm install
 
 yarn start - for development electron:
 		- Localfiles should be able to load via the localhost
