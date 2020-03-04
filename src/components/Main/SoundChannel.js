@@ -1,11 +1,11 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-28T20:23:55+00:00
+ * @Last modified time: 2020-03-04T18:46:13+00:00
  */
 
  import React, { Component, Fragment } from 'react';
  import $ from "jquery";
- import 'bootstrap/dist/css/bootstrap.css';
+ // import 'bootstrap/dist/css/bootstrap.css';
 
  class SoundChannel extends Component{
    constructor(props){

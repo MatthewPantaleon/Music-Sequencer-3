@@ -1,5 +1,5 @@
 {
-  "name": "cra-electron",
+  "name": "Electron-Beats",
   "description": "CRA + Electron sitting in a tree",
   "author": "Kitze",
   "version": "0.2.7",
@@ -20,11 +20,15 @@
     "update-electron-app": "^1.2.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.8.6",
+    "@babel/preset-react": "^7.8.3",
     "concurrently": "4.1.2",
     "electron": "6.0.11",
     "electron-builder": "^21.2.0",
+    "jest": "^25.1.0",
     "prettier": "^1.4.4",
     "react-scripts": "3.1.2",
+    "react-test-renderer": "^16.13.0",
     "wait-on": "3.3.0"
   },
   "build": {
@@ -42,7 +46,8 @@
     "electron-build": "electron-builder",
     "release": "yarn react-build && electron-builder --publish=always",
     "build": "yarn react-build && yarn electron-build",
-    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "test": "jest"
   },
   "browserslist": {
     "production": [
