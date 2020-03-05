@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-02-28T20:21:03+00:00
+ * @Last modified time: 2020-03-05T17:38:42+00:00
  */
 
 
@@ -98,12 +98,15 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
    };
 
    getChannelBarData = (e) => {//gets the bar data of each channel for saving and loading projects
+     // console.log("You Shouldn't be undfined");
      let newArray = this.state.channelBars;
      let effectArray = this.state.effectBars;
-     console.log(e);
+     // console.log(e);
      console.log(effectArray);
      newArray.push(e);
-     if(!effectArray.indexOf(e[0].id, 0)){
+     // console.log(!effectArray.indexOf(e[0].id, 0) || effectArray.length === 0);
+     // console.log(effectArray.findIndex(c => c.id === e[0].id));
+     if(effectArray.findIndex(c => c.id === e[0].id) === -1 || effectArray.length === 0){
        effectArray.push({id: e[0].id, volume: 1});
      }
      this.setState({channelBars: newArray, effectBars: effectArray}, () => console.log(this.state));
@@ -221,7 +224,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
           <div className="no-gutters p-0 m-0 container-fluid" style={{overflowX: "hidden", overflowY: "hidden", width: "100%"}}>
             <div className="card-header bg-dark text-white p-0">
 
-            
+
             <DropdownButton title="File" variant="dark" size="sm">
               <Dropdown.Item href="#" onClick={() => this.newProject()}>New Project</Dropdown.Item>
               <Dropdown.Item href="#" onClick={() => this.saveProject()}>Save Project</Dropdown.Item>

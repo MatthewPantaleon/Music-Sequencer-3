@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-28T20:21:56+00:00
+ * @Last modified time: 2020-03-05T17:17:55+00:00
  */
 
 
@@ -37,7 +37,7 @@ class SoundTimeline extends Component{
   }
 
   componentDidUpdate(){
-
+    
   }
 
   bpm(that){
