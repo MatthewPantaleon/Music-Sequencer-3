@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-03-09T18:26:40+00:00
+ * @Last modified time: 2020-03-09T18:52:31+00:00
  */
 
 
@@ -99,6 +99,20 @@ class SoundTimeline extends Component{
     this.setState({currentPage: c});
   }
 
+  addPage(){
+    let np = this.state.pages;
+    np.push(np.length + 1);
+    this.setState({pages: np});
+  }
+  removePage(){
+    let np = this.state.pages;
+
+    if(np.length > 1){
+      np.pop();
+      this.setState({pages: np});
+    }
+  }
+
   render(){
 
     return(
@@ -122,6 +136,8 @@ class SoundTimeline extends Component{
                       <button className={(this.state.currentPage === e ? "btn-primary" : "btn-secondary") + " btn ml-1 mr-1"} onClick={() => this.changePage(e)}>{e}</button>
                     </Fragment>);
                 })}
+                <button className="btn btn-secondary float-right" onClick={() => this.addPage()}>Add Page</button>
+                <button className="btn btn-secondary float-right" onClick={() => this.removePage()}>Remove Page</button>
               </div>
               <ul className="list-group col-12" style={{height: (this.props.isPanelOpen ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
 
