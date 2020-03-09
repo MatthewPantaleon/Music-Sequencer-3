@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-03-09T18:33:53+00:00
+ * @Last modified time: 2020-03-09T19:00:57+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -115,7 +115,7 @@
           <div className="col-11">
             {this.props.soundUrl !== "" || this.props.soundUrl !== undefined ? this.state.bar.map((e, i) => {
               if(i+1 > (this.props.currentPage-1)*this.state.segments && i < (this.props.currentPage)*this.state.segments){
-
+                //if e does not exist add new ones but do not delete ones for now
                 let color = this.state.normalColor;
                 if(e.active){
                   color = e.activeColor;
