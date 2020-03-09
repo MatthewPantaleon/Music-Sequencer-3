@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-03-09T18:20:01+00:00
+ * @Last modified time: 2020-03-09T18:33:53+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -47,6 +47,7 @@
        }
      }
      this.props.getBarData(segments);
+     console.log(segments);
      this.setState({bar: segments});
    }
 
@@ -80,7 +81,7 @@
 
    //how each segment is to be presented based on if it active or not
    segment(size = "1.9vw", backgroundColor = "#777", play, segment){
-     if(play.index == play.time){
+     if((play.index % this.state.segments) == play.time){
        let a = new Audio(this.props.soundUrl);
        if(segment.active && this.props.isPlaying && !this.state.mute){
          a.volume = parseFloat(this.props.effects.volume);

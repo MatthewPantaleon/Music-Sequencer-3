@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-03-09T17:55:05+00:00
+ * @Last modified time: 2020-03-09T18:26:40+00:00
  */
 
 
@@ -46,7 +46,14 @@ class SoundTimeline extends Component{
     if(that.state.timeIndex < 27){
       that.setState({timeIndex: t});
     }else{
-      that.setState({timeIndex: 0});
+      let c = that.state.currentPage;
+      c++;
+      if(that.state.pages.includes(c)){
+        that.setState({timeIndex: 0, currentPage: c});
+      }else{
+        that.setState({timeIndex: 0, currentPage: 1});
+      }
+
     }
   }
 
