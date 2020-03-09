@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-02-28T20:21:56+00:00
+ * @Last modified time: 2020-03-09T17:55:05+00:00
  */
 
 
@@ -12,8 +12,6 @@ import SoundChannel from "./SoundChannel";
 const electron = window.require('electron');
 const remote = electron.remote;
 let space = remote.getCurrentWindow().webContents.getOwnerBrowserWindow().getBounds();
-
-
 
 
 let globalInterval;
@@ -28,7 +26,8 @@ class SoundTimeline extends Component{
       channelArray: [],
       isPlaying: false,
       timeIndex: 0,
-      pages: [1, 2],
+      pages: [1, 2, 3, 4, 5],
+      currentPage: 1
     };
   }
 
@@ -88,7 +87,13 @@ class SoundTimeline extends Component{
     // this.affectBpm(e.target.value);
   }
 
+  changePage(c){
+    console.log(c);
+    this.setState({currentPage: c});
+  }
+
   render(){
+
     return(
       <>
         <div className="card">
@@ -102,6 +107,14 @@ class SoundTimeline extends Component{
                 <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.props.clearChannels()}>Clear Channels</button>
                 <input type="range" min="60" max="240" onChange={(e) => this.changeBpm(e)}/>
                 <input className="btn btn-warning" onChange={(e) => this.changeBpm(e)} value={this.props.bpm}/>
+                {/* Pages */}
+                {/*<button className="btn btn-secondary ml-1 mr-1">1</button>*/}
+                {this.state.pages.map((e, i) => {
+                  return(
+                    <Fragment key={i}>
+                      <button className={(this.state.currentPage === e ? "btn-primary" : "btn-secondary") + " btn ml-1 mr-1"} onClick={() => this.changePage(e)}>{e}</button>
+                    </Fragment>);
+                })}
               </div>
               <ul className="list-group col-12" style={{height: (this.props.isPanelOpen ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
 
@@ -122,6 +135,8 @@ class SoundTimeline extends Component{
                       existingBar={this.props.existingBars[i]}
 
                       effects={this.props.effects[i]}
+                      pages={this.state.pages}
+                      currentPage={this.state.currentPage}
                       />
                   </li>);
                   })

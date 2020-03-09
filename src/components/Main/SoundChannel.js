@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-02-28T20:23:55+00:00
+ * @Last modified time: 2020-03-09T17:46:30+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -32,7 +32,7 @@
        exist = [{id: -1}];
      }
 
-     for(let i = 0; i < this.state.segments; i++){
+     for(let i = 0; i < this.state.segments * this.props.pages; i++){
        // let backgroundColor = "#777";
        let isEnd = false;
        if((i+1) % this.state.barInterval === 0){
@@ -113,16 +113,22 @@
           </div>
           <div className="col-11">
             {this.props.soundUrl !== "" || this.props.soundUrl !== undefined ? this.state.bar.map((e, i) => {
-              let color = this.state.normalColor;
-              if(e.active){
-                color = e.activeColor;
-              }else if(e.isEnd){
-                color = "#444"
+              if(i+1 > (this.props.currentPage-1)*this.state.segments && i < (this.props.currentPage)*this.state.segments){
+
+                let color = this.state.normalColor;
+                if(e.active){
+                  color = e.activeColor;
+                }else if(e.isEnd){
+                  color = "#444"
+                }
+                return (
+                <Fragment key={i}>
+                  <div className="mr-1" onClick={() => {if(this.props.soundUrl)this.activate(this.props.id, i)}} style={this.segment(undefined, color, {index: i, time: this.props.time}, e)}> </div>
+                </Fragment>);
+
+
               }
-              return (
-              <Fragment key={i}>
-                <div className="mr-1" onClick={() => {if(this.props.soundUrl)this.activate(this.props.id, i)}} style={this.segment(undefined, color, {index: i, time: this.props.time}, e)}> </div>
-              </Fragment>);
+
             }) : <></>}
             <button className="btn btn-danger m-0 float-right" onClick={() => this.removeChannel(this.props.id)}>X</button>
             <button className={"btn m-0 float-right " + (this.state.mute ? "btn-danger" : "btn-secondary")} onClick={() => this.muteChannel()}>{this.state.mute ? "Muted" : "Mute"}</button>
