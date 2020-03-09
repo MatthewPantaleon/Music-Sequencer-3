@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-03-03T17:54:59+00:00
- * @Last modified time: 2020-03-05T20:20:55+00:00
+ * @Last modified time: 2020-03-06T19:04:39+00:00
  */
 
 
@@ -20,8 +20,6 @@ function timer(callback){
 test('Test Sound Component Rendering', () => {
   // console.log("TEst");
 
-
-
   const component = renderer.create(
     <SoundChannel
       id={1}
@@ -37,31 +35,40 @@ test('Test Sound Component Rendering', () => {
       />
   );
   let tree = component.toJSON();
-  // console.log(tree.props);
-  // expect(tree).toMatchSnapshot();
-  // jest.useFakeTimers();
-  // // timer();
-  // setTimeout((callback) => {
-  //   console.log("Time's up -- stop!");
-  //   callback && callback();
-  // }, 100);
-  // jest.runAllTimers();
-  // expect(setTimeout).toHaveBeenCalledTimes(2);
 
-  // tree.preview();
-  // tree = component.toJSON();
-  // expect(tree).toMatchSnapshot();
 });
 
 let counter = 0;
+let b = jest.fn(() => counter);
+// console.log(b.mockResolvedValue());
+let ct = 0;
+let nt = 0;
 
-it("Testing fake Timers", () => {
+test("Testing fake Timers With Plain setInterval", () => {
+  let times = [];
+  if(ct === 0 )ct = new Date().getTime();
   jest.useFakeTimers();
+  // jest.runTimersToTime(1000);
   let h = setInterval(() => {
-    console.log('TIME IS UP');
+    // console.log('TIME IS UP');
+    jest.setTimeout(10000);
+    nt = new Date().getTime();
+    // console.log(nt - ct);
+    times.push(nt - ct);
+
+    if(counter === 27){
+      clearInterval(h);
+      return;
+    }
     counter++;
-    if(counter === 5) clearInterval(h);
+    ct = nt;
   }, 1000);
+
   jest.runAllTimers();
-  
+  console.log(times);
 });
+
+
+function t(){
+
+}
