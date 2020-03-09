@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-03-05T17:41:37+00:00
+ * @Last modified time: 2020-03-09T18:20:50+00:00
  */
 
 
@@ -66,6 +66,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
    addNewChannel = (fileName) => {//adding a new channel
      // console.log("Add New Channel: " + fileName);
      let newArray = this.state.soundChannels;
+
      newArray.push(fileName);
      this.setState({soundChannels: newArray});
    };
@@ -98,6 +99,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
    };
 
    getChannelBarData = (e) => {//gets the bar data of each channel for saving and loading projects
+
      let newArray = this.state.channelBars;
      let effectArray = this.state.effectBars;
      console.log(e);
