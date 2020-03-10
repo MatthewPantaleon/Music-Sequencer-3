@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-03-09T19:00:57+00:00
+ * @Last modified time: 2020-03-10T16:37:52+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -60,6 +60,11 @@
        if(false)new Audio(this.props.soundUrl).play();
      });
    }
+
+   componentDidUpdate(previousProps){
+     console.log(previousProps.pages);
+   }
+
 
    preview(){//preview sound, testing how audio effects here
      // this.state.sound.volume = 0.5;
