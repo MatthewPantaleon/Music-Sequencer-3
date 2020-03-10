@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-03-09T18:20:50+00:00
+ * @Last modified time: 2020-03-10T19:58:30+00:00
  */
 
 
@@ -87,8 +87,8 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
    changeChannelVolume = (select, data) => {//change the volume of an individual channel
      // console.log(this.state.effectBars);
-     // console.log(select);
-     // console.log(data);
+     console.log(select);
+     console.log(data);
 
      // let changed = this.state.effectBars[this.state.effectBars.findIndex(e => e.id == select)];
      let all = this.state.effectBars;
@@ -98,15 +98,22 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      this.setState({effectBars: all});
    };
 
+
+   changePlaybackRate = (select, data) => {
+     let all = this.state.effectBars;
+     all[this.state.effectBars.findIndex(e => e.id == select)].playbackRate = parseFloat(data/100);
+     this.setState({effectBars: all}, () => console.log(this.state.effectBars));
+   };
+
    getChannelBarData = (e) => {//gets the bar data of each channel for saving and loading projects
 
      let newArray = this.state.channelBars;
      let effectArray = this.state.effectBars;
-     console.log(e);
-     console.log(effectArray);
+     // console.log(e);
+     // console.log(effectArray);
      newArray.push(e);
      if(effectArray.findIndex(c => c.id === e[0].id) === -1 || effectArray.length === 0){
-       effectArray.push({id: e[0].id, volume: 1});
+       effectArray.push({id: e[0].id, volume: 1, playbackRate: 1});
      }
      this.setState({channelBars: newArray, effectBars: effectArray}, () => console.log(this.state));
    };
@@ -254,6 +261,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
                 bpm={this.state.bpm}
                 changeBpm={this.changeBpm}
                 changeVolume={this.changeChannelVolume}
+                changePlaybackRate={this.changePlaybackRate}
                 effects={this.state.effectBars}
 
                 AudioContext={this.state.context}

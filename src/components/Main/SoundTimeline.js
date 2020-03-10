@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-03-09T18:52:31+00:00
+ * @Last modified time: 2020-03-10T19:48:13+00:00
  */
 
 
@@ -26,7 +26,7 @@ class SoundTimeline extends Component{
       channelArray: [],
       isPlaying: false,
       timeIndex: 0,
-      pages: [1, 2, 3, 4, 5],
+      pages: [1],
       currentPage: 1
     };
   }

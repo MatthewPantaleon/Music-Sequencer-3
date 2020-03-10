@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T19:27:18+00:00
- * @Last modified time: 2020-02-28T20:24:13+00:00
+ * @Last modified time: 2020-03-10T19:55:59+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -19,12 +19,12 @@ class ChannelMixer extends Component{
     this.state = {
       selectedEffect: "",
       volume: 1,
-      selectedChannel: -1
+      selectedChannel: "none"
     };
   }
 
   componentDidMount(){
-    // console.log(this.props);
+    console.log(this.props);
   }
 
 
@@ -37,14 +37,26 @@ class ChannelMixer extends Component{
   }
 
   volumeControls(){
-    return(
-      <>
-        <input className="form-control-range" type="range" min="0" max="100" onChange={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, e.target.value)} />
-        <p></p>
-      </>
-    );
+    if(this.state.selectedChannel !== "none"){
+      return(
+        <>
+          <p>Volume Controls</p>
+          <input className="form-control-range" type="range" min="0" max="100" onChange={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, e.target.value)} />
+        </>
+      );
+    }
   }
 
+  playBackRate(){
+    if(this.state.selectedChannel !== "none"){
+      return(
+        <>
+          <p>playBackRate Controls</p>
+          <input className="form-control-range" type="range" min="0" max="100" onChange={(e) => this.props.changePlaybackRate(this.state.selectedChannel || undefined, e.target.value)} />
+        </>
+      );
+    }
+  }
 
   render(){
     return(
@@ -72,14 +84,11 @@ class ChannelMixer extends Component{
               <select className="custom-select" size="10" style={{height: "100%"}} onChange={(e) => this.changeSelectedEffect(e)}>
                 <option value="volume">Volume</option>
                 <option value="playBackRate">playBackRate</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
               </select>
             </div>
             <div className="col-9 text-white" style={debugBorder()}>
               {this.state.selectedEffect === "volume" ? this.volumeControls() : <></>}
-              {this.state.selectedEffect === "playBackRate" ? <p>playBackRate Controls</p> : <></>}
+              {this.state.selectedEffect === "playBackRate" ? this.playBackRate() : <></>}
               {/**/}
             </div>
           </div>

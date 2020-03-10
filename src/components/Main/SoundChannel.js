@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-03-10T19:05:50+00:00
+ * @Last modified time: 2020-03-10T19:46:39+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -47,7 +47,7 @@
        }
      }
      this.props.getBarData(segments);
-     console.log(segments);
+     // console.log(segments);
      this.setState({bar: segments});
    }
 
@@ -106,11 +106,14 @@
 
 
    preview(){//preview sound, testing how audio effects here
+
      // this.state.sound.volume = 0.5;
      let t = this.state.sound;
-     // console.log(new Audio(this.props.soundUrl));
+     console.log(new Audio(this.props.soundUrl).playbackRate);
      // console.log(parseFloat(this.props.effects.volume));
      t.volume = parseFloat(this.props.effects.volume);
+     // t.preservesPitch = false;
+     t.playbackRate = parseFloat(this.props.effects.playbackRate);
      t.play();
      // console.log(this.state.sound.duration);
 
