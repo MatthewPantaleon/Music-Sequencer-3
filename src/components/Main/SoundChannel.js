@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-03-10T18:46:01+00:00
+ * @Last modified time: 2020-03-10T19:05:50+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -65,8 +65,12 @@
      // console.log(pP.pages);
      // console.log(pP.pages[pP.pages.length - 1] * this.state.segments);
      // console.log(this.state.bar.length);
+
+
      let newTotal = pP.pages[pP.pages.length - 1] * this.state.segments;
      let bars = this.state.bar;
+
+     //adding a new page extends the bar array
      if(newTotal > this.state.bar.length){
        for(let i = 0; i < newTotal; i++){
          let isEnd = false;
@@ -78,7 +82,26 @@
            bars[i] = {id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[(this.props.id % this.state.activatedColor.length) -1] || "#fff", isEnd, active: false};
          }
        }
+       // console.log(this.state.bar);
      }
+
+     //for removing a page how should the bar array be handled
+     if(newTotal < this.state.bar.length){
+       let subset = bars.slice((bars.length - 1) - this.state.segments, (bars.length - 1));
+       // console.log(subset);
+
+       // if(!subset.every((e) => e.active == false)){
+       //   if(!window.confirm("There are active bars on this page. Are you sure to Remove it? This cannot be undone!")){
+       //     return;
+       //   }
+       // }
+       console.log("UUUGGGHHHHH!");
+       for(let i = 0; i < this.state.segments; i++){
+         bars.pop();
+       }
+       console.log(bars);
+     }
+
    }
 
 
