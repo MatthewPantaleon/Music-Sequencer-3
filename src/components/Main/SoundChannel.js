@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-03-10T16:37:52+00:00
+ * @Last modified time: 2020-03-10T18:46:01+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -61,8 +61,24 @@
      });
    }
 
-   componentDidUpdate(previousProps){
-     console.log(previousProps.pages);
+   componentDidUpdate(pP, ps){
+     // console.log(pP.pages);
+     // console.log(pP.pages[pP.pages.length - 1] * this.state.segments);
+     // console.log(this.state.bar.length);
+     let newTotal = pP.pages[pP.pages.length - 1] * this.state.segments;
+     let bars = this.state.bar;
+     if(newTotal > this.state.bar.length){
+       for(let i = 0; i < newTotal; i++){
+         let isEnd = false;
+         if((i+1) % this.state.barInterval === 0){
+           // backgroundColor = "#444"
+           isEnd = true;
+         }
+         if(!bars[i]){
+           bars[i] = {id: this.props.id, segmentId: i, activeColor: this.state.activatedColor[(this.props.id % this.state.activatedColor.length) -1] || "#fff", isEnd, active: false};
+         }
+       }
+     }
    }
 
 
