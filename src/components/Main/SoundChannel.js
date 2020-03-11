@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-03-11T17:26:39+00:00
+ * @Last modified time: 2020-03-11T19:16:27+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -106,37 +106,46 @@
 
    }
 
-
    async preview(){//preview sound, testing how audio effects here
 
      // this.state.sound.volume = 0.5;
      // console.log(new Audio(this.props.soundUrl).playbackRate);
 
      let t = this.state.sound;
-     t.volume = parseFloat(this.props.effects.volume);
-     t.playbackRate = parseFloat(this.props.effects.playbackRate);
-     t.play();
+     // t.volume = parseFloat(this.props.effects.volume);
+     // t.playbackRate = parseFloat(this.props.effects.playbackRate);
+     // t.play();
+     let s;
+     let ac = new AudioContext();
+     // console.log(ac.createMediaElementSource(t));
+     // let s = ac.createMediaElementSource(t);
+     // let s = ac.createMediaElementSource(t);
+     // let s = ac.audioNode(t);
 
-     // let ac = new AudioContext();
+     s = await loadAudioBuffer(ac, this.props.soundUrl).then((r) => {
+       return r.audioBuffer;
+     });
+
+     console.log(s);
+     let source = ac.createBufferSource();
+     source.buffer = s;
+     // console.log(source);
+     source.connect(ac.destination);
+     source.start();
      // let ps = PitchShift(ac);
      // ps.connect(ac.destination);
-     // console.log(ps);
      //
-     // let s = await loadAudioBuffer(ac, this.props.soundUrl).then((r) => {
-     //   return r;
-     // });
+     // ps.connect(t);
+     // console.log(ps);
+     // ps.transpose(24);
+     // ps.start();
+     // ps.detune.value = -1200;
+
      //
      // console.log(s);
      // let source = s;
 
      // console.log(this.state.sound.duration);
-
-     // console.log(this.state.sound.currentTime);
-     // console.log(this.state.sound.controls);
-     // console.log(this.state.sound.srcObject);
-     // let test = this.state.sound;
-     // console.log(test.srcObject = new MediaStream());
-     // console.log(test.playBackRate);
 
    }
 
