@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-03-10T19:58:30+00:00
+ * @Last modified time: 2020-03-11T15:28:19+00:00
  */
 
 
@@ -87,8 +87,8 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
    changeChannelVolume = (select, data) => {//change the volume of an individual channel
      // console.log(this.state.effectBars);
-     console.log(select);
-     console.log(data);
+     // console.log(select);
+     // console.log(data);
 
      // let changed = this.state.effectBars[this.state.effectBars.findIndex(e => e.id == select)];
      let all = this.state.effectBars;
@@ -102,7 +102,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
    changePlaybackRate = (select, data) => {
      let all = this.state.effectBars;
      all[this.state.effectBars.findIndex(e => e.id == select)].playbackRate = parseFloat(data/100);
-     this.setState({effectBars: all}, () => console.log(this.state.effectBars));
+     this.setState({effectBars: all});
    };
 
    getChannelBarData = (e) => {//gets the bar data of each channel for saving and loading projects

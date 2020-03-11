@@ -1,11 +1,12 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-03-10T19:46:39+00:00
+ * @Last modified time: 2020-03-10T20:28:44+00:00
  */
 
  import React, { Component, Fragment } from 'react';
  import $ from "jquery";
  import 'bootstrap/dist/css/bootstrap.css';
+ import PitchShift from "soundbank-pitch-shift";
 
  class SoundChannel extends Component{
    constructor(props){
@@ -108,13 +109,19 @@
    preview(){//preview sound, testing how audio effects here
 
      // this.state.sound.volume = 0.5;
+     // console.log(new Audio(this.props.soundUrl).playbackRate);
+
      let t = this.state.sound;
-     console.log(new Audio(this.props.soundUrl).playbackRate);
-     // console.log(parseFloat(this.props.effects.volume));
-     t.volume = parseFloat(this.props.effects.volume);
-     // t.preservesPitch = false;
-     t.playbackRate = parseFloat(this.props.effects.playbackRate);
-     t.play();
+     // t.volume = parseFloat(this.props.effects.volume);
+     // t.playbackRate = parseFloat(this.props.effects.playbackRate);
+     // t.play();
+     let ac = new AudioContext();
+     let ps = PitchShift(ac);
+     ps.connect(ac.destination);
+     console.log(ps);
+
+      new Audio(t).connect(ps);
+
      // console.log(this.state.sound.duration);
 
      // console.log(this.state.sound.currentTime);

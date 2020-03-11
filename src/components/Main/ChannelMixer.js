@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T19:27:18+00:00
- * @Last modified time: 2020-03-10T20:18:37+00:00
+ * @Last modified time: 2020-03-11T15:27:11+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -21,12 +21,12 @@ class ChannelMixer extends Component{
       volume: 1,
       selectedChannel: "none"
     };
+
   }
 
   componentDidMount(){
     console.log(this.props);
   }
-
 
   changeSelectedEffect(e){
     this.setState({selectedEffect: e.target.value});
@@ -42,6 +42,7 @@ class ChannelMixer extends Component{
         <>
           <p>Volume Controls</p>
           <input className="form-control-range" type="range" min="0" max="100" onChange={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, e.target.value)} />
+          <small>Current Volume multiplier: {this.props.effects[parseInt(this.state.selectedChannel) - 1].volume}</small>
         </>
       );
     }
@@ -52,7 +53,8 @@ class ChannelMixer extends Component{
       return(
         <>
           <p>playBackRate Controls</p>
-          <input className="form-control-range" type="range" min="0" max="100" onChange={(e) => this.props.changePlaybackRate(this.state.selectedChannel || undefined, e.target.value)} />
+          <input className="form-control-range" type="range" min="0" max="500" onChange={(e) => this.props.changePlaybackRate(this.state.selectedChannel || undefined, e.target.value)} />
+          <small>Current Playback value: {this.props.effects[parseInt(this.state.selectedChannel) - 1].playbackRate}</small>
         </>
       );
     }

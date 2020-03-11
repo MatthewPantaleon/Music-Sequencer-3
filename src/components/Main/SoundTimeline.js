@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T18:19:01+00:00
- * @Last modified time: 2020-03-10T19:48:13+00:00
+ * @Last modified time: 2020-03-11T15:30:04+00:00
  */
 
 
@@ -95,7 +95,7 @@ class SoundTimeline extends Component{
   }
 
   changePage(c){
-    console.log(c);
+    // console.log(c);
     this.setState({currentPage: c});
   }
 
