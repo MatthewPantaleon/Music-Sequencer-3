@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-03-11T16:55:20+00:00
+ * @Last modified time: 2020-03-11T18:30:30+00:00
  */
 
 
@@ -50,7 +50,7 @@ let empty = true;
          empty = false;
          let stats = await loadAudioBuffer(new AudioContext(), this.state.selectedFile).then((r) => {
            return r;
-         });
+         }).catch(() => { return{} });
          this.setState({fileStats: stats});
        });
      }
@@ -59,7 +59,7 @@ let empty = true;
          empty = true;
          let stats = await loadAudioBuffer(new AudioContext(), this.state.selectedFile).then((r) => {
            return r;
-         });
+         }).catch(() => { return {} });
          this.setState({fileStats: stats});
        });
      }
@@ -118,7 +118,7 @@ let empty = true;
         <div className="col-8 text-white">
           <h5><b>Selected File: </b> {this.split(this.state.selectedFile)} </h5>
           <h5><b>File Type: </b> {this.state.selectedFile ? this.state.selectedFile.split('.').pop() : ""} </h5>
-          <h5><b>File Size: </b> {this.sizeConverter(this.state.fileStats.fileSize)} KB </h5>
+          <h5><b>File Size: </b> {this.state.fileStats.fileSize ? this.sizeConverter(this.state.fileStats.fileSize) : 0} KB </h5>
           <h5><b>Duration: </b> {this.state.fileStats.audioBuffer ? this.state.fileStats.audioBuffer.duration.toFixed(3) : 0} Seconds </h5>
 
         </div>
