@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T17:37:27+00:00
- * @Last modified time: 2020-03-10T19:58:48+00:00
+ * @Last modified time: 2020-03-11T17:52:33+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -31,6 +31,9 @@ class SoundContainer extends Component{
  }
 
  componentDidMount(){
+   // console.log(this.props);
+ }
+ componentDidUpdate(){
    // console.log(this.props);
  }
 

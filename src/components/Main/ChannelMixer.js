@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-05T19:27:18+00:00
- * @Last modified time: 2020-03-11T17:46:33+00:00
+ * @Last modified time: 2020-03-11T17:52:36+00:00
  */
 
 import React, { Component, Fragment } from 'react';
@@ -27,6 +27,10 @@ class ChannelMixer extends Component{
 
   componentDidMount(){
     console.log(this.props);
+  }
+
+  componentDidUpdate(){
+    // console.log(this.props);
   }
 
   changeSelectedEffect(e){

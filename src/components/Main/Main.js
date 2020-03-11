@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-03-11T17:39:38+00:00
+ * @Last modified time: 2020-03-11T17:52:44+00:00
  */
 
 
@@ -48,6 +48,9 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
    }
 
 
+   componentDidUpdate(){
+     // console.log(this.state);
+   }
 
    split = (str) => { //fastest
      if(!str)return;
@@ -132,7 +135,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
        readyFiles: [],
        soundChannels: [],
        channelBars: [],
-       effectbars: [],
+       effectBars: [],
        projectName: "untitled",
        context: new AudioContext()
      });
