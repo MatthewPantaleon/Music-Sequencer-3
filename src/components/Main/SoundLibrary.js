@@ -1,12 +1,13 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-02-28T20:30:19+00:00
+ * @Last modified time: 2020-03-11T16:52:28+00:00
  */
 
 
  import React, { Component, Fragment } from 'react';
  import $ from "jquery";
  import 'bootstrap/dist/css/bootstrap.css';
+ import { loadAudioBuffer } from 'audiobuffer-loader';
 
  const fs = window.require("fs");
  const { dialog } = window.require('electron').remote;
@@ -20,7 +21,8 @@ let empty = true;
 
      this.state = {
        sounds: [],
-       selectedFile: ""
+       selectedFile: "",
+       fileStats: {}
      };
    }
 
@@ -42,24 +44,46 @@ let empty = true;
    }
 
    componentDidUpdate(){
+
      if(this.props.sounds.length !== 0 && empty){
-       this.setState({selectedFile: this.props.sounds[0]}, () => empty = false);
+       this.setState({selectedFile: this.props.sounds[0]}, async () => {
+         empty = false;
+         let stats = await loadAudioBuffer(new AudioContext(), this.state.selectedFile).then((r) => {
+           return r;
+         });
+         this.setState({fileStats: stats});
+       });
      }
      if(this.props.sounds.length === 0 && !empty){
-       this.setState({selectedFile: this.props.sounds[0]}, () => empty = true);
+       this.setState({selectedFile: this.props.sounds[0]}, async () =>{
+         empty = true;
+         let stats = await loadAudioBuffer(new AudioContext(), this.state.selectedFile).then((r) => {
+           return r;
+         });
+         this.setState({fileStats: stats});
+       });
      }
 
    }
 
-   changeFile = (name) => {
-     this.setState({selectedFile: name});
+   changeFile(name){
+     let that = this;
+
+     this.setState({selectedFile: name}, async () => {
+       let st = await loadAudioBuffer(new AudioContext(), this.state.selectedFile).then((r) => {
+         return r;
+       });
+       this.setState({fileStats: st}, () => console.log(this.state.fileStats));
+     });
+
+
    };
 
 
    removeFromLibrary(e){
       if(window.confirm(`Are you Sure you want to remove: ${this.split(e)}? \nThis will Remove all Channels too.\nThisCannot be undone!`)){
         if(this.state.selectedFile === e){
-          this.setState({selectedFile: null}, () => {
+          this.setState({selectedFile: null, fileStats: {}}, () => {
             this.props.removeSound(e);
             // console.log(this.state.selectedFile);
           });
@@ -82,14 +106,20 @@ let empty = true;
      new Audio(file).play();
    }
 
+
+   sizeConverter(bytes){
+     return (bytes / 1024).toFixed(1) || "";
+   }
+
    render(){
      return (
       <>
       <div className="row card-body bg-dark mb-2" style={{position: "relative", height: "calc(20vh)"}}>
         <div className="col-8 text-white">
           <h5><b>Selected File: </b> {this.split(this.state.selectedFile)} </h5>
-          <h5><b>File Type: </b> WAV </h5>
-          <h5><b>File Size: </b> 100kb </h5>
+          <h5><b>File Type: </b> {this.state.selectedFile ? this.state.selectedFile.split('.').pop() : ""} </h5>
+          <h5><b>File Size: </b> {this.sizeConverter(this.state.fileStats.fileSize)} KB </h5>
+          <h5><b>Duration: </b> {this.state.fileStats.audioBuffer ? this.state.fileStats.audioBuffer.duration.toFixed(3) : 0} Seconds </h5>
 
         </div>
         <div className="col-4" style={{position: "relative"}}>

@@ -1,12 +1,13 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-03-10T20:28:44+00:00
+ * @Last modified time: 2020-03-11T16:20:38+00:00
  */
 
  import React, { Component, Fragment } from 'react';
  import $ from "jquery";
  import 'bootstrap/dist/css/bootstrap.css';
  import PitchShift from "soundbank-pitch-shift";
+ import { loadAudioBuffer } from 'audiobuffer-loader';
 
  class SoundChannel extends Component{
    constructor(props){
@@ -106,7 +107,7 @@
    }
 
 
-   preview(){//preview sound, testing how audio effects here
+   async preview(){//preview sound, testing how audio effects here
 
      // this.state.sound.volume = 0.5;
      // console.log(new Audio(this.props.soundUrl).playbackRate);
@@ -120,7 +121,12 @@
      ps.connect(ac.destination);
      console.log(ps);
 
-      new Audio(t).connect(ps);
+     let s = await loadAudioBuffer(ac, this.props.soundUrl).then((r) => {
+       return r;
+     });
+
+     console.log(s);
+     let source = s
 
      // console.log(this.state.sound.duration);
 

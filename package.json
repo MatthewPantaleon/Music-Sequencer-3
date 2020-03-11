@@ -5,6 +5,7 @@
   "version": "0.2.7",
   "private": true,
   "dependencies": {
+    "audiobuffer-loader": "^1.0.3",
     "bootstrap": "^4.4.1",
     "cross-env": "6.0.2",
     "electron-is-dev": "1.1.0",
