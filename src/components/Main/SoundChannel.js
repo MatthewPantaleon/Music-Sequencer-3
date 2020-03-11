@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-03-11T19:16:27+00:00
+ * @Last modified time: 2020-03-11T19:33:40+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -128,9 +128,16 @@
 
      console.log(s);
      let source = ac.createBufferSource();
+     let g = ac.createGain();
      source.buffer = s;
-     // console.log(source);
-     source.connect(ac.destination);
+
+     source.detune.value = 600;
+     source.playbackRate.value = 2;
+     // source.gain.value = 0.1;
+     source.connect(g);
+     g.gain.value = 5;
+     console.log(source);
+     g.connect(ac.destination);
      source.start();
      // let ps = PitchShift(ac);
      // ps.connect(ac.destination);
