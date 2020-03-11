@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-12T18:38:37+00:00
- * @Last modified time: 2020-03-11T16:52:28+00:00
+ * @Last modified time: 2020-03-11T16:55:20+00:00
  */
 
 
@@ -73,7 +73,7 @@ let empty = true;
        let st = await loadAudioBuffer(new AudioContext(), this.state.selectedFile).then((r) => {
          return r;
        });
-       this.setState({fileStats: st}, () => console.log(this.state.fileStats));
+       this.setState({fileStats: st});
      });
 
 

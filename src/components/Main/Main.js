@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-01-17T16:13:59+00:00
- * @Last modified time: 2020-03-11T15:28:19+00:00
+ * @Last modified time: 2020-03-11T17:39:38+00:00
  */
 
 
@@ -9,7 +9,7 @@ import $ from "jquery";
 import SoundBrowser from './SoundBrowser';
 import SoundContainer from './SoundContainer';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-
+import { loadAudioBuffer } from 'audiobuffer-loader';
 
 const fs = window.require("fs");
 const { dialog } = window.require('electron').remote;
@@ -105,17 +105,22 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      this.setState({effectBars: all});
    };
 
-   getChannelBarData = (e) => {//gets the bar data of each channel for saving and loading projects
+   getChannelBarData = async (e, url) => {//gets the bar data of each channel for saving and loading projects
 
      let newArray = this.state.channelBars;
      let effectArray = this.state.effectBars;
      // console.log(e);
      // console.log(effectArray);
+     let duration = await loadAudioBuffer(new AudioContext(), url).then((r) => {
+       return r.audioBuffer.duration;
+     });
+     // console.log(duration);
+     effectArray = effectArray.filter(e => e !== undefined);
      newArray.push(e);
      if(effectArray.findIndex(c => c.id === e[0].id) === -1 || effectArray.length === 0){
-       effectArray.push({id: e[0].id, volume: 1, playbackRate: 1});
+       effectArray.push({id: e[0].id, soundUrl: url, volume: 1, playbackRate: 1, duration});
      }
-     this.setState({channelBars: newArray, effectBars: effectArray}, () => console.log(this.state));
+     this.setState({channelBars: newArray, effectBars: effectArray});
    };
 
 //-----------------------------------------------------------------------------------

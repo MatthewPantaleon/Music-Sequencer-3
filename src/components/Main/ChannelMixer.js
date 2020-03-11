@@ -1,11 +1,12 @@
 /**
  * @Date:   2020-02-05T19:27:18+00:00
- * @Last modified time: 2020-03-11T15:27:11+00:00
+ * @Last modified time: 2020-03-11T17:46:33+00:00
  */
 
 import React, { Component, Fragment } from 'react';
 import $ from "jquery";
 import 'bootstrap/dist/css/bootstrap.css';
+import { loadAudioBuffer } from 'audiobuffer-loader';
 
 const electron = window.require('electron');
 const remote = electron.remote;
@@ -42,7 +43,7 @@ class ChannelMixer extends Component{
         <>
           <p>Volume Controls</p>
           <input className="form-control-range" type="range" min="0" max="100" onChange={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, e.target.value)} />
-          <small>Current Volume multiplier: {this.props.effects[parseInt(this.state.selectedChannel) - 1].volume}</small>
+          <small>Current Volume multiplier: {this.props.effects.length > 0 ? this.props.effects[parseInt(this.state.selectedChannel) - 1].volume : 0}</small>
         </>
       );
     }
@@ -50,11 +51,14 @@ class ChannelMixer extends Component{
 
   playBackRate(){
     if(this.state.selectedChannel !== "none"){
+
       return(
         <>
           <p>playBackRate Controls</p>
           <input className="form-control-range" type="range" min="0" max="500" onChange={(e) => this.props.changePlaybackRate(this.state.selectedChannel || undefined, e.target.value)} />
-          <small>Current Playback value: {this.props.effects[parseInt(this.state.selectedChannel) - 1].playbackRate}</small>
+          <small>Current Playback value: {this.props.effects.length > 0 ? this.props.effects[parseInt(this.state.selectedChannel) - 1].playbackRate : 0}</small>
+          <br />
+          <small>Current Playback Duration: {this.props.effects.length > 0 ? (this.props.effects[parseInt(this.state.selectedChannel) - 1].duration / this.props.effects[parseInt(this.state.selectedChannel) - 1].playbackRate).toFixed(3) : 0}</small>
         </>
       );
     }

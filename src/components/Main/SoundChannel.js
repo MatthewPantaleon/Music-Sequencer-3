@@ -1,6 +1,6 @@
 /**
  * @Date:   2020-02-24T08:59:30+00:00
- * @Last modified time: 2020-03-11T16:20:38+00:00
+ * @Last modified time: 2020-03-11T17:26:39+00:00
  */
 
  import React, { Component, Fragment } from 'react';
@@ -48,7 +48,7 @@
          segments.push(this.props.existingBar[i]);
        }
      }
-     this.props.getBarData(segments);
+     this.props.getBarData(segments, this.props.soundUrl);
      // console.log(segments);
      this.setState({bar: segments});
    }
@@ -59,7 +59,7 @@
      let allBar = this.state.bar;
      allBar[i].active = !allBar[i].active;
      this.setState({bar: allBar}, () => {
-       if(false)new Audio(this.props.soundUrl).play();
+       if(false)new Audio(this.props.soundUrl).volume(parseFloat(this.props.effects.volume)).playbackRate(parseFloat(this.props.effects.playbackRate)).play();
      });
    }
 
@@ -113,20 +113,21 @@
      // console.log(new Audio(this.props.soundUrl).playbackRate);
 
      let t = this.state.sound;
-     // t.volume = parseFloat(this.props.effects.volume);
-     // t.playbackRate = parseFloat(this.props.effects.playbackRate);
-     // t.play();
-     let ac = new AudioContext();
-     let ps = PitchShift(ac);
-     ps.connect(ac.destination);
-     console.log(ps);
+     t.volume = parseFloat(this.props.effects.volume);
+     t.playbackRate = parseFloat(this.props.effects.playbackRate);
+     t.play();
 
-     let s = await loadAudioBuffer(ac, this.props.soundUrl).then((r) => {
-       return r;
-     });
-
-     console.log(s);
-     let source = s
+     // let ac = new AudioContext();
+     // let ps = PitchShift(ac);
+     // ps.connect(ac.destination);
+     // console.log(ps);
+     //
+     // let s = await loadAudioBuffer(ac, this.props.soundUrl).then((r) => {
+     //   return r;
+     // });
+     //
+     // console.log(s);
+     // let source = s;
 
      // console.log(this.state.sound.duration);
 
@@ -145,6 +146,7 @@
        let a = new Audio(this.props.soundUrl);
        if(segment.active && this.props.isPlaying && !this.state.mute){
          a.volume = parseFloat(this.props.effects.volume);
+         a.playbackRate = parseFloat(this.props.effects.playbackRate);
          a.play();
        }
        return{width: size, height: size, backgroundColor, display: "inline-block", border: "2px solid #fff"};
