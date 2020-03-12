@@ -1,0 +1,40 @@
+research
+https://stackoverflow.com/questions/21022554/audio-manipulation-with-java - types of audio manipulation
+https://itssmee.wordpress.com/2010/04/21/comparing-processing-to-javafx-via-a-processing-tutorial/ - Comparison of Processing to JavaFX (2010)
+https://github.com/fujeyla/processing4netbeans/ - Processing API for Java
+https://stackoverflow.com/questions/4515622/is-there-a-way-to-stop-netbeans-scanning-projects - prevent
+https://blogs.oracle.com/netbeansphp/enable-auto-scanning-of-sources-scan-for-external-changes - Disable auto-scanning of sources
+
+https://proton-native.js.org/#/ - JavaScript Desktop Application/Mobile
+https://tonejs.github.io/ - Synth
+https://tonejs.github.io/docs/13.8.25/Instrument _toneJS documentation
+https://github.com/audiojs/web-audio-api - Audio API
+
+
+https://www.freecodecamp.org/news/build-native-desktop-apps-with-javascript-a49ede90d8e9/ - get started Proton Native
+https://catalin.me/how-to-fix-node-js-gyp-err-cant-find-python-executable-python-on-windows/ - fix python executable
+https://github.com/facebook/create-react-app/issues/7051 - update core-js
+https://stackoverflow.com/questions/55606841/how-to-update-core-js-to-core-js3-dependency - update and save core-js
+
+https://www.quora.com/Why-is-it-a-mistake-to-use-JavaScript-for-everything-from-web-development-to-desktop-applications - JavaScript Limitations
+
+-----------------------------------------------------------
+
+https://www.packtpub.com/eu/web-development/cross-platform-desktop-application-development-electron-node-nwjs-and-react - book
+https://github.com/PacktPublishing/Cross-platform-Desktop-Application-Development-Electron-Node-NW.js-and-React - book examples
+https://www.google.com/search?q=low+level+system+design&rlz=1C1GCEU_enIE867IE867&oq=low+level+sys&aqs=chrome.2.69i57j0l5.5614j0j7&sourceid=chrome&ie=UTF-8 - LLD
+https://www.sciencedirect.com/topics/computer-science/hardware-abstraction-layer#targetText=In%20computers%2C%20a%20hardware%20abstraction,or%20from%20a%20device%20driver. - Hardware Abstraction Layer
+https://www.techopedia.com/definition/3736/abstraction#targetText=Abstraction%20is%20the%20act%20of,implementation%20of%20complex%20software%20systems. - Abstraction
+
+https://github.com/electron-userland/electron-builder/commit/8f099f53421fde604105208d28edec67d8358c6c - "framework": "proton-native"
+https://en.wikipedia.org/wiki/Symbol_table - translate symbols
+https://stackoverflow.com/questions/33080155/does-babel-need-es6-shim - Babel?
+https://stackoverflow.com/questions/39246498/compiler-vs-interpreter-vs-transpiler - Pilers
+
+https://www.codementor.io/randyfindley/how-to-build-an-electron-app-using-create-react-app-and-electron-builder-ss1k0sfer - electron with react
+https://electronjs.org/docs/tutorial/security - Security
+https://www.npmjs.com/package/react-p5-wrapper - wrapper
+
+https://medium.com/@kitze/%EF%B8%8F-from-react-to-an-electron-app-ready-for-production-a0468ecb1da3 - Dist Electron and React
+
+https://colin-sullivan.net/main/2019/performance-environment/ - Supercollider
