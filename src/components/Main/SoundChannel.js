@@ -20,13 +20,14 @@
        activatedColor: ["#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff", "#800", "#080", "#008", "#880", "#808", "#088"],
        normalColor: "#777",
        sound: new Audio(this.props.soundUrl) || "",
+       soundBuffer: {},
        mute: false
      };
    }
 
 
 
-   componentWillMount(){
+   async componentWillMount(){
      let segments = [];
 
      let exist = this.props.existingBar;
@@ -50,9 +51,15 @@
      }
      this.props.getBarData(segments, this.props.soundUrl);
      // console.log(segments);
-     this.setState({bar: segments});
+
+     let ac = new AudioContext();
+     let s = await loadAudioBuffer(ac, this.props.soundUrl).then((r) => {
+       return r.audioBuffer;
+     });
+     this.setState({bar: segments, soundBuffer: s}, () => console.log(this.state.soundBuffer));
    }
 
+   //play sound when adding a new channel set to false by default can be toggled later
    activate(id, i){
      // console.log("This is something from channel: "+ id + ". Position: " + (i+1));
      // console.log(this.state.activatedColor[id]);
@@ -92,12 +99,13 @@
        let subset = bars.slice((bars.length - 1) - this.state.segments, (bars.length - 1));
        // console.log(subset);
 
+       //page validation for if some segments are active
        // if(!subset.every((e) => e.active == false)){
        //   if(!window.confirm("There are active bars on this page. Are you sure to Remove it? This cannot be undone!")){
        //     return;
        //   }
        // }
-       console.log("UUUGGGHHHHH!");
+       // console.log("UUUGGGHHHHH!");
        for(let i = 0; i < this.state.segments; i++){
          bars.pop();
        }
@@ -115,7 +123,6 @@
      // t.volume = parseFloat(this.props.effects.volume);
      // t.playbackRate = parseFloat(this.props.effects.playbackRate);
      // t.play();
-     let s;
      let ac = new AudioContext();
      // console.log(ac.createMediaElementSource(t));
      // let s = ac.createMediaElementSource(t);
@@ -124,15 +131,17 @@
 
 
      //get audio data as an audiobuffernode object
-     s = await loadAudioBuffer(ac, this.props.soundUrl).then((r) => {
-       return r.audioBuffer;
-     });
+     // s = await loadAudioBuffer(ac, this.props.soundUrl).then((r) => {
+     //   return r.audioBuffer;
+     // });
 
-     console.log(s);
+     let s = this.state.soundBuffer;
+     // console.log(s);
      let source = ac.createBufferSource();
      let g = ac.createGain();
      source.buffer = s;
      let ps = PitchShift(ac);
+
 
      source.playbackRate.value = this.props.effects.playbackRate;
      source.detune.value = this.props.effects.pitch;
@@ -144,16 +153,16 @@
 
      g.gain.value = this.props.effects.volume;
 
-     console.log(source);
+     // console.log(source);
      g.connect(ac.destination);
      ps.connect(ac.destination);
-     console.log(s.sampleRate);
-     source.start(0, 0.5, 0.2);
+     // console.log(s.sampleRate);
+     source.start(0, this.props.effects.start, this.props.effects.end - this.props.effects.start);
      // source.stop(ac.currentTime + 0.7);
 
      // t.playbackRate = this.props.effects.playbackRate;
-     let m = ac.createMediaElementSource(new Audio(this.props.soundUrl));
-     console.log(m);
+     // let m = ac.createMediaElementSource(new Audio(this.props.soundUrl));
+     // console.log(m);
 
      // m = null;
      // t.play();
@@ -175,17 +184,39 @@
      // let source = s;
 
      // console.log(this.state.sound.duration);
-     ac = null;
+     // ac = null;
    }
 
    //how each segment is to be presented based on if it active or not
    segment(size = "1.9vw", backgroundColor = "#777", play, segment){
      if((play.index % this.state.segments) == play.time){
-       let a = new Audio(this.props.soundUrl);
+       // let a = new Audio(this.props.soundUrl);
+       let ac = new AudioContext();
+       let source = ac.createBufferSource();
+       let g = ac.createGain();
+       let s = this.state.soundBuffer;
+       source.buffer = s;
+       let ps = PitchShift(ac);
        if(segment.active && this.props.isPlaying && !this.state.mute){
-         a.volume = parseFloat(this.props.effects.volume);
-         a.playbackRate = parseFloat(this.props.effects.playbackRate);
-         a.play();
+         // a.volume = parseFloat(this.props.effects.volume);
+         // a.playbackRate = parseFloat(this.props.effects.playbackRate);
+         // a.play();
+         let s = this.state.soundBuffer;
+         source.playbackRate.value = this.props.effects.playbackRate;
+         source.detune.value = this.props.effects.pitch;
+         // source.preservePitch = true;
+
+         // source.gain.value = 0.1;
+         source.connect(g);
+         // source.connect(ps);
+
+         g.gain.value = this.props.effects.volume;
+
+         // console.log(source);
+         g.connect(ac.destination);
+         ps.connect(ac.destination);
+         console.log(s.sampleRate);
+         source.start(0, this.props.effects.start, this.props.effects.end - this.props.effects.start);
        }
        return{width: size, height: size, backgroundColor, display: "inline-block", border: "2px solid #fff"};
      }else{

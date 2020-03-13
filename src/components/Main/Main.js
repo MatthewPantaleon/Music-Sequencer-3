@@ -76,7 +76,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
    clearAllChannels = () => {//clear all channels
      if(window.confirm("Clear All Channels? This action cannot be Undone!")){
-       this.setState({soundChannels: []}, () => alert("Cleared All Channels"));
+       this.setState({soundChannels: [], effectBars: []}, () => alert("Cleared All Channels"));
      }
    };
 
@@ -127,9 +127,21 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      effectArray = effectArray.filter(e => e !== undefined);
      newArray.push(e);
      if(effectArray.findIndex(c => c.id === e[0].id) === -1 || effectArray.length === 0){
-       effectArray.push({id: e[0].id, soundUrl: url, volume: 1, playbackRate: 1, duration, pitch: 0});
+       effectArray.push({id: e[0].id, soundUrl: url, volume: 1, playbackRate: 1, duration, pitch: 0, start: 0, end: duration});
      }
      this.setState({channelBars: newArray, effectBars: effectArray});
+   };
+
+   changeSubset = (select, data, type) => {
+     // console.log(select);
+     // console.log(data);
+     // console.log(type);
+
+     let all = this.state.effectBars;
+     console.log(parseFloat(data/1000));
+     all[this.state.effectBars.findIndex(e => e.id == select)][type] = parseFloat(data/1000);
+     this.setState({effectBars: all});
+
    };
 
 //-----------------------------------------------------------------------------------
@@ -207,10 +219,12 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
 
     let newArray = this.state.readyFiles;
     let newChannels = this.state.soundChannels;
+    let effectArray = this.state.effectBars;
     newArray = newArray.filter(e => e !== name);
     newChannels = newChannels.filter(e => e !== name);
-    console.log(newArray);
-    this.setState({readyFiles: newArray, soundChannels: newChannels});
+    effectArray = effectArray.filter(e => e.soundUrl !== name);
+
+    this.setState({readyFiles: newArray, soundChannels: newChannels, effectBars: effectArray});
 
   };
 
@@ -277,6 +291,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
                 changeVolume={this.changeChannelVolume}
                 changePlaybackRate={this.changePlaybackRate}
                 changePitch={this.changePitch}
+                changeSubset={this.changeSubset}
                 effects={this.state.effectBars}
 
                 AudioContext={this.state.context}

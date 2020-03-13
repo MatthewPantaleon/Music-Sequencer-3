@@ -85,6 +85,22 @@ class ChannelMixer extends Component{
       );
     }
   }
+
+  changeSubset(){
+    if(this.state.selectedChannel !== "none"){
+      let efs = this.props.effects[parseInt(this.state.selectedChannel) - 1];
+      return(<>
+        <p>playBackRate Controls</p>
+        <input className="form-control-range" type="range" min="0" max={efs.duration*1000} onChange={(e) => this.props.changeSubset(this.state.selectedChannel || undefined, e.target.value, "start")} />
+        <input className="form-control-range" type="range" min="0" max={(efs.duration*1000)} onChange={(e) => this.props.changeSubset(this.state.selectedChannel || undefined, e.target.value, "end")} />
+        <small>Start value: {this.props.effects.length > 0 ? efs.start : 0}</small>
+        <br />
+        <small>End value: {this.props.effects.length > 0 ? efs.end : 0}</small>
+        <br />
+      </>);
+    }
+  }
+
   render(){
     return(
       <>
@@ -112,12 +128,14 @@ class ChannelMixer extends Component{
                 <option value="volume">Volume</option>
                 <option value="playBackRate">playBackRate</option>
                 <option value="pitch">Pitch</option>
+                <option value="subset">Select Audio Subset</option>
               </select>
             </div>
             <div className="col-9 text-white" style={debugBorder()}>
               {this.state.selectedEffect === "volume" ? this.volumeControls() : <></>}
               {this.state.selectedEffect === "playBackRate" ? this.playBackRate() : <></>}
               {this.state.selectedEffect === "pitch" ? this.pitchControls() : <></>}
+              {this.state.selectedEffect === "subset" ? this.changeSubset() : <></>}
               {/**/}
             </div>
           </div>
