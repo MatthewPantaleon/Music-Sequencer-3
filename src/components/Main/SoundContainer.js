@@ -62,6 +62,7 @@ class SoundContainer extends Component{
                 changeVolume={this.props.changeVolume}
                 effects={this.props.effects}
                 changePlaybackRate={this.props.changePlaybackRate}
+                changePitch={this.props.changePitch}
               />
             </div>
 

@@ -108,6 +108,12 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      this.setState({effectBars: all});
    };
 
+   changePitch = (select, data) => {
+     let all = this.state.effectBars;
+     all[this.state.effectBars.findIndex(e => e.id == select)].pitch = parseFloat(data);
+     this.setState({effectBars: all});
+   };
+
    getChannelBarData = async (e, url) => {//gets the bar data of each channel for saving and loading projects
 
      let newArray = this.state.channelBars;
@@ -121,7 +127,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      effectArray = effectArray.filter(e => e !== undefined);
      newArray.push(e);
      if(effectArray.findIndex(c => c.id === e[0].id) === -1 || effectArray.length === 0){
-       effectArray.push({id: e[0].id, soundUrl: url, volume: 1, playbackRate: 1, duration});
+       effectArray.push({id: e[0].id, soundUrl: url, volume: 1, playbackRate: 1, duration, pitch: 0});
      }
      this.setState({channelBars: newArray, effectBars: effectArray});
    };
@@ -270,6 +276,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
                 changeBpm={this.changeBpm}
                 changeVolume={this.changeChannelVolume}
                 changePlaybackRate={this.changePlaybackRate}
+                changePitch={this.changePitch}
                 effects={this.state.effectBars}
 
                 AudioContext={this.state.context}

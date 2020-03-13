@@ -122,6 +122,8 @@
      // let s = ac.createMediaElementSource(t);
      // let s = ac.audioNode(t);
 
+
+     //get audio data as an audiobuffernode object
      s = await loadAudioBuffer(ac, this.props.soundUrl).then((r) => {
        return r.audioBuffer;
      });
@@ -130,15 +132,32 @@
      let source = ac.createBufferSource();
      let g = ac.createGain();
      source.buffer = s;
+     let ps = PitchShift(ac);
 
-     source.detune.value = 600;
-     source.playbackRate.value = 2;
+     source.playbackRate.value = this.props.effects.playbackRate;
+     source.detune.value = this.props.effects.pitch;
+     source.preservePitch = true;
+
      // source.gain.value = 0.1;
      source.connect(g);
-     g.gain.value = 5;
+     // source.connect(ps);
+
+     g.gain.value = this.props.effects.volume;
+
      console.log(source);
      g.connect(ac.destination);
+     ps.connect(ac.destination);
      source.start();
+
+
+     // t.playbackRate = this.props.effects.playbackRate;
+     // let m = ac.createMediaElementSource(t);
+     // console.log(m);
+     // t.play();
+     // m.connect(ac.destination);
+     // m.start();
+
+
      // let ps = PitchShift(ac);
      // ps.connect(ac.destination);
      //

@@ -46,8 +46,10 @@ class ChannelMixer extends Component{
       return(
         <>
           <p>Volume Controls</p>
-          <input className="form-control-range" type="range" min="0" max="100" onChange={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, e.target.value)} />
+          <input className="form-control-range" type="range" min="0" max="2000" onChange={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, e.target.value)} />
           <small>Current Volume multiplier: {this.props.effects.length > 0 ? this.props.effects[parseInt(this.state.selectedChannel) - 1].volume : 0}</small>
+          <br />
+          <button className="btn btn-dark" onClick={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, 100)}>Reset Volume</button>
         </>
       );
     }
@@ -59,15 +61,30 @@ class ChannelMixer extends Component{
       return(
         <>
           <p>playBackRate Controls</p>
-          <input className="form-control-range" type="range" min="0" max="500" onChange={(e) => this.props.changePlaybackRate(this.state.selectedChannel || undefined, e.target.value)} />
+          <input className="form-control-range" type="range" min="5" max="500" onChange={(e) => this.props.changePlaybackRate(this.state.selectedChannel || undefined, e.target.value)} />
           <small>Current Playback value: {this.props.effects.length > 0 ? this.props.effects[parseInt(this.state.selectedChannel) - 1].playbackRate : 0}</small>
           <br />
           <small>Current Playback Duration: {this.props.effects.length > 0 ? (this.props.effects[parseInt(this.state.selectedChannel) - 1].duration / this.props.effects[parseInt(this.state.selectedChannel) - 1].playbackRate).toFixed(3) : 0}</small>
+          <br />
+          <button className="btn btn-dark" onClick={(e) => this.props.changePlaybackRate(this.state.selectedChannel || undefined, 100)}>Reset Playback Rate</button>
         </>
       );
     }
   }
 
+  pitchControls(){
+    if(this.state.selectedChannel !== "none"){
+      return(
+        <>
+          <p>playBackRate Controls</p>
+          <input className="form-control-range" type="range" min="-2000" max="2000" onChange={(e) => this.props.changePitch(this.state.selectedChannel || undefined, e.target.value)} />
+          <small>Current Pitch value: {this.props.effects.length > 0 ? this.props.effects[parseInt(this.state.selectedChannel) - 1].pitch : 0}</small>
+          <br />
+          <button className="btn btn-dark" onClick={(e) => this.props.changePitch(this.state.selectedChannel || undefined, 0)}>Reset Pitch</button>
+        </>
+      );
+    }
+  }
   render(){
     return(
       <>
@@ -94,11 +111,13 @@ class ChannelMixer extends Component{
               <select className="custom-select" size="10" style={{height: "100%"}} onChange={(e) => this.changeSelectedEffect(e)}>
                 <option value="volume">Volume</option>
                 <option value="playBackRate">playBackRate</option>
+                <option value="pitch">Pitch</option>
               </select>
             </div>
             <div className="col-9 text-white" style={debugBorder()}>
               {this.state.selectedEffect === "volume" ? this.volumeControls() : <></>}
               {this.state.selectedEffect === "playBackRate" ? this.playBackRate() : <></>}
+              {this.state.selectedEffect === "pitch" ? this.pitchControls() : <></>}
               {/**/}
             </div>
           </div>
