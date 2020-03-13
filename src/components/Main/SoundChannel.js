@@ -136,7 +136,7 @@
 
      source.playbackRate.value = this.props.effects.playbackRate;
      source.detune.value = this.props.effects.pitch;
-     source.preservePitch = true;
+     // source.preservePitch = true;
 
      // source.gain.value = 0.1;
      source.connect(g);
@@ -147,12 +147,15 @@
      console.log(source);
      g.connect(ac.destination);
      ps.connect(ac.destination);
-     source.start();
-
+     console.log(s.sampleRate);
+     source.start(0, 0.5, 0.2);
+     // source.stop(ac.currentTime + 0.7);
 
      // t.playbackRate = this.props.effects.playbackRate;
-     // let m = ac.createMediaElementSource(t);
-     // console.log(m);
+     let m = ac.createMediaElementSource(new Audio(this.props.soundUrl));
+     console.log(m);
+
+     // m = null;
      // t.play();
      // m.connect(ac.destination);
      // m.start();
@@ -172,7 +175,7 @@
      // let source = s;
 
      // console.log(this.state.sound.duration);
-
+     ac = null;
    }
 
    //how each segment is to be presented based on if it active or not
