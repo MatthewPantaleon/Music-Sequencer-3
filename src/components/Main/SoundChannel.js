@@ -53,10 +53,12 @@
      // console.log(segments);
 
      let ac = new AudioContext();
+
+     //may not work continously rapidly enough
      let s = await loadAudioBuffer(ac, this.props.soundUrl).then((r) => {
        return r.audioBuffer;
      });
-     this.setState({bar: segments, soundBuffer: s}, () => console.log(this.state.soundBuffer));
+     this.setState({bar: segments, soundBuffer: s});
    }
 
    //play sound when adding a new channel set to false by default can be toggled later
@@ -135,7 +137,12 @@
      //   return r.audioBuffer;
      // });
 
-     let s = this.state.soundBuffer;
+     // let s = this.state.soundBuffer;
+
+     //testing to see if rebuffering is the the cause of inconsistent plauing
+     let s = await loadAudioBuffer(ac, this.props.soundUrl).then((r) => {
+       return r.audioBuffer;
+     });
      // console.log(s);
      let source = ac.createBufferSource();
      let g = ac.createGain();
@@ -157,8 +164,17 @@
      g.connect(ac.destination);
      ps.connect(ac.destination);
      // console.log(s.sampleRate);
-     source.start(0, this.props.effects.start, this.props.effects.end - this.props.effects.start);
+     // console.log("start: ", this.props.effects.start);
+     // console.log("end/duration: ", this.props.effects.end - this.props.effects.start);
+     // console.log(this.props.effects.duration);
+
+     //time offset not implemented as its very inconsistent
+     // source.start(0, ac.currentTime + this.props.effects.start.toFixed(2), ac.currentTime + (this.props.effects.end - this.props.effects.start).toFixed(2));
+     // source.start(0, this.props.effects.start.toFixed(2));
+     // source.stop(this.props.effects.end);
      // source.stop(ac.currentTime + 0.7);
+
+     source.start();
 
      // t.playbackRate = this.props.effects.playbackRate;
      // let m = ac.createMediaElementSource(new Audio(this.props.soundUrl));
@@ -184,7 +200,7 @@
      // let source = s;
 
      // console.log(this.state.sound.duration);
-     // ac = null;
+     ac = null;
    }
 
    //how each segment is to be presented based on if it active or not
@@ -215,9 +231,12 @@
          // console.log(source);
          g.connect(ac.destination);
          ps.connect(ac.destination);
-         console.log(s.sampleRate);
-         source.start(0, this.props.effects.start, this.props.effects.end - this.props.effects.start);
+         // console.log(s.sampleRate);
+         // source.start(0, this.props.effects.start, (this.props.effects.duration) - this.props.effects.end);
+         // source.start(0, this.props.effects.start.toFixed(2));
+         source.start();
        }
+       ac = null;
        return{width: size, height: size, backgroundColor, display: "inline-block", border: "2px solid #fff"};
      }else{
        return{width: size, height: size, backgroundColor, display: "inline-block"};
