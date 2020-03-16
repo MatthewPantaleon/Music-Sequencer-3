@@ -124,7 +124,7 @@ class ChannelMixer extends Component{
               <h5 className="float-left text-white">Effects</h5>
               <button className="btn btn-dark float-right">Apply/Remove</button>
 
-              <select className="custom-select" size="10" style={{height: "100%"}} onChange={(e) => this.changeSelectedEffect(e)}>
+              <select className="custom-select" size="4" style={{height: "100%"}} onChange={(e) => this.changeSelectedEffect(e)}>
                 <option value="volume">Volume</option>
                 <option value="playBackRate">playBackRate</option>
                 {/*<option value="pitch">Pitch</option>*/}
