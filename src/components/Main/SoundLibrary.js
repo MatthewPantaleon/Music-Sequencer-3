@@ -125,6 +125,7 @@ let empty = true;
         <div className="col-4" style={{position: "relative"}}>
           <button className={(this.state.selectedFile ? "btn-primary" : "btn-secondary") + " mb-2"} disabled={this.state.selectedFile === "" || this.state.selectedFile === undefined} onClick={() => this.preview(this.state.selectedFile)}>Preview</button>
           <button className={(this.state.selectedFile ? "btn-primary" : "btn-secondary")} disabled={this.state.selectedFile === "" || this.state.selectedFile === undefined} onClick={() => this.props.addChannel(this.state.selectedFile)}>Add Channel</button>
+          <button className={(this.state.selectedFile ? "btn-primary" : "btn-secondary")} disabled={this.state.selectedFile === "" || this.state.selectedFile === undefined} onClick={() => this.props.changeSound(this.state.selectedFile)}>Change Sound</button>
           {this.state.selectedFile ? <button className="btn-danger" style={{position: "absolute", bottom: 0, left: "15px"}} onClick={() => this.removeFromLibrary(this.state.selectedFile)}>Remove</button> : <></>}
         </div>
       </div>

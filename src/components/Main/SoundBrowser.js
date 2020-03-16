@@ -67,6 +67,7 @@ class SoundBrowser extends Component{
               importSound={this.props.importSound}
               addChannel={this.props.addChannel}
               removeSound={this.props.removeSound}
+              changeSound={this.props.changeSound}
               /> : <SoundAPI />}
           </div>
           <hr className="m-0"/>

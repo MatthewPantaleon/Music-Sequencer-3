@@ -207,6 +207,10 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
     if(file.includes(".wav") || file.includes(".mp3")){
       // console.log(fs.createReadStream(file));
       let newArray = this.state.readyFiles;
+      if(newArray.includes(file)){
+        alert("This sound is already in the Library!");
+        return;
+      }
       newArray.push(file);
       this.setState({readyFiles: newArray});
     }else{
@@ -252,6 +256,15 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
     console.log("SAVE TO REAL SOUND");
   }
 
+  validateFiles(){
+    // console.log("VALIDATE");
+  }
+
+  changeSound = (oldSoundUrl) => {
+    let soundIndex = this.state.readyFiles.findIndex(e => e === oldSoundUrl);
+    console.log(soundIndex);
+  };
+
    render(){
      return(
        <>
@@ -263,7 +276,8 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
               <Dropdown.Item href="#" onClick={() => this.newProject()}>New Project</Dropdown.Item>
               <Dropdown.Item href="#" onClick={() => this.saveProject()}>Save Project</Dropdown.Item>
               <Dropdown.Item href="#" onClick={() => this.loadProject()}>Load Project</Dropdown.Item>
-              <Dropdown.Item href="#" onClick={() => this.saveToReal()}>Export As File...</Dropdown.Item>
+              <Dropdown.Item href="#" onClick={() => this.saveToReal()}>Export As File... (Not working)</Dropdown.Item>
+              <Dropdown.Item href="#" onClick={() => this.validateFiles()}>Validate Files</Dropdown.Item>
             </DropdownButton>
 
 
@@ -276,6 +290,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
                 importSound={this.importSoundFromMain}
                 removeSound={this.removeFromProject}
                 addChannel={this.addNewChannel}
+                changeSound={this.changeSound}
               />
             </div>
 
