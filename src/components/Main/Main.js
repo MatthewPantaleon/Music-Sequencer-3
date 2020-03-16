@@ -260,9 +260,15 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
     // console.log("VALIDATE");
   }
 
-  changeSound = (oldSoundUrl) => {
+  changeSound = async (oldSoundUrl) => {
     let soundIndex = this.state.readyFiles.findIndex(e => e === oldSoundUrl);
     console.log(soundIndex);
+    let file = await dialog.showOpenDialog(BrowserWindow).then((e) => e.filePaths[0]);
+    console.log(file);
+
+    let newArray = this.state.readyFiles;
+    newArray[soundIndex] = file;
+    this.setState({readyFiles: newArray});
   };
 
    render(){
