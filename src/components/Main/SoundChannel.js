@@ -122,9 +122,11 @@
      // console.log(new Audio(this.props.soundUrl).playbackRate);
 
      let t = this.state.sound;
+
      // t.volume = parseFloat(this.props.effects.volume);
      // t.playbackRate = parseFloat(this.props.effects.playbackRate);
      // t.play();
+
      let ac = new AudioContext();
      // console.log(ac.createMediaElementSource(t));
      // let s = ac.createMediaElementSource(t);
@@ -147,8 +149,7 @@
      let source = ac.createBufferSource();
      let g = ac.createGain();
      source.buffer = s;
-     let ps = PitchShift(ac);
-
+     // let ps = PitchShift(ac);
 
      source.playbackRate.value = this.props.effects.playbackRate;
      source.detune.value = this.props.effects.pitch;
@@ -159,10 +160,11 @@
      // source.connect(ps);
 
      g.gain.value = this.props.effects.volume;
+     g.connect(ac.destination);
 
      // console.log(source);
-     g.connect(ac.destination);
-     ps.connect(ac.destination);
+
+     // ps.connect(ac.destination);
      // console.log(s.sampleRate);
      // console.log("start: ", this.props.effects.start);
      // console.log("end/duration: ", this.props.effects.end - this.props.effects.start);
@@ -175,7 +177,6 @@
      // source.stop(ac.currentTime + 0.7);
 
      source.start();
-
      // t.playbackRate = this.props.effects.playbackRate;
      // let m = ac.createMediaElementSource(new Audio(this.props.soundUrl));
      // console.log(m);
@@ -206,37 +207,37 @@
    //how each segment is to be presented based on if it active or not
    segment(size = "1.9vw", backgroundColor = "#777", play, segment){
      if((play.index % this.state.segments) == play.time){
-       // let a = new Audio(this.props.soundUrl);
-       let ac = new AudioContext();
-       let source = ac.createBufferSource();
-       let g = ac.createGain();
-       let s = this.state.soundBuffer;
-       source.buffer = s;
-       let ps = PitchShift(ac);
+       let a = new Audio(this.props.soundUrl);
+       // let ac = new AudioContext();
+       // let source = ac.createBufferSource();
+       // let g = ac.createGain();
+       // let s = this.state.soundBuffer;
+       // source.buffer = s;
+       // let ps = PitchShift(ac);
        if(segment.active && this.props.isPlaying && !this.state.mute){
-         // a.volume = parseFloat(this.props.effects.volume);
-         // a.playbackRate = parseFloat(this.props.effects.playbackRate);
-         // a.play();
-         let s = this.state.soundBuffer;
-         source.playbackRate.value = this.props.effects.playbackRate;
-         source.detune.value = this.props.effects.pitch;
+         a.volume = parseFloat(this.props.effects.volume);
+         a.playbackRate = parseFloat(this.props.effects.playbackRate);
+         a.play();
+         // let s = this.state.soundBuffer;
+         // source.playbackRate.value = this.props.effects.playbackRate;
+         // source.detune.value = this.props.effects.pitch;
          // source.preservePitch = true;
 
          // source.gain.value = 0.1;
-         source.connect(g);
+         // source.connect(g);
          // source.connect(ps);
 
-         g.gain.value = this.props.effects.volume;
+         // g.gain.value = this.props.effects.volume;
 
          // console.log(source);
-         g.connect(ac.destination);
-         ps.connect(ac.destination);
+         // g.connect(ac.destination);
+         // ps.connect(ac.destination);
          // console.log(s.sampleRate);
          // source.start(0, this.props.effects.start, (this.props.effects.duration) - this.props.effects.end);
          // source.start(0, this.props.effects.start.toFixed(2));
-         source.start();
+         // source.start();
        }
-       ac = null;
+       // ac = null;
        return{width: size, height: size, backgroundColor, display: "inline-block", border: "2px solid #fff"};
      }else{
        return{width: size, height: size, backgroundColor, display: "inline-block"};

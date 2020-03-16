@@ -46,7 +46,7 @@ class ChannelMixer extends Component{
       return(
         <>
           <p>Volume Controls</p>
-          <input className="form-control-range" type="range" min="0" max="2000" onChange={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, e.target.value)} />
+          <input className="form-control-range" type="range" min="0" max="100" onChange={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, e.target.value)} />
           <small>Current Volume multiplier: {this.props.effects.length > 0 ? this.props.effects[parseInt(this.state.selectedChannel) - 1].volume : 0}</small>
           <br />
           <button className="btn btn-dark" onClick={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, 100)}>Reset Volume</button>
@@ -88,7 +88,7 @@ class ChannelMixer extends Component{
 
   changeSubset(){
     if(this.state.selectedChannel !== "none"){
-      let efs = this.props.effects[parseInt(this.state.selectedChannel) - 1];
+      let efs = this.props.effects[parseInt(this.state.selectedChannel) - 1] ? this.props.effects[parseInt(this.state.selectedChannel) - 1] : {duration: 0};
       return(<>
         <p>playBackRate Controls</p>
         <input className="form-control-range" type="range" min="0" max={efs.duration*1000} onChange={(e) => this.props.changeSubset(this.state.selectedChannel || undefined, e.target.value, "start")} />
@@ -127,15 +127,15 @@ class ChannelMixer extends Component{
               <select className="custom-select" size="10" style={{height: "100%"}} onChange={(e) => this.changeSelectedEffect(e)}>
                 <option value="volume">Volume</option>
                 <option value="playBackRate">playBackRate</option>
-                <option value="pitch">Pitch</option>
-                <option value="subset">Select Audio Subset</option>
+                {/*<option value="pitch">Pitch</option>*/}
+                {/*<option value="subset">Select Audio Subset</option>*/}
               </select>
             </div>
             <div className="col-9 text-white" style={debugBorder()}>
               {this.state.selectedEffect === "volume" ? this.volumeControls() : <></>}
               {this.state.selectedEffect === "playBackRate" ? this.playBackRate() : <></>}
               {this.state.selectedEffect === "pitch" ? this.pitchControls() : <></>}
-              {this.state.selectedEffect === "subset" ? this.changeSubset() : <></>}
+              {/*this.state.selectedEffect === "subset" ? this.changeSubset() : <></>*/}
               {/**/}
             </div>
           </div>
