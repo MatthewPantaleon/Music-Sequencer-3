@@ -283,7 +283,7 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
               <Dropdown.Item href="#" onClick={() => this.saveProject()}>Save Project</Dropdown.Item>
               <Dropdown.Item href="#" onClick={() => this.loadProject()}>Load Project</Dropdown.Item>
               <Dropdown.Item href="#" onClick={() => this.saveToReal()}>Export As File... (Not working)</Dropdown.Item>
-              <Dropdown.Item href="#" onClick={() => this.validateFiles()}>Validate Files</Dropdown.Item>
+              <Dropdown.Item href="#" onClick={() => this.validateFiles()}>Validate Files... (Not working)</Dropdown.Item>
             </DropdownButton>
 
 
