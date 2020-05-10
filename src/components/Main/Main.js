@@ -97,14 +97,17 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
      let all = this.state.effectBars;
      // console.log(parseFloat(data/100));
      // console.log(all);
-     all[this.state.effectBars.findIndex(e => e.id == select)].volume = parseFloat(data/100);
+     // console.log(select);
+     all = all.filter(x => x !== undefined);
+     all[all.findIndex(e => e.id == select)].volume = parseFloat(data/100);
      this.setState({effectBars: all});
    };
 
 
    changePlaybackRate = (select, data) => {
      let all = this.state.effectBars;
-     all[this.state.effectBars.findIndex(e => e.id == select)].playbackRate = parseFloat(data/100);
+     all = all.filter(x => x !== undefined);
+     all[all.findIndex(e => e.id == select)].playbackRate = parseFloat(data/100);
      this.setState({effectBars: all});
    };
 

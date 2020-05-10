@@ -76,7 +76,7 @@
      // console.log(pP.pages);
      // console.log(pP.pages[pP.pages.length - 1] * this.state.segments);
      // console.log(this.state.bar.length);
-
+     // console.log(this.props.effects);
 
      let newTotal = pP.pages[pP.pages.length - 1] * this.state.segments;
      let bars = this.state.bar;

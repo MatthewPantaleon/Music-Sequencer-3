@@ -132,7 +132,7 @@ let empty = true;
       {/* Fix later either to set minnimum screen size or fix al together*/}
       <div className="row card-body bg-dark" style={{position: "relative"}}>
         <div className="col-12 p-0">
-          <ul className="list-group" style={{height: "calc(62.5vh)"}}>
+          <ul className="list-group" style={{height: "calc(61vh)"}}>
             {/*<li className="list-group-item list-group-item-action">SoundFile1<button className="btn btn-danger float-right">X</button></li>*/}
             {this.props.sounds.length === 0 ? <p className="text-white">You have no sounds in your library</p> : this.props.sounds.map((e, i) => {
               return (

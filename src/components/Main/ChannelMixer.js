@@ -30,7 +30,7 @@ class ChannelMixer extends Component{
   }
 
   componentDidUpdate(){
-    // console.log(this.props);
+    // console.log(this.props.effects);
   }
 
   changeSelectedEffect(e){
@@ -42,52 +42,63 @@ class ChannelMixer extends Component{
   }
 
   volumeControls(){
-    if(this.state.selectedChannel !== "none"){
+    if(this.state.selectedChannel !== "none" && this.props.effects.length > 0){
+      // console.log(this.props.effects);
+      // console.log(this.state.selectedChannel);
+      let all = this.props.effects.filter(x => x !== undefined);
       return(
         <>
           <p>Volume Controls</p>
-          <input className="form-control-range" type="range" min="0" max="100" onChange={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, e.target.value)} />
-          <small>Current Volume multiplier: {this.props.effects.length > 0 ? this.props.effects[parseInt(this.state.selectedChannel) - 1].volume : 0}</small>
+          <input className="form-control-range slider" type="range" min="0" max="100" onChange={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, e.target.value)} />
+          <small>Current Volume multiplier: {all.length > 0 && all[all.findIndex(x => x.id == this.state.selectedChannel)] ? all[all.findIndex(x => x.id == this.state.selectedChannel)].volume : 0}</small>
           <br />
           <button className="btn btn-dark" onClick={(e) => this.props.changeVolume(this.state.selectedChannel || undefined, 100)}>Reset Volume</button>
         </>
       );
+    }else{
+      this.state.selectedChannel = "none";
     }
   }
 
   playBackRate(){
-    if(this.state.selectedChannel !== "none"){
-
+    if(this.state.selectedChannel !== "none" && this.props.effects.length > 0){
+      // console.log(this.props.effects);
+      // console.log(this.state.selectedChannel);
+      let all = this.props.effects.filter(x => x !== undefined);
       return(
         <>
           <p>playBackRate Controls</p>
-          <input className="form-control-range" type="range" min="5" max="500" onChange={(e) => this.props.changePlaybackRate(this.state.selectedChannel || undefined, e.target.value)} />
-          <small>Current Playback value: {this.props.effects.length > 0 ? this.props.effects[parseInt(this.state.selectedChannel) - 1].playbackRate : 0}</small>
+          <input className="form-control-range slider" type="range" min="5" max="500" onChange={(e) => this.props.changePlaybackRate(this.state.selectedChannel || undefined, e.target.value)} />
+          <small>Current Playback value: {all.length > 0 ? all[all.findIndex(x => x.id == this.state.selectedChannel)].playbackRate : 0}</small>
           <br />
-          <small>Current Playback Duration: {this.props.effects.length > 0 ? (this.props.effects[parseInt(this.state.selectedChannel) - 1].duration / this.props.effects[parseInt(this.state.selectedChannel) - 1].playbackRate).toFixed(3) : 0}</small>
+          <small>Current Playback Duration: {all.length > 0 && all[all.findIndex(x => x.id == this.state.selectedChannel)] ? (all[all.findIndex(x => x.id == this.state.selectedChannel)].duration / all[all.findIndex(x => x.id == this.state.selectedChannel)].playbackRate).toFixed(3) : 0}</small>
           <br />
           <button className="btn btn-dark" onClick={(e) => this.props.changePlaybackRate(this.state.selectedChannel || undefined, 100)}>Reset Playback Rate</button>
         </>
       );
+    }else{
+      this.state.selectedChannel = "none";
     }
   }
 
   pitchControls(){
-    if(this.state.selectedChannel !== "none"){
+    if(this.state.selectedChannel !== "none" && this.props.effects.length > 0){
       return(
         <>
           <p>playBackRate Controls</p>
-          <input className="form-control-range" type="range" min="-2000" max="2000" onChange={(e) => this.props.changePitch(this.state.selectedChannel || undefined, e.target.value)} />
+          <input className="form-control-range slider" type="range" min="-2000" max="2000" onChange={(e) => this.props.changePitch(this.state.selectedChannel || undefined, e.target.value)} />
           <small>Current Pitch value: {this.props.effects.length > 0 ? this.props.effects[parseInt(this.state.selectedChannel) - 1].pitch : 0}</small>
           <br />
           <button className="btn btn-dark" onClick={(e) => this.props.changePitch(this.state.selectedChannel || undefined, 0)}>Reset Pitch</button>
         </>
       );
+    }else{
+      this.state.selectedChannel = "none";
     }
   }
 
   changeSubset(){
-    if(this.state.selectedChannel !== "none"){
+    if(this.state.selectedChannel !== "none" && this.props.effects.length > 0){
       let efs = this.props.effects[parseInt(this.state.selectedChannel) - 1] ? this.props.effects[parseInt(this.state.selectedChannel) - 1] : {duration: 0};
       return(<>
         <p>playBackRate Controls</p>
@@ -98,6 +109,8 @@ class ChannelMixer extends Component{
         <small>End value: {this.props.effects.length > 0 ? efs.end : 0}</small>
         <br />
       </>);
+    }else{
+      this.state.selectedChannel = "none";
     }
   }
 
@@ -110,7 +123,9 @@ class ChannelMixer extends Component{
           <select className="form-control col-2 float-right" onChange={(e) => this.changeSelectedChannel(e)}>
             <option value="none">Select Channel</option>
             {this.props.effects.map((e, i) => {
-              if(e === undefined)return;
+              console.log(e);
+              if(e === undefined || e === null)return;
+              console.log(e);
               return (
                 <Fragment key={i}>
                   <option value={e.id}>{e.id}</option>
@@ -131,7 +146,7 @@ class ChannelMixer extends Component{
                 {/*<option value="subset">Select Audio Subset</option>*/}
               </select>
             </div>
-            <div className="col-9 text-white" style={debugBorder()}>
+            <div className="col-9 text-white">
               {this.state.selectedEffect === "volume" ? this.volumeControls() : <></>}
               {this.state.selectedEffect === "playBackRate" ? this.playBackRate() : <></>}
               {this.state.selectedEffect === "pitch" ? this.pitchControls() : <></>}

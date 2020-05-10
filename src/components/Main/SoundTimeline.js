@@ -126,7 +126,7 @@ class SoundTimeline extends Component{
               <div className="col-12 mb-2">
                 <button className="btn btn-secondary mt-2 mb-4 mr-3" onClick={() => this.playChannels()}>{this.state.isPlaying ? "Stop" : "Play Button"}</button>
                 <button className="btn btn-secondary mt-2 mb-4" onClick={() => this.props.clearChannels()}>Clear Channels</button>
-                <input type="range" min="60" max="240" onChange={(e) => this.changeBpm(e)}/>
+                <input className="slider mr-2 ml-2" style={{width: "15%"}} type="range" min="60" max="240" onChange={(e) => this.changeBpm(e)}/>
                 <input className="btn btn-warning" onChange={(e) => this.changeBpm(e)} value={this.props.bpm}/>
                 {/* Pages */}
                 {/*<button className="btn btn-secondary ml-1 mr-1">1</button>*/}
@@ -139,7 +139,7 @@ class SoundTimeline extends Component{
                 <button className="btn btn-secondary float-right" onClick={() => this.addPage()}>Add Page</button>
                 <button className="btn btn-secondary float-right" onClick={() => this.removePage()}>Remove Page</button>
               </div>
-              <ul className="list-group col-12" style={{height: (this.props.isPanelOpen ? "calc(48vh)" : "calc(78vh)"), overflowY: "auto"}}>
+              <ul className="list-group col-12" style={{height: (this.props.isPanelOpen ? "calc(43vh)" : "calc(73vh)"), overflowY: "auto"}}>
 
                 {this.props.soundChannels.length === 0 || this.props.soundChannels.every(e => e === undefined) ?
                 <li className="list-group-item bg-dark text-white">There are no Channels</li> :
@@ -157,7 +157,7 @@ class SoundTimeline extends Component{
                       getBarData={this.props.getBarData}
                       existingBar={this.props.existingBars[i]}
 
-                      effects={this.props.effects[i]}
+                      effects={this.props.effects[i] ? this.props.effects[i] : this.props.effects[i-1]}
                       pages={this.state.pages}
                       currentPage={this.state.currentPage}
                       />
