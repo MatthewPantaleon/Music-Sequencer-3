@@ -240,16 +240,29 @@ const testUrl = "C:/Users/N00173936/Desktop/DummyFolder/projects/";
     let newArray = this.state.soundChannels;
     let newChannels = this.state.channelBars;
     let effectArray = this.state.effectBars;
-    // console.log(newArray);
+    console.log(newArray);
+    console.log(effectArray);
+    console.log(newChannels);
+    console.log(index);
     newArray[index - 1] = undefined;
     newChannels[index - 1] = undefined;
-    effectArray[index - 1] = undefined;
+    effectArray[effectArray.filter(x => x.id == index)] = undefined;
 
-    if(newArray.every((e) => e === undefined)){
+
+    if(newArray.every((e) => e === undefined) || newArray.length < 1){
       this.setState({soundChannels: [], channelBars: [], effectBars: []});
     }else{
       // newArray = newArray.filter(e => e !== undefined);
       // newChannels = newChannels.filter(e => e !== undefined);
+      let ids = newChannels.map((x, i) => {
+        if(x !== undefined){
+          return x[0].id;
+        }
+      });
+      ids = ids.filter(x => x !== undefined);
+      console.log(ids);
+      effectArray = effectArray.filter(e => e !== undefined);
+      effectArray.filter(x => ids.includes(x.id));
       this.setState({soundChannels: newArray, channelBars: newChannels, effectBars: effectArray});
     }
 

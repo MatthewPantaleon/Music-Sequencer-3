@@ -65,6 +65,8 @@ class ChannelMixer extends Component{
       // console.log(this.props.effects);
       // console.log(this.state.selectedChannel);
       let all = this.props.effects.filter(x => x !== undefined);
+      console.log(all);
+      console.log(this.state.selectedChannel);
       return(
         <>
           <p>playBackRate Controls</p>
@@ -123,9 +125,9 @@ class ChannelMixer extends Component{
           <select className="form-control col-2 float-right" onChange={(e) => this.changeSelectedChannel(e)}>
             <option value="none">Select Channel</option>
             {this.props.effects.map((e, i) => {
-              console.log(e);
+              // console.log(e);
               if(e === undefined || e === null)return;
-              console.log(e);
+              // console.log(e);
               return (
                 <Fragment key={i}>
                   <option value={e.id}>{e.id}</option>
